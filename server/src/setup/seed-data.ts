@@ -95,12 +95,21 @@ createConnection().then(async (conn) => {
   const industryRepo = conn.getRepository<Industry>(Industry);
   try {
     const industry1 = new Industry();
-    industry1.name = 'Test Industry #1';
+    industry1.name = 'Finances';
     await industryRepo.save(industry1);
 
     const industry2 = new Industry();
-    industry2.name = 'Test Industry #2';
+    industry2.name = 'Capital Goods';
     await industryRepo.save(industry2);
+
+    const industry3 = new Industry();
+    industry3.name = 'Industrial Goods';
+    await industryRepo.save(industry3);
+
+    const industry4 = new Industry();
+    industry4.name = 'Transportation';
+    await industryRepo.save(industry4);
+
     console.log(`Test industries written`);
   } catch (e) {
     console.warn('Skipping test industries...');
@@ -111,27 +120,50 @@ createConnection().then(async (conn) => {
 
   try {
     const industries = await industryRepo.find({});
-    const firstIndustry = industries[0];
+    const firstIndustry = industries[2];
 
     const company1 = new Company();
-    company1.name = 'Test Market #1';
+    company1.name = 'Amazon';
     company1.industry = firstIndustry;
-    company1.abbr = 'AAA';
-    company1.address = 'Test Address #1';
-    company1.ceo = 'Test CEO #1';
+    company1.abbr = 'AMZN';
+    company1.address = 'California, USA';
+    company1.ceo = 'Jeff Bezos';
     company1.icon = '__MISSING__';
     company1.closedate = new Date(2000, 0, 0, 12, 0);
     await companyRepo.save(company1);
 
+    const secondIndustry = industries[0];
     const company2 = new Company();
-    company2.name = 'Test Market #2';
-    company2.industry = firstIndustry;
-    company2.abbr = 'DD';
-    company2.address = 'Test Address #2';
-    company2.ceo = 'Test CEO #2';
+    company2.name = 'Bitcoin';
+    company2.industry = secondIndustry;
+    company2.abbr = 'BTC';
+    company2.address = 'None';
+    company2.ceo = 'Roger Ver';
     company2.icon = '__MISSING__';
     company2.closedate = new Date(2000, 0, 0, 8, 0);
     await companyRepo.save(company2);
+
+    const company3 = new Company();
+    company3.name = 'Ethereum';
+    company3.industry = secondIndustry;
+    company3.abbr = 'ETHEREUM';
+    company3.address = 'None';
+    company3.ceo = 'Vitalik Buterin';
+    company3.icon = '__MISSING__';
+    company3.closedate = new Date(2000, 0, 0, 6, 0);
+    await companyRepo.save(company3);
+
+    const fourthIndustry = industries[3];
+    const company4 = new Company();
+    company4.name = 'American Airlines Group';
+    company4.industry = fourthIndustry;
+    company4.abbr = 'AAL';
+    company4.address = 'Texas, USA';
+    company4.ceo = 'Dough Parker';
+    company4.icon = '__MISSING__';
+    company4.closedate = new Date(2000, 0, 0, 6, 0);
+    await companyRepo.save(company4);
+
     console.log(`Test markets written`);
   } catch (e) {
     console.log(e);

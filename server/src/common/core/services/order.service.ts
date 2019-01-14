@@ -37,7 +37,7 @@ export class OrderService {
         }
 
         const amountNeeded = order.buyPrice * order.units;
-        if (amountNeeded > foundUser.funds.currentamount) {
+        if (amountNeeded <= foundUser.funds.currentamount) {
             try {
                 const createOrder: Order = await this.orderRepository.create();
                 createOrder.opendate = order.openDate;
@@ -78,7 +78,16 @@ export class OrderService {
         return foundOrder;
     }
 
-    async closeOrder(id: string) { }
+    async closeOrder(id: string): Promise<Order> {
+        try {
+            const order: Order = await this.orderRepository.findOne({ id });
+            order.status = await this.statusRepository.findOne({ where: { statusname: 'closed' } });
+            return await this.orderRepository.save(order);
+        } catch (error) {
+            throw new HttpException('Orders not found!', HttpStatus.NOT_FOUND);
+        }
+
+    }
 
     async getClosedOrders(id: string) {
 

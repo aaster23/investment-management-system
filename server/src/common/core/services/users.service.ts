@@ -24,28 +24,6 @@ export class UsersService {
   ) { }
 
   // ==> Only admin can register new client and managers profiles
-
-  async registerUser(user: RegisterDTO) {
-    try {
-      const userFound = await this.usersRepository.findOne({ where: { email: user.email } });
-
-      if (userFound) {
-        throw new BadRequestException('User already exist.');
-      }
-
-      const createUser = await this.usersRepository.create();
-      createUser.dateregistered = new Date();
-      createUser.email = user.email;
-      createUser.fullname = user.fullname;
-      createUser.password = user.password = await bcrypt.hash(user.password, 10);
-
-      const result = await this.usersRepository.save(createUser);
-
-      return result;
-    } catch (error) {
-      throw new BadRequestException('Cannot add user to database.');
-    }
-  }
   async createManager(manager: RegisterDTO): Promise<User> {
     const foundManager = await this.usersRepository.findOne({ email: manager.email });
     if (foundManager) {

@@ -57,7 +57,7 @@ export class WatchlistService {
             return { result: `${companyToAdd.name} has been added to watchlist!`};
 
         } catch (error) {
-            console.log(`error details: Error on method addCompany\n`)
+            console.log(`error details: Error on method addCompany\n`);
             console.log(`error message: ${error}`);
             throw new HttpException('Cannot add company', HttpStatus.BAD_REQUEST);
         }
@@ -84,7 +84,7 @@ export class WatchlistService {
 
             return { result: `Company with id:${companyId} has been removed from watchlist!`};
         } catch (error) {
-            console.log(`error details: Error on method removeCompany\n`)
+            console.log(`error details: Error on method removeCompany\n`);
             console.log(`error message: ${error}`);
             throw new HttpException('Cannot remove company', HttpStatus.BAD_REQUEST);
         }

@@ -99,8 +99,8 @@ export class UsersService {
     return userFound;
   }
 
-  async signIn(user: UserLoginDTO): Promise<GetUserDTO> {
-    const userFound: GetUserDTO = await this.usersRepository.findOne({ where: { email: user.email } });
+  async signIn(user: UserLoginDTO): Promise<User> {
+    const userFound: User = await this.usersRepository.findOne({ where: { email: user.email } });
 
     if (userFound) {
       const result = await bcrypt.compare(user.password, userFound.password);

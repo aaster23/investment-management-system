@@ -27,7 +27,7 @@ export class ConfigService {
       NODE_ENV: Joi.string()
         .valid(['development', 'production', 'test', 'provision'])
         .default('development'),
-      PORT: Joi.number().default(5500),
+      PORT: Joi.number().default(3000),
       JWT_SECRET: Joi.string().required(),
       JWT_EXPIRE: Joi.number().default(3600 * 24 * 7),
       DB_TYPE: Joi.string().default('mysql'),

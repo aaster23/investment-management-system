@@ -7,6 +7,9 @@ export class ClientRegisterDTO {
     @IsString()
     email: string;
 
-    @IsNumber()
-    amount: number;
+    @IsString()
+    amount: string;
+
+    @IsString()
+    managerId: string;
 }

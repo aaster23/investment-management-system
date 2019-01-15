@@ -40,34 +40,34 @@ createConnection().then(async (conn) => {
 
   // Setup the default admin
   // email: admin@test.com
-  // password: TestPassword1!
+  // password: TainoObichamAzis
 
   // Setup the default manager
   // email: manager@test.com
-  // password: TestPassword1!
+  // password: TainoObichamAzis
 
   const userRepo = conn.getRepository<User>(User);
 
   try {
     const user1 = new User();
-    user1.fullname = 'Admin';
+    user1.fullname = 'Test Admin';
     user1.email = 'admin@test.com';
     user1.dateregistered = new Date();
     user1.role = admin;
-    user1.password = await bcrypt.hash('TestPassword1!', 10);
+    user1.password = await bcrypt.hash('TainoObichamAzis', 10);
 
     await userRepo.save(user1);
 
     const user2 = new User();
-    user2.fullname = 'Manager';
+    user2.fullname = 'Test Manager';
     user2.email = 'manager@test.com';
     user2.dateregistered = new Date();
     user2.role = manager;
-    user2.password = await bcrypt.hash('TestPassword1!', 10);
+    user2.password = await bcrypt.hash('TainoObichamAzis', 10);
 
     await userRepo.save(user2);
 
-    console.log(`Default admin and client written successfully.`);
+    console.log(`Default admin and manager written successfully.`);
   } catch (e) {
     console.log(e);
     console.warn('Skipping admin creation...');

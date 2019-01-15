@@ -2,9 +2,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Result } from 'range-parser';
-import { Industry } from 'src/data/entities/industry.entity';
-import { IndustryDTO } from 'src/models/industry/industry.dto';
-import { IndustryUpdateDTO } from 'src/models/industry/industryUpdate.dto';
+import { Industry } from '../../../data/entities/industry.entity';
+import { IndustryDTO } from '../../../models/industry/industry.dto';
+import { IndustryUpdateDTO } from '../../../models/industry/industryUpdate.dto';
 @Injectable()
 export class IndustriesService {
   constructor(

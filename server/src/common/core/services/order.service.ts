@@ -2,7 +2,7 @@ import { Status } from './../../../data/entities/status.entity';
 import { Company } from './../../../data/entities/company.entity';
 import { Injectable, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/data/entities/user.entity';
+import { User } from '../../../data/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Order } from '../../../data/entities/order.entity';
 import { OrderDTO } from '../../../models/order/order.dto';

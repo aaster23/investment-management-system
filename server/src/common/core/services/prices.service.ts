@@ -1,8 +1,8 @@
 import { Injectable, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Between, MoreThan } from 'typeorm';
-import { Price } from 'src/data/entities/prices.entity';
-import { Company } from 'src/data/entities/company.entity';
+import { Price } from '../../../data/entities/prices.entity';
+import { Company } from '../../../data/entities/company.entity';
 
 @Injectable()
 export class PricesService {

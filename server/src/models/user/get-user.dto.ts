@@ -1,10 +1,10 @@
 import { IsString, Length, Matches, IsOptional, IsEmail } from 'class-validator';
-import { Role } from 'src/data/entities/role.entity';
+import { Role } from '../../data/entities/role.entity';
 
 export class GetUserDTO {
-
+  @IsString()
   email: string;
-
+  @IsString()
   password: string;
 
   role: Role;

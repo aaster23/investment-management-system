@@ -2,7 +2,7 @@ import { ClientRegisterDTO } from './../../../models/user/client-register.dto';
 import { GetUserDTO } from '../../../models/user/get-user.dto';
 import { UserLoginDTO } from '../../../models/user/user-login.dto';
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { Repository, AdvancedConsoleLogger } from 'typeorm';
+import { Repository } from 'typeorm';
 import { User } from '../../../data/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 

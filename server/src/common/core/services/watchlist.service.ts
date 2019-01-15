@@ -3,8 +3,7 @@ import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { User } from '../../../data/entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { watch } from 'fs';
-import { Watchlist } from 'src/data/entities/watchlist.entity';
+import { Watchlist } from '../../../data/entities/watchlist.entity';
 @Injectable()
 export class WatchlistService {
 

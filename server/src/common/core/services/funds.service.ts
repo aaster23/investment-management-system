@@ -1,4 +1,4 @@
-import { User } from 'src/data/entities/user.entity';
+import { User } from '../../../data/entities/user.entity';
 import { Funds } from './../../../data/entities/funds.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';

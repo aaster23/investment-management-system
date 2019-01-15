@@ -1,10 +1,10 @@
+import { Company } from '../../../data/entities/company.entity';
 import { Industry } from '../../../data/entities/industry.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Company } from 'src/data/entities/company.entity';
 import { Repository } from 'typeorm';
-import { Watchlist } from 'src/data/entities/watchlist.entity';
-import { CompanyDTO } from 'src/models/company/company.dto';
+import { Watchlist } from '../../../data/entities/watchlist.entity';
+import { CompanyDTO } from '../../../models/company/company.dto';
 
 @Injectable()
 export class CompaniesService {

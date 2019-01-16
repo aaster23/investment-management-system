@@ -20,10 +20,10 @@ export class AuthController {
   ) { }
 
   @Get()
-  @Roles('admin', 'manager')
+  @Roles('manager')
   @UseGuards(AuthGuard(), RolesGuard)
   async root(): Promise<any> {
-    return { meesage: 'root'};
+    return { meesage: 'root' };
   }
 
   @Post('login')
@@ -36,7 +36,9 @@ export class AuthController {
       throw new BadRequestException('Wrong credentials!');
     }
 
-    return { token };
+    return {
+      token,
+    };
   }
 
   // @Post('register')

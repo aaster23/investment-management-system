@@ -1,3 +1,4 @@
+import { UserLoginDTO } from './../../models/user/user-login.dto';
 import { AdminGuard } from '../../common/guards/roles/admin.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { Controller, Get, UseGuards, Body, ValidationPipe, HttpException, Post } from '@nestjs/common';
@@ -12,6 +13,10 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
   ) { }
+  @Get('/user')
+  getUser(@Body() user: UserLoginDTO) {
+    return this.usersService.getUser(user);
+  }
 
   @Post('register/manager')
   @Roles('admin')
@@ -44,7 +49,7 @@ export class UsersController {
   }
 
   @Get()
-  @Roles('admin', 'manager')
+  @Roles('admin')
   @UseGuards(AuthGuard(), AdminGuard)
   all() {
     return this.usersService.getAll();

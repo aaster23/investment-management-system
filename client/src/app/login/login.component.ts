@@ -1,7 +1,9 @@
+import { LoginDTO } from './../models/user-login.dto';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '../core/auth.service';
 import { TokenDTO } from '../models/token.dto';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 @Component({
@@ -16,8 +18,8 @@ export class LoginComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private auth: AuthService,
-    ) {
-    }
+        private toastr: ToastrService
+    ) {}
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],

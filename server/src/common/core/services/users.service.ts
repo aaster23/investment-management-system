@@ -116,10 +116,10 @@ export class UsersService {
     return this.usersRepository.find({});
   }
 
-  async getUser(id: string): Promise<User> {
+  async getUser(user: UserLoginDTO): Promise<User> {
     try {
-      const user = await this.usersRepository.findOneOrFail({ id });
-      return user;
+      const foundUser = await this.usersRepository.findOneOrFail({ email: user.email });
+      return foundUser;
     } catch (error) {
       throw new BadRequestException('No such user');
     }

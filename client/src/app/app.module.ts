@@ -24,7 +24,6 @@ export function tokenGetter() {
     AppRoutingModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter,

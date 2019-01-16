@@ -32,9 +32,13 @@ export class LoginComponent implements OnInit {
 
     login(loginForm: NgForm): void {
         if (loginForm.valid) {
-            this.auth.login(loginForm.value).subscribe((response: TokenDTO) => {
-                localStorage.setItem('access_token', response.token);
-            });
+                this.auth.login(loginForm.value).subscribe((response: TokenDTO) => {
+                    localStorage.setItem('access_token', response.token);
+                }, (e) => {
+                    this.toastr.error('everything is broken', 'Major Error', {
+                        timeOut: 3000
+                      });
+                });
         }
     }
 }

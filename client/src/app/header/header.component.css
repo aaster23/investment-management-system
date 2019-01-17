@@ -1,9 +1,12 @@
-
 a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-    color: white;
-    font-family: fantasy;
-    font-size: -webkit-xxx-large;
-  }
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: underline;
+  color: white;
+  font-family: fantasy;
+  font-size: -webkit-xxx-large;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

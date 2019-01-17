@@ -82,24 +82,26 @@ export class AdminPanelComponent implements OnInit {
             this.openSnackBar(`Please fill all of the fields!`, 'Okay');
             return;
         }
-            const email = this.registerForm.controls.email.value;
-            const fullname = this.registerForm.controls.name.value;
-            const password = this.registerForm.controls.password.value;
-            const amount = this.registerForm.controls.amount.value;
-            if (this.selectedForm === 'admin' ||this.selectedForm === 'manager' ) {
-                this.auth.register({ fullname, email, password }, this.selectedForm).subscribe((res) => {
-                    this.openSnackBar(`Successfully registered ${this.selectedForm} ${fullname} with ${email}`, 'Okay');
-                }, (e) => {
-                    console.log(e)
-                    this.openSnackBar(`The email is already registered!`, 'Okay');
-            })} else if (this.selectedForm === 'client') {
-                this.auth.register({ fullname, email, amount }, 'client').subscribe((res) => {
-                    this.openSnackBar(`Successfully registered manager ${fullname} with ${email}`, 'Okay');
-                }, (e) => {
-                    console.log(e)
-                    this.openSnackBar(`The email is already registered!`, 'Okay');
-                });
-        }}
+        const email = this.registerForm.controls.email.value;
+        const fullname = this.registerForm.controls.name.value;
+        const password = this.registerForm.controls.password.value;
+        const amount = this.registerForm.controls.amount.value;
+        if (this.selectedForm === 'admin' || this.selectedForm === 'manager') {
+            this.auth.register({ fullname, email, password }, this.selectedForm).subscribe((res) => {
+                this.openSnackBar(`Successfully registered ${this.selectedForm} ${fullname} with ${email}`, 'Okay');
+            }, (e) => {
+                console.log(e);
+                this.openSnackBar(`The email is already registered!`, 'Okay');
+            });
+        } else if (this.selectedForm === 'client') {
+            this.auth.register({ fullname, email, amount }, 'client').subscribe((res) => {
+                this.openSnackBar(`Successfully registered manager ${fullname} with ${email}`, 'Okay');
+            }, (e) => {
+                console.log(e);
+                this.openSnackBar(`The email is already registered!`, 'Okay');
+            });
+        }
+    }
 
     private selectedButton(event) {
         if (event.value === '0') {

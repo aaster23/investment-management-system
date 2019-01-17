@@ -1,47 +1,31 @@
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-<!------ Include the above in your HEAD tag ---------->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+          <span><a href="/">Trading 11</a></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-<!------ Include the above in your HEAD tag ---------->
+<mat-toolbar>
+  <span>Login</span>
+</mat-toolbar>
+<mat-card class="my-card">
+  <mat-card-content>
+    <form validate [formGroup]="loginForm" class="my-form">
 
-<section class="login-block">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 login-sec">
-        <h2 class="text-center">Login</h2>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" name="email" formControlName='email' required>
+        <mat-error>{{validate(email)}}</mat-error>
+      </mat-form-field>
 
-        <form validate [formGroup]="loginForm" (ngSubmit)="this.login(loginForm)" class="login-form">
-          <div class="form-group">
-            <label for="exampleInputEmail1" class="text-uppercase">Email</label>
-            <input type="text" class="form-control" name="email" formControlName='email'>
-          </div>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type = "password" placeholder="Password" name="password" formControlName='password' required>
+        <mat-error>{{validate(password)}}</mat-error>
+      </mat-form-field>
 
-          <div class="form-group">
-            <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-            <input type="password" class="form-control" name="pass" formControlName='password'>
-          </div>
-
-          <div class="form-check">
-            <!-- <label class="form-check-label">
-              <input type="checkbox" class="form-check-input">
-              <small>Remember Me</small>
-            </label> -->
-            <button type="Submit" class="btn btn-login float-right">Login</button>
-          </div>
-
-        </form>
-      </div>
-
-      <div class="col-md-8 banner-sec">
-        <div class="carousel-item active">
-          <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide">
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="login(loginForm)" color="primary">Login</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<mat-toolbar>
+  <span>Registration</span>
+</mat-toolbar>
+<mat-card class="my-card">
+  <mat-card-content>
+    <form validate [formGroup]="this.registerForm" (ngSubmit)="this.register(registerForm)" class="my-form" >
+
+      <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" name="name" formControlName='name' required>
+        <mat-error>{{validate(name)}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type = "text" name="email" formControlName='email' required>
+        <mat-error>{{validate(email)}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type = "password" name="password" formControlName='password'>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" name="amount" formControlName='amount'>
+      </mat-form-field>
+
+      <section class="example-section">
+        <label class="full-width">Role:</label>
+        <br>
+        <br>
+        <mat-radio-group>
+          <mat-radio-button class="example-margin" value="after">Admin</mat-radio-button>
+          <mat-radio-button class="example-margin" value="before">Manager</mat-radio-button>
+          <mat-radio-button class="example-margin" value="after">Client</mat-radio-button>
+        </mat-radio-group>
+      </section>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="register()" color="primary">Register</button>
+  </mat-card-actions>
+</mat-card>

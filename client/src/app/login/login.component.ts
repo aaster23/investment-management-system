@@ -4,6 +4,8 @@ import { NgForm, FormGroup, FormBuilder, Validators, AbstractControl } from '@an
 import { AuthService } from '../core/auth.service';
 import { TokenDTO } from '../models/token.dto';
 import { ToastrService } from 'ngx-toastr';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Injectable()
 @Component({
@@ -15,11 +17,14 @@ export class LoginComponent implements OnInit {
     private loginForm: FormGroup;
     private email: AbstractControl;
     private password: AbstractControl;
+    private credentialsError: string = null;
 
     constructor(private formBuilder: FormBuilder,
         private auth: AuthService,
-        private toastr: ToastrService
-    ) {}
+        private toastr: ToastrService,
+        public snackBar: MatSnackBar,
+        private router: Router,
+    ) { }
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],
@@ -32,13 +37,29 @@ export class LoginComponent implements OnInit {
 
     login(loginForm: NgForm): void {
         if (loginForm.valid) {
-                this.auth.login(loginForm.value).subscribe((response: TokenDTO) => {
-                    localStorage.setItem('access_token', response.token);
-                }, (e) => {
-                    this.toastr.error('everything is broken', 'Major Error', {
-                        timeOut: 3000
-                      });
+            this.auth.login(loginForm.value).subscribe((response: TokenDTO) => {
+                localStorage.setItem('access_token', response.token);
+                this.credentialsError = null;
+                this.auth.getUser();
+                this.openSnackBar('Successful login.', 'OK');
+                this.router.navigate(['/register']);
+            }, (e) => {
+                this.toastr.error('everything is broken', 'Major Error', {
+                    timeOut: 3000
                 });
+            });
         }
+    }
+
+    private validate(inputField: AbstractControl): string {
+        if (inputField.hasError('required')) {
+            return 'The field is required';
+        }
+    }
+
+    private openSnackBar(message: string, action: string): void {
+        this.snackBar.open(message, action, {
+            duration: 2000,
+        });
     }
 }

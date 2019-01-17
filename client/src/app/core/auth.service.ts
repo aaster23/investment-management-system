@@ -47,6 +47,6 @@ export class AuthService {
         localStorage.removeItem('role');
         this.user.next({});
         this.isAuth.next(false);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
     }
 }

@@ -1,3 +1,5 @@
+import { HeaderComponent } from './header/header.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AppRoutingModule } from './app.router.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,6 +10,8 @@ import { SharedModule } from './shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SharedMaterialModule } from './shared/shared-material.module';
+import { RouterModule } from '@angular/router';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -15,10 +19,14 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    AdminPanelComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    SharedMaterialModule,
     CoreModule,
     SharedModule,
     AppRoutingModule,

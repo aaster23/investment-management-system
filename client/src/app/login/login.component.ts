@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private auth: AuthService,
-        private toastr: ToastrService,
+
         public snackBar: MatSnackBar,
         private router: Router,
     ) { }
@@ -37,16 +37,16 @@ export class LoginComponent implements OnInit {
 
     login(loginForm: NgForm): void {
         if (loginForm.valid) {
-            this.auth.login(loginForm.value).subscribe((response: TokenDTO) => {
+            this.auth.login(loginForm.value)
+            .subscribe(
+                (response: TokenDTO) => {
                 localStorage.setItem('access_token', response.token);
                 this.credentialsError = null;
                 this.auth.getUser();
                 this.openSnackBar('Successful login.', 'OK');
                 this.router.navigate(['/register']);
             }, (e) => {
-                this.toastr.error('everything is broken', 'Major Error', {
-                    timeOut: 3000
-                });
+                this.openSnackBar('Wrong credentials', 'Failed to login!');
             });
         }
     }

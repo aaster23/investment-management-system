@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfig } from '../config/app.config';
 import { LoginDTO } from '../models/user-login.dto';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -48,5 +48,16 @@ export class AuthService {
         this.user.next({});
         this.isAuth.next(false);
         this.router.navigate(['/login']);
+    }
+
+    public register(body, role): Observable<object> {
+        const bearerToken = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('access_token')
+          });
+        return this.http.post(`${this.appConfig.apiUrl}/users/register/${role}`, body, { headers: bearerToken });
+
+
+
     }
 }

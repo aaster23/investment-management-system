@@ -20,3 +20,8 @@ a:-webkit-any-link {
   font-family: fantasy;
   font-size: -webkit-xxx-large;
 }
+
+::ng-deep snack-bar-container.blue-snackbar{
+  background: rgb(223, 84, 84);
+  color: black;
+}

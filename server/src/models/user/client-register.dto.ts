@@ -1,4 +1,4 @@
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsOptional } from 'class-validator';
 
 export class ClientRegisterDTO {
     @IsString()
@@ -10,6 +10,6 @@ export class ClientRegisterDTO {
     @IsString()
     amount: string;
 
-    @IsString()
+    @IsOptional()
     managerId: string;
 }

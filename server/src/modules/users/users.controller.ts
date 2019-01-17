@@ -36,15 +36,26 @@ export class UsersController {
   @Post('register/client')
   @Roles('admin')
   @UseGuards(AuthGuard(), AdminGuard)
-  async registerClient(@Body(new ValidationPipe({
-    transform: true,
-    whitelist: true,
-  })) client: ClientRegisterDTO) {
+  async registerClient(@Body() client: ClientRegisterDTO) {
+    console.log(client);
     try {
       await this.usersService.createClient(client.managerId, client);
-      return 'Client was sccessfully added!';
+      return 'Sucessfully created client!';
     } catch (error) {
       throw new HttpException('Client is not created', 404);
+    }
+  }
+
+  @Post('register/admin')
+  @Roles('admin')
+  @UseGuards(AuthGuard(), AdminGuard)
+  async registerAdmin(@Body() admin: RegisterDTO) {
+    console.log(admin);
+    try {
+      await this.usersService.createAdmin(admin);
+      return 'Sucessfully created admin!';
+    } catch (error) {
+      throw new HttpException('Admin is not created', 404);
     }
   }
 

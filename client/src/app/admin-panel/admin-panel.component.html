@@ -10,23 +10,27 @@
       <mat-form-field class="full-width">
         <mat-label>Name</mat-label>
         <input matInput type="text" name="name" formControlName='name' required>
-        <mat-error>{{validate(name)}}</mat-error>
+        <mat-error><h3>{{validate(name)}}</h3></mat-error>
+        <br>
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>Email</mat-label>
+        <mat-label >Email</mat-label>
         <input matInput type = "text" name="email" formControlName='email' required>
-        <mat-error>{{validate(email)}}</mat-error>
+        <mat-error><h3>{{validate(email)}}</h3></mat-error>
+        <br>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
         <input matInput type = "password" name="password" formControlName='password'>
+        <br>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Amount</mat-label>
         <input matInput type="number" name="amount" formControlName='amount'>
+        <br>
       </mat-form-field>
 
       <section class="example-section">
@@ -34,14 +38,14 @@
         <br>
         <br>
         <mat-radio-group>
-          <mat-radio-button class="example-margin" value="after">Admin</mat-radio-button>
-          <mat-radio-button class="example-margin" value="before">Manager</mat-radio-button>
-          <mat-radio-button class="example-margin" value="after">Client</mat-radio-button>
+          <mat-radio-button class="example-margin" value="0" (change)="this.selectedButton($event)">Admin</mat-radio-button>
+          <mat-radio-button class="example-margin" value="1" (change)="this.selectedButton($event)">Manager</mat-radio-button>
+          <mat-radio-button class="example-margin" value="2" (change)="this.selectedButton($event)" checked>Client</mat-radio-button>
         </mat-radio-group>
       </section>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="register()" color="primary">Register</button>
+    <button mat-raised-button (click)="this.register($event)" color="primary">Register</button>
   </mat-card-actions>
 </mat-card>

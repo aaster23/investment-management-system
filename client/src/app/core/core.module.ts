@@ -3,12 +3,15 @@ import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthService } from './auth.service';
 import { AppConfig } from '../config/app.config';
+import { ManagerService } from './manager.service';
 
 @NgModule({
   imports: [],
   providers: [
     AppConfig,
-    AuthService
+    AuthService,
+    JwtHelperService,
+    ManagerService
   ],
 })
 export class CoreModule { }

@@ -26,7 +26,7 @@ export class AuthService {
     public isAuthenticated(): boolean {
         const token = this.jwtService.tokenGetter();
         const decoded = this.jwtService.decodeToken(token);
-        const isLogged = !!token && decoded.iss === this.appConfig.jwtSecret;
+        const isLogged = !!token && decoded.role;
 
         this.isAuth.next(isLogged);
         return isLogged;
@@ -37,6 +37,7 @@ export class AuthService {
             const token = this.jwtService.tokenGetter();
             const decodedToken = this.jwtService.decodeToken(token);
             this.user.next(decodedToken);
+            return decodedToken;
         } else {
             this.user.next({});
         }
@@ -54,7 +55,7 @@ export class AuthService {
         const bearerToken = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('access_token')
-          });
+        });
         return this.http.post(`${this.appConfig.apiUrl}/users/register/${role}`, body, { headers: bearerToken });
 
 

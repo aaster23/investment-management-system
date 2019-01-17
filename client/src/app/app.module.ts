@@ -1,3 +1,5 @@
+import { GuardsModule } from './route-guard/gurad.module';
+import { AppConfig } from './config/app.config';
 import { HeaderComponent } from './header/header.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AppRoutingModule } from './app.router.module';
@@ -10,7 +12,6 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SharedMaterialModule } from './shared/shared-material.module';
-import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './manager/sidebar.component';
 
 export function tokenGetter() {
@@ -26,6 +27,7 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
+    GuardsModule,
     BrowserAnimationsModule,
     SharedMaterialModule,
     CoreModule,
@@ -40,7 +42,7 @@ export function tokenGetter() {
       },
     }),
   ],
-  providers: [],
+  providers: [AppConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

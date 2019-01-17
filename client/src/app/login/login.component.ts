@@ -1,3 +1,5 @@
+import { AppConfig } from './../config/app.config';
+import { AdminGuardService } from './../route-guard/admin.guard';
 import { LoginDTO } from './../models/user-login.dto';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
@@ -17,12 +19,14 @@ export class LoginComponent implements OnInit {
     private email: AbstractControl;
     private password: AbstractControl;
     private credentialsError: string = null;
+    private role: string;
 
     constructor(private formBuilder: FormBuilder,
         private auth: AuthService,
 
         public snackBar: MatSnackBar,
         private router: Router,
+        private appConfig: AppConfig,
     ) { }
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
@@ -37,16 +41,22 @@ export class LoginComponent implements OnInit {
     login(loginForm: NgForm): void {
         if (loginForm.valid) {
             this.auth.login(loginForm.value)
-            .subscribe(
-                (response: TokenDTO) => {
-                localStorage.setItem('access_token', response.token);
-                this.credentialsError = null;
-                this.auth.getUser();
-                this.openSnackBar('Successful login.', 'OK');
-                this.router.navigate(['/register']);
-            }, (e) => {
-                this.openSnackBar('Wrong credentials', 'Failed to login!');
-            });
+                .subscribe(
+                    (response: TokenDTO) => {
+                        localStorage.setItem('access_token', response.token);
+                        this.credentialsError = null;
+                        const payload: any = this.auth.getUser();
+                        if (payload.role === this.appConfig.admin) {
+                            this.router.navigate(['/register']);
+                        }
+                        if (payload.role === this.appConfig.manager) {
+                            this.router.navigate(['/manager']);
+                        }
+
+                        this.openSnackBar('Successful login.', 'OK');
+                    }, (e) => {
+                        this.openSnackBar('Wrong credentials', 'Failed to login!');
+                    });
         }
     }
 
@@ -58,7 +68,7 @@ export class LoginComponent implements OnInit {
 
     private openSnackBar(message: string, action: string): void {
         this.snackBar.open(message, action, {
-            duration: 2000,
+            duration: 3500,
         });
     }
 }

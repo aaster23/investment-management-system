@@ -54,6 +54,9 @@ export class LoginComponent implements OnInit {
         }, (e) => {
           this.openSnackBar('Wrong credentials', 'Failed to login!');
         });
+
+
+
     }
   }
 

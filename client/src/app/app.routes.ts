@@ -9,5 +9,6 @@ export const ROUTES: Routes = [
     { path: 'register', component: AdminPanelComponent, /*canActivate: [AdminGuardService] */},
     { path: 'login', component: LoginComponent },
     { path: 'manager', component: SidebarComponent, /* canActivate: [ManagerGuardService]*/ },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];

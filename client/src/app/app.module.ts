@@ -33,7 +33,6 @@ export function tokenGetter() {
     CoreModule,
     SharedModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,

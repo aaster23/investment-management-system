@@ -1,6 +1,5 @@
-import { LoginDTO } from './../models/user-login.dto';
-import { NgForm } from '@angular/forms';
-import { LoginComponent } from './../login/login.component';
+import { AuthService } from './../core/auth.service';
+import { UserInfoDTO } from './../models/userInfo.dto';
 import { UsersService } from './../core/user.service';
 import { Component, Injectable, OnInit } from '@angular/core';
 
@@ -11,10 +10,20 @@ import { Component, Injectable, OnInit } from '@angular/core';
     styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-    private user: any;
-    constructor() {
-    }
+    private managerName: string;
+    private user: UserInfoDTO;
+    constructor(
+        private usersService: UsersService,
+        private auth: AuthService
+    ) { }
 
     ngOnInit(): void {
+        const token = this.auth.decodeToken();
+        const email = {
+            email: token.email,
+        };
+        this.usersService.retrieveUserData(email).subscribe(
+            (managerData: UserInfoDTO) => { this.managerName = managerData.fullname; }
+        );
     }
 }

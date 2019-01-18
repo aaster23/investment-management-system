@@ -45,7 +45,7 @@ export class AdminPanelComponent implements OnInit {
 
     private login(registerForm: NgForm): void {
         if (registerForm.valid) {
-            this.auth.login(registerForm.value).subscribe(
+            // this.auth.login(registerForm.value).subscribe(
                 // (res: IAccessToken) => {
                 //     localStorage.setItem('access_token', res.token);
                 //     this.credentialsError = null;
@@ -54,10 +54,10 @@ export class AdminPanelComponent implements OnInit {
                 //     this.router.navigate(['/project/all']);
                 //     // this.router.navigate(['/', this.user.company]);
                 // },
-                (err: HttpErrorResponse) => {
-                    this.credentialsError = err.error.err;
-                    this.auth.getUser();
-                });
+                // (err: HttpErrorResponse) => {
+                //     this.credentialsError = err.error.err;
+                //     this.auth.getUser();
+                // });
         }
     }
 
@@ -69,7 +69,7 @@ export class AdminPanelComponent implements OnInit {
 
     private openSnackBar(message: string, action: string): void {
         this.snackBar.open(message, action, {
-            duration: 3000,
+            duration: 3500,
             panelClass: ['blue-snackbar'],
         });
     }
@@ -123,7 +123,6 @@ export class AdminPanelComponent implements OnInit {
 
             this.registerForm.controls.password.setValue('');
             this.registerForm.controls.password.disable();
-
         }
     }
 }

@@ -6,6 +6,7 @@ import { UsersService } from '../../common/core/services/users.service';
 import { Roles } from 'src/common';
 import { RegisterDTO } from 'src/models/user/register.dto';
 import { ClientRegisterDTO } from 'src/models/user/client-register.dto';
+import { GetUserByEmailDTO } from 'src/models/user/getUserByEmail.dto';
 
 @Controller('users')
 export class UsersController {
@@ -14,11 +15,11 @@ export class UsersController {
     private readonly usersService: UsersService,
   ) { }
 
-  @Get('/user')
+  @Post('/user')
   // @Roles('admin', 'manager')
   // @UseGuards(AuthGuard(), AdminGuard)
-  getUser(@Body() user: UserLoginDTO) {
-    return this.usersService.getUser(user);
+  async getUser(@Body() user: GetUserByEmailDTO) {
+    return await this.usersService.getUser(user);
   }
 
   @Post('register/manager')
@@ -30,7 +31,7 @@ export class UsersController {
   })) manager: RegisterDTO) {
     try {
       await this.usersService.createManager(manager);
-      return 'Manager was successfully added!';
+      return { message: 'Sucessfully created admin!' };
     } catch (error) {
       throw new HttpException('Manager is not created', 404);
     }
@@ -43,7 +44,7 @@ export class UsersController {
     console.log(client);
     try {
       await this.usersService.createClient(client.managerId, client);
-      return 'Sucessfully created client!';
+      return { message: 'Sucessfully created client!' };
     } catch (error) {
       throw new HttpException('Client is not created', 404);
     }
@@ -56,7 +57,7 @@ export class UsersController {
     console.log(admin);
     try {
       await this.usersService.createAdmin(admin);
-      return 'Sucessfully created admin!';
+      return { message: 'Sucessfully created admin!' };
     } catch (error) {
       throw new HttpException('Admin is not created', 404);
     }

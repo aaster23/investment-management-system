@@ -43,8 +43,7 @@ export class LoginComponent implements OnInit {
         (response: TokenDTO) => {
           localStorage.setItem('access_token', response.token);
           this.credentialsError = null;
-
-          const payload: any = this.auth.getUser();
+          const payload: any = this.auth.decodeToken();
           if (payload.role === this.appConfig.admin) {
             this.router.navigate(['/register']);
           }
@@ -55,13 +54,6 @@ export class LoginComponent implements OnInit {
         }, (e) => {
           this.openSnackBar('Wrong credentials', 'Failed to login!');
         });
-
-      this.userService.retrieveUserData(loginForm.value).subscribe(
-        (response) => {
-          console.log(response);
-        }
-
-      );
     }
   }
 

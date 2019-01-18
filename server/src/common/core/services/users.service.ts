@@ -1,3 +1,4 @@
+import { GetUserByEmailDTO } from './../../../models/user/getUserByEmail.dto';
 import { ClientRegisterDTO } from './../../../models/user/client-register.dto';
 import { GetUserDTO } from '../../../models/user/get-user.dto';
 import { UserLoginDTO } from '../../../models/user/user-login.dto';
@@ -116,7 +117,7 @@ export class UsersService {
     return this.usersRepository.find({});
   }
 
-  async getUser(user: UserLoginDTO): Promise<User> {
+  async getUser(user: GetUserByEmailDTO): Promise<User> {
     try {
       const foundUser = await this.usersRepository.findOneOrFail({ email: user.email });
       return foundUser;

@@ -24,24 +24,28 @@ export class AuthService {
         return this.http.post(`${this.appConfig.apiUrl}/auth/login`, user);
     }
 
-    public isAuthenticated(): boolean {
-        const token = this.jwtService.tokenGetter();
-        const decoded = this.jwtService.decodeToken(token);
-        const isLogged = !!token && decoded.role;
+    // public isAuthenticated(): boolean {
+    //     const token = this.jwtService.tokenGetter();
+    //     const decoded = this.jwtService.decodeToken(token);
+    //     const isLogged = !!token && decoded.role;
 
-        this.isAuth.next(isLogged);
-        return isLogged;
-    }
+    //     this.isAuth.next(isLogged);
+    //     return isLogged;
+    // }
 
-    public getUser(): void {
-        if (this.isAuthenticated()) {
-            const token = this.jwtService.tokenGetter();
-            const decodedToken = this.jwtService.decodeToken(token);
-            this.user.next(decodedToken);
-            return decodedToken;
-        } else {
-            this.user.next({});
-        }
+    // public getUser(): void {
+    //     if (this.isAuthenticated()) {
+    //         const token = this.jwtService.tokenGetter();
+    //         const decodedToken = this.jwtService.decodeToken(token);
+    //         this.user.next(decodedToken);
+    //         return decodedToken;
+    //     } else {
+    //         this.user.next({});
+    //     }
+    // }
+    public decodeToken() {
+        const token = localStorage.getItem('access_token');
+        return this.jwtService.decodeToken(token);
     }
 
     public logout(): void {

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthService } from './auth.service';
 import { AppConfig } from '../config/app.config';
-import { ManagerService } from './manager.service';
+import { UsersService } from './user.service';
 
 @NgModule({
   imports: [],
@@ -11,7 +11,7 @@ import { ManagerService } from './manager.service';
     AppConfig,
     AuthService,
     JwtHelperService,
-    ManagerService
+    UsersService
   ],
 })
 export class CoreModule { }

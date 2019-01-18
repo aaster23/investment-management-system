@@ -1,5 +1,8 @@
-import { Component, Injectable } from '@angular/core';
-import { AuthService } from '../core/auth.service';
+import { LoginDTO } from './../models/user-login.dto';
+import { NgForm } from '@angular/forms';
+import { LoginComponent } from './../login/login.component';
+import { UsersService } from './../core/user.service';
+import { Component, Injectable, OnInit } from '@angular/core';
 
 @Injectable()
 @Component({
@@ -7,6 +10,11 @@ import { AuthService } from '../core/auth.service';
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
+    private user: any;
+    constructor() {
+    }
 
+    ngOnInit(): void {
+    }
 }

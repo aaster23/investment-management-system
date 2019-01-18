@@ -13,7 +13,10 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
   ) { }
+
   @Get('/user')
+  // @Roles('admin', 'manager')
+  // @UseGuards(AuthGuard(), AdminGuard)
   getUser(@Body() user: UserLoginDTO) {
     return this.usersService.getUser(user);
   }

@@ -40,11 +40,11 @@ createConnection().then(async (conn) => {
 
   // Setup the default admin
   // email: admin@test.com
-  // password: TainoObichamAzis
+  // password: azis123
 
   // Setup the default manager
   // email: manager@test.com
-  // password: TainoObichamAzis
+  // password: azis123
 
   const userRepo = conn.getRepository<User>(User);
 
@@ -54,7 +54,7 @@ createConnection().then(async (conn) => {
     user1.email = 'admin@test.com';
     user1.dateregistered = new Date();
     user1.role = admin;
-    user1.password = await bcrypt.hash('TainoObichamAzis', 10);
+    user1.password = await bcrypt.hash('azis', 10);
 
     await userRepo.save(user1);
 
@@ -63,7 +63,7 @@ createConnection().then(async (conn) => {
     user2.email = 'manager@test.com';
     user2.dateregistered = new Date();
     user2.role = manager;
-    user2.password = await bcrypt.hash('TainoObichamAzis', 10);
+    user2.password = await bcrypt.hash('azis', 10);
 
     await userRepo.save(user2);
 

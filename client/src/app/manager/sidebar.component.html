@@ -1,55 +1,65 @@
 <app-header></app-header>
 <nav class="nav">
-        <h2 class="text-white name">{{this.managerName}}</h2>
-          <ul>
-          <hr style="margin:0;border-color: #666;">
-              <li><a href="#">Clients</a></li>
-              <li><a href="#">Client Positions</a></li>
-          </ul>
-        <div class="table">
-          <div class="table-row table-heading">
-            <div class="cell">
-              Symbol
-            </div>
-            <div class="cell">
-              Sell Price
-            </div>
-            <div class="cell">
-              Buy Price
-            </div>
-          </div>
-          <a class="table-row" href="#">
-            <div class="cell">
-              2.1
-            </div>
-            <div class="cell">
-              2.2
-            </div>
-            <div class="cell">
-              2.3
-            </div>
-          </a>
-          <a class="table-row" href="#">
-            <div class="cell">
-              2.1
-            </div>
-            <div class="cell">
-              2.2
-            </div>
-            <div class="cell">
-              2.3
-            </div>
-          </a>
-        </div>
-      </nav>
-      
-      <div class="main">
-        <h2>Sidebar</h2>
-        <p>This sidebar is of full height (100%) and always shown.</p>
-        <p>Scroll down the page to see the result.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+  <h1 class="text-white name">{{this.managerName}}</h1>
+  <ul>
+    <hr style="margin:0;border-color: #666;">
+    <li><a><button mat-raised-button color="primary" (click)="this.getClients()">Clients</button></a></li>
+    <li><a><button mat-raised-button color="primary" (click)="this.clientsPositions()">Client Positions</button></a></li>
+  </ul>
+  <div class="table">
+    <div class="table-row table-heading">
+      <div class="cell">
+        Symbol
       </div>
+      <div class="cell">
+        Sell Price
+      </div>
+      <div class="cell">
+        Buy Price
+      </div>
+    </div>
+    <a class="table-row" href="#">
+      <div class="cell">
+        2.1
+      </div>
+      <div class="cell">
+        2.2
+      </div>
+      <div class="cell">
+        2.3
+      </div>
+    </a>
+    <a class="table-row" href="#">
+      <div class="cell">
+        2.1
+      </div>
+      <div class="cell">
+        2.2
+      </div>
+      <div class="cell">
+        2.3
+      </div>
+    </a>
+  </div>
+</nav>
+
+<div *ngIf="this.isDisabled" class="main" >
+  <br>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for client...">
+
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:50%;">Name</th>
+      <th style="width:30%;">Balance</th>
+      <th style="width:20%;"></th>
+    </tr>
+
+    <tr *ngFor="let clientInfo of clientData">
+      <td>{{clientInfo[0]}}</td>
+      <td>$ {{clientInfo[1]}}</td>
+      <td><button mat-raised-button color="accent">Manage</button></td>
       
+    </tr>
+
+  </table>
+</div>

@@ -12,6 +12,7 @@ import { JwtPayload } from '../../../interfaces/jwt-payload';
 import { Role } from '../../../data/entities/role.entity';
 import { Funds } from '../../../data/entities/funds.entity';
 import { RegisterDTO } from '../../../models/user/register.dto';
+import { IdDTO } from 'src/models/user/id.dto';
 
 @Injectable()
 export class UsersService {
@@ -121,6 +122,15 @@ export class UsersService {
     try {
       const foundUser = await this.usersRepository.findOneOrFail({ email: user.email });
       return foundUser;
+    } catch (error) {
+      throw new BadRequestException('No such user');
+    }
+  }
+
+  async getClients(id: IdDTO): Promise<{}> {
+    try {
+      const clients = await this.usersRepository.find({ where: { manager: id } });
+      return clients;
     } catch (error) {
       throw new BadRequestException('No such user');
     }

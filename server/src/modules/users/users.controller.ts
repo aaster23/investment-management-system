@@ -1,18 +1,22 @@
+import { ManagerGuardService } from './../../../../client/src/app/route-guard/manager.guard';
 import { UserLoginDTO } from './../../models/user/user-login.dto';
 import { AdminGuard } from '../../common/guards/roles/admin.guard';
 import { AuthGuard } from '@nestjs/passport';
-import { Controller, Get, UseGuards, Body, ValidationPipe, HttpException, Post } from '@nestjs/common';
+import { Controller, Get, UseGuards, Body, ValidationPipe, HttpException, Post, BadRequestException } from '@nestjs/common';
 import { UsersService } from '../../common/core/services/users.service';
 import { Roles } from 'src/common';
 import { RegisterDTO } from 'src/models/user/register.dto';
 import { ClientRegisterDTO } from 'src/models/user/client-register.dto';
 import { GetUserByEmailDTO } from 'src/models/user/getUserByEmail.dto';
+import { IdDTO } from 'src/models/user/id.dto';
+import { FundsService } from 'src/common/core/services/funds.service';
 
 @Controller('users')
 export class UsersController {
 
   constructor(
     private readonly usersService: UsersService,
+    private readonly fundService: FundsService,
   ) { }
 
   @Post('/user')
@@ -20,6 +24,25 @@ export class UsersController {
   // @UseGuards(AuthGuard(), AdminGuard)
   async getUser(@Body() user: GetUserByEmailDTO) {
     return await this.usersService.getUser(user);
+  }
+
+  @Post('/clients')
+  async getClients(@Body() id: IdDTO) {
+    try {
+      return await this.usersService.getClients(id);
+    } catch (error) {
+      throw new BadRequestException('No clients found');
+    }
+  }
+
+  @Post('/funds')
+  async getFund(@Body() id: IdDTO) {
+    try {
+      const fund = +(await this.fundService.currentFund(id));
+      return { fund };
+    } catch (error) {
+      throw new BadRequestException('No clients found');
+    }
   }
 
   @Post('register/manager')

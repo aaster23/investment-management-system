@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { FundDTO } from '../../../models/funds/fund.dto';
 import { AddSubstractFundDTO } from '../../../models/funds/add-substract-fund.dto';
+import { IdDTO } from '../../../../../client/src/app/models/id.dto';
 
 @Injectable()
 export class FundsService {
@@ -48,8 +49,8 @@ export class FundsService {
         return await this.fundRepository.update({ id: fundDTO.id }, { currentamount: foundFund.currentamount - fundDTO.amount });
     }
 
-    async currentFund(client_id: string) {
-        const clientFound = await this.userRepository.findOne({ where: { id: client_id } });
+    async currentFund(client_id: IdDTO) {
+        const clientFound = await this.userRepository.findOne({ where: { id: client_id.id } });
 
         if (!clientFound) {
             throw new HttpException('Client not found!', HttpStatus.NOT_FOUND);

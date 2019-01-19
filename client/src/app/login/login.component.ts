@@ -7,6 +7,7 @@ import { TokenDTO } from '../models/token.dto';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { UsersService } from '../core/user.service';
+import { UserInfoDTO } from '../models/userInfo.dto';
 
 @Injectable()
 @Component({
@@ -23,7 +24,6 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private auth: AuthService,
     private userService: UsersService,
-    public snackBar: MatSnackBar,
     private router: Router,
     private appConfig: AppConfig,
   ) { }
@@ -39,36 +39,31 @@ export class LoginComponent implements OnInit {
 
   login(loginForm: NgForm): void {
     if (loginForm.valid) {
-      this.auth.login(loginForm.value).subscribe(
-        (response: TokenDTO) => {
-          localStorage.setItem('access_token', response.token);
-          this.credentialsError = null;
-          const payload: any = this.auth.decodeToken();
-          if (payload.role === this.appConfig.admin) {
-            this.router.navigate(['/register']);
-          }
-          if (payload.role === this.appConfig.manager) {
-            this.router.navigate(['/manager']);
-          }
-          this.openSnackBar('Successful login.', 'OK');
-        }, (e) => {
-          this.openSnackBar('Wrong credentials', 'Failed to login!');
-        });
-
-
-
+      this.auth.login(loginForm.value).subscribe((response: TokenDTO) => {
+        localStorage.setItem('access_token', response.token);
+        this.credentialsError = null;
+        const payload: any = this.auth.decodeToken();
+        if (payload.role === this.appConfig.admin) {
+          this.router.navigate(['/register']);
+        }
+        if (payload.role === this.appConfig.manager) {
+          const email = { email: payload.email };
+          this.userService.retrieveUserData(email).subscribe(
+            (managerData: UserInfoDTO) => {
+              localStorage.setItem('id', managerData.id);
+            }
+          );
+          this.router.navigate(['/manager']);
+        }
+        this.userService.openSnackBar('Successful login.', 'OK');
+      }, (e) => {
+        this.userService.openSnackBar('Wrong credentials', 'Failed to login!');
+      });
     }
   }
-
   private validate(inputField: AbstractControl): string {
     if (inputField.hasError('required')) {
       return 'The field is required';
     }
-  }
-
-  private openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action, {
-      duration: 3500,
-    });
   }
 }

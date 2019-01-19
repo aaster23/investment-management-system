@@ -1,4 +1,4 @@
-.my-form{
+.my-form {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
@@ -15,4 +15,24 @@ a:-webkit-any-link {
   color: white;
   font-family: fantasy;
   font-size: -webkit-xxx-large;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  display: grid;
+  justify-content: center;
+  padding-bottom: 150px;
+  padding-right: 16px;
+  padding-left: 16px;
+  padding-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 70px;
+  box-shadow: 0 0px 1px -1px rgba(0,0,0,0.2), 0 1px 50px 0 rgba(0, 0, 0, 1), 0 0px 7px 0 rgba(0,0,0,1);
+}
+
+.mat-card-actions .mat-raised-button:first-child {
+  margin: -20px -50px;
+  position: relative;
+  top: 50%;
+  left: 50%;
 }

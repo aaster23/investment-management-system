@@ -1,7 +1,8 @@
+import { HeaderModule } from './header/header.module';
+import { AdminModule } from './admin-panel/admin.module';
 import { GuardsModule } from './route-guard/gurad.module';
 import { AppConfig } from './config/app.config';
 import { HeaderComponent } from './header/header.component';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AppRoutingModule } from './app.router.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SharedMaterialModule } from './shared/shared-material.module';
-import { SidebarComponent } from './manager/sidebar.component';
+import { ManagerModule } from './manager/manager.module';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -21,12 +22,11 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminPanelComponent,
-    HeaderComponent,
-    SidebarComponent
   ],
   imports: [
     BrowserModule,
+    ManagerModule,
+    AdminModule,
     GuardsModule,
     BrowserAnimationsModule,
     SharedMaterialModule,

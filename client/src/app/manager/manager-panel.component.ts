@@ -1,22 +1,22 @@
 import { BehaviorSubject } from 'rxjs';
-import { AuthService } from './../core/auth.service';
-import { UserInfoDTO } from './../models/userInfo.dto';
-import { UsersService } from './../core/user.service';
+import { AuthService } from '../core/auth.service';
+import { UserInfoDTO } from '../models/userInfo.dto';
+import { UsersService } from '../core/user.service';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { IGridData } from '../models/gridData';
 import { IdDTO } from '../models/id.dto';
 
 @Injectable()
 @Component({
-    selector: 'app-sidebar',
-    templateUrl: './sidebar.component.html',
-    styleUrls: ['./sidebar.component.css']
+    selector: 'app-manager-panel',
+    templateUrl: './manager-panel.component.html',
+    styleUrls: ['./manager-panel.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class ManagerPanelComponent implements OnInit {
     isDisabled = false;
     private managerName: string;
     private managerId: string;
-    private clientData = []; /* [ [Martn, 500], [Ivan, 50000 ] ]*/
+    private clientData = []; /* [ [Martin, 500], [Ivan, 50000 ] ]*/
     private clients: [];
     constructor(
         private usersService: UsersService,

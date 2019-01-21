@@ -1,6 +1,6 @@
 import { Company } from '../../../data/entities/company.entity';
 import { Industry } from '../../../data/entities/industry.entity';
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Watchlist } from '../../../data/entities/watchlist.entity';
@@ -91,5 +91,13 @@ export class CompaniesService {
         const companies = await this.watchlistRepository.find({ where: { companyFound } });
 
         return companies.length;
+    }
+
+    async getAll() {
+        try {
+            return this.companyRepository.find();
+        } catch (error) {
+            throw new BadRequestException('No companies to show');
+        }
     }
 }

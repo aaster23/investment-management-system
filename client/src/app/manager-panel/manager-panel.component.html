@@ -7,59 +7,33 @@
     <li><a><button mat-raised-button color="primary" (click)="this.clientsPositions()">Client Positions</button></a></li>
   </ul>
   <div class="table">
+
     <div class="table-row table-heading">
       <div class="cell">
         Symbol
       </div>
       <div class="cell">
-        Sell Price
+        Sell Price $
       </div>
       <div class="cell">
-        Buy Price
+        Buy Price $
       </div>
     </div>
-    <a class="table-row" href="#">
+
+    <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
       <div class="cell">
-        2.1
+          <button mat-raised-button color="accent">{{stock}}</button>
       </div>
       <div class="cell">
-        2.2
+       3000
       </div>
       <div class="cell">
-        2.3
+        3000
       </div>
-    </a>
-    <a class="table-row" href="#">
-      <div class="cell">
-        2.1
-      </div>
-      <div class="cell">
-        2.2
-      </div>
-      <div class="cell">
-        2.3
-      </div>
-    </a>
+    </div>
   </div>
 </nav>
 
-<div *ngIf="this.isDisabled" >
+<div *ngIf="this.isDisabled">
   <app-client-list></app-client-list>
-  <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for client...">
-
-  <table id="myTable">
-    <tr class="header">
-      <th style="width:50%;">Name</th>
-      <th style="width:30%;">Balance</th>
-      <th style="width:20%;"></th>
-    </tr>
-
-    <tr *ngFor="let clientInfo of clientData">
-      <td>{{clientInfo[0]}}</td>
-      <td>$ {{clientInfo[1]}}</td>
-      <td><button mat-raised-button color="accent">Manage</button></td>
-      
-    </tr>
-
-  </table> -->
 </div>

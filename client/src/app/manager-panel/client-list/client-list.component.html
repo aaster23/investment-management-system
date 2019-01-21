@@ -1,18 +1,18 @@
 <div class="main">
   <br>
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for client...">
+  <input type="text" id="myInput" (keyup)="myFunction()" placeholder="Search for name...">
 
   <table id="myTable">
     <tr class="header">
-      <th style="width:50%;">Name</th>
-      <th style="width:30%;">Balance</th>
+      <th style="width:50%;">Client Name</th>
+      <th style="width:30%;">Balance $</th>
       <th style="width:20%;"></th>
     </tr>
 
     <tr *ngFor="let clientInfo of clientData; let i = index" [attr.data-index]="i" [ngStyle]="{'background-color':clientInfo[1]>0? '#a0ec9b' : '#ff9e9e'}">
       <td>{{i+1}}. {{clientInfo[0]}}</td>
-      <td>$ {{clientInfo[1]}}</td>
-      <td><button mat-raised-button color="accent">Manage</button></td>
+      <td>{{clientInfo[1]}}</td>
+      <td><button mat-fab color="accent">Manage</button></td>
     </tr>
 
   </table>

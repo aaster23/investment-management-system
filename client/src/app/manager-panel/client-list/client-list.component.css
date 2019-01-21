@@ -1,5 +1,6 @@
 .main {
   margin-left: 320px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 #myInput {
   width: 100%;
@@ -12,6 +13,7 @@
   /* Add a grey border */
   margin-bottom: 12px;
   /* Add some space below the input */
+  opacity: 0.9;
 }
 
 #myTable {

@@ -1,3 +1,4 @@
+import { CompanyModule } from './modules/company/company.module';
 import { UsersModule } from './modules/users/users.module';
 import { Module, HttpModule } from '@nestjs/common';
 import { ConfigModule } from './config/config.module';
@@ -20,6 +21,7 @@ import { UsersService } from './common/core/services/users.service';
     WatchlistModule,
     PricesModule,
     UsersModule,
+    CompanyModule,
   ],
   controllers: [],
   providers: [UsersService],

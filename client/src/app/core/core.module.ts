@@ -1,9 +1,9 @@
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthService } from './auth.service';
 import { AppConfig } from '../config/app.config';
 import { UsersService } from './user.service';
+import { StocksService } from './stocks.service';
 
 @NgModule({
   imports: [],
@@ -11,7 +11,8 @@ import { UsersService } from './user.service';
     AppConfig,
     AuthService,
     JwtHelperService,
-    UsersService
-  ],
+    UsersService,
+    StocksService,
+  ]
 })
 export class CoreModule { }

@@ -1,6 +1,7 @@
 import { UserInfoDTO } from '../models/userInfo.dto';
 import { UsersService } from '../core/user.service';
 import { Component, Injectable, OnInit, } from '@angular/core';
+import { StocksService } from '../core/stocks.service';
 
 @Injectable()
 @Component({
@@ -9,10 +10,12 @@ import { Component, Injectable, OnInit, } from '@angular/core';
     styleUrls: ['./manager-panel.component.css']
 })
 export class ManagerPanelComponent implements OnInit {
-    isDisabled = false;
+    private isDisabled = false;
+    private stocksInfo = [];
     private managerName: string;
     constructor(
         private usersService: UsersService,
+        private stocksService: StocksService,
     ) { }
 
     ngOnInit(): void {
@@ -23,8 +26,14 @@ export class ManagerPanelComponent implements OnInit {
             }
         );
 
+        this.stocksInfo = this.stocksService.getStockData();
     }
+
     getClients() {
-        this.isDisabled = true;
+        if (this.isDisabled === false) {
+            return this.isDisabled = true;
+        } else {
+            return this.isDisabled = false;
+        }
     }
 }

@@ -39,6 +39,7 @@ body {
   background-color: #444;
   transition: left 500ms ease;
   z-index: 0;
+  overflow: auto;
 }
 
 .nav ul {
@@ -101,6 +102,7 @@ body {
   display: table;
   width: 100%;
   padding: 20px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 .table-row {

@@ -1,13 +1,14 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-          <span><a href="/">Trading 11</a></span>
+  <mat-toolbar-row>
+    <img src="../../assets//img//duck.png" style="width:55px;height:55px; padding-right: 6px;">
+    <span>
+      <a href="/">Trading 11</a></span>
     </mat-toolbar-row>
   </mat-toolbar>
+  
 
-<mat-toolbar>
-  <span>Login</span>
-</mat-toolbar>
 <mat-card class="my-card">
+  <H1>Login</H1>
   <mat-card-content>
     <form validate [formGroup]="loginForm" class="my-form">
 
@@ -19,7 +20,7 @@
 
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
-        <input matInput type = "password" placeholder="Password" name="password" formControlName='password' required>
+        <input matInput type="password" placeholder="Password" name="password" formControlName='password' required>
         <mat-error>{{validate(password)}}</mat-error>
       </mat-form-field>
 

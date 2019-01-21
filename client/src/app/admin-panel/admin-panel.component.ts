@@ -1,3 +1,5 @@
+import { AppConfig } from './../config/app.config';
+import { AdminGuardService } from './../route-guard/admin.guard';
 import { LoginDTO } from './../models/user-login.dto';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
@@ -21,12 +23,20 @@ export class AdminPanelComponent implements OnInit {
     private credentialsError: string = null;
     private selectedForm: string;
 
-    constructor(private formBuilder: FormBuilder,
+
+    constructor(
+        private formBuilder: FormBuilder,
         private auth: AuthService,
         public snackBar: MatSnackBar,
         private router: Router,
+        private guard: AdminGuardService,
+        private config: AppConfig,
     ) { }
     ngOnInit(): void {
+        if (!this.guard.canActivate()) {
+            this.router.navigate([`${this.config.apiUrl}/login`]);
+        }
+
         this.registerForm = this.formBuilder.group({
             email: ['', Validators.pattern('.+\@.+\..+')],
             password: ['', Validators.pattern('[A-z0-9]{6,}')],

@@ -11,10 +11,11 @@ export class AdminGuardService implements CanActivate {
         private auth: AuthService,
         private appConfig: AppConfig,
     ) {
+        this.auth.getUser();
         this.auth.user.subscribe((token: PayloadDTO) => this.token = token);
     }
     public canActivate(): boolean {
-        if (this.token.role === this.appConfig.admin) {
+        if (this.token !== null && this.token.role === this.appConfig.admin) {
             return true;
         }
         return false;

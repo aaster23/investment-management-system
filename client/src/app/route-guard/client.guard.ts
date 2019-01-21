@@ -11,6 +11,7 @@ export class ClientGuardService implements CanActivate {
         private auth: AuthService,
         private appConfig: AppConfig,
     ) {
+        this.auth.getUser();
         this.auth.user.subscribe((token: PayloadDTO) => this.token = token);
     }
     public canActivate(): boolean {

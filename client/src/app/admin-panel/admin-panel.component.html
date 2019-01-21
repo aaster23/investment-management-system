@@ -10,26 +10,27 @@
       <mat-form-field class="full-width">
         <mat-label>Name</mat-label>
         <input matInput type="text" name="name" formControlName='name' required>
-        <mat-error><h3>{{validate(name)}}</h3></mat-error>
+        <mat-error><h4>{{validate(name)}}</h4></mat-error>
         <br>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label >Email</mat-label>
         <input matInput type = "text" name="email" formControlName='email' required>
-        <mat-error><h3>{{validate(email)}}</h3></mat-error>
+        <mat-error><h4>{{validate(email)}}</h4></mat-error>
         <br>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
-        <input matInput type = "password" name="password" formControlName='password'>
+        <input matInput type = "password" name="password" formControlName='password' required>
+        <mat-error><h4>{{validate(password)}}</h4></mat-error>
         <br>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Amount</mat-label>
-        <input matInput type="number" name="amount" formControlName='amount'>
+        <input matInput type="number" name="amount" formControlName='amount' required>
         <br>
       </mat-form-field>
 

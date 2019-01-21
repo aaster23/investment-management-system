@@ -42,25 +42,6 @@ export class AdminPanelComponent implements OnInit {
         this.registerForm.controls.password.disable();
     }
 
-
-    private login(registerForm: NgForm): void {
-        if (registerForm.valid) {
-            // this.auth.login(registerForm.value).subscribe(
-                // (res: IAccessToken) => {
-                //     localStorage.setItem('access_token', res.token);
-                //     this.credentialsError = null;
-                //     this.auth.getUser();
-                //     this.openSnackBar('Successful login.', 'OK');
-                //     this.router.navigate(['/project/all']);
-                //     // this.router.navigate(['/', this.user.company]);
-                // },
-                // (err: HttpErrorResponse) => {
-                //     this.credentialsError = err.error.err;
-                //     this.auth.getUser();
-                // });
-        }
-    }
-
     private validate(inputField: AbstractControl): string {
         if (inputField.hasError('required')) {
             return 'The field is required';
@@ -72,9 +53,6 @@ export class AdminPanelComponent implements OnInit {
             duration: 3500,
             panelClass: ['blue-snackbar'],
         });
-    }
-    private logout() {
-        this.auth.logout();
     }
 
     private register() {

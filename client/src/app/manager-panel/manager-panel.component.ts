@@ -11,7 +11,6 @@ import { Component, Injectable, OnInit, } from '@angular/core';
 export class ManagerPanelComponent implements OnInit {
     isDisabled = false;
     private managerName: string;
-    private clientData = []; /* [ [Martin, 500], [Ivan, 50000 ] ]*/
     constructor(
         private usersService: UsersService,
     ) { }
@@ -26,7 +25,6 @@ export class ManagerPanelComponent implements OnInit {
 
     }
     getClients() {
-        this.clientData = this.usersService.getClients();
         this.isDisabled = true;
     }
 }

@@ -11,7 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SharedMaterialModule } from './shared/shared-material.module';
-import { ManagerModule } from './manager/manager.module';
+import { ManagerModule } from './manager-panel/manager.module';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');

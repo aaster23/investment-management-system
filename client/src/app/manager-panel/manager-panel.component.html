@@ -43,9 +43,9 @@
   </div>
 </nav>
 
-<div *ngIf="this.isDisabled" class="main" >
-  <br>
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for client...">
+<div *ngIf="this.isDisabled" >
+  <app-client-list></app-client-list>
+  <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for client...">
 
   <table id="myTable">
     <tr class="header">
@@ -61,5 +61,5 @@
       
     </tr>
 
-  </table>
+  </table> -->
 </div>

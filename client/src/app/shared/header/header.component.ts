@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { AuthService } from '../core/auth.service';
+import { AuthService } from '../../core/auth.service';
 
 @Injectable()
 @Component({

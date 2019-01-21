@@ -1,8 +1,6 @@
-import { HeaderModule } from './header/header.module';
 import { AdminModule } from './admin-panel/admin.module';
 import { GuardsModule } from './route-guard/gurad.module';
 import { AppConfig } from './config/app.config';
-import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app.router.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';

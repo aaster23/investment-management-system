@@ -51,7 +51,7 @@ export class UsersService {
             (clients: []) => {
                 clients.forEach((client: UserInfoDTO) => {
                     const info = [];
-                    info.push(client.fullname, +client.funds.currentamount);
+                    info.push(client.fullname, client.email, +client.funds.currentamount);
                     clientData.push(info);
                 });
             },

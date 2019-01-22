@@ -14,38 +14,38 @@ import { Router } from '@angular/router';
     styleUrls: ['./manager-panel.component.css']
 })
 export class ManagerPanelComponent implements OnInit {
-    private isDisabled = false;
-    private stocksInfo = [];
-    private managerName: string;
+    // private isDisabled = false;
+    // private stocksInfo = [];
+    // private managerName: string;
     constructor(
-        private usersService: UsersService,
-        private stocksService: StocksService,
-        private router: Router,
-        private guard: ManagerGuardService,
-        private config: AppConfig,
+        // private usersService: UsersService,
+        // private stocksService: StocksService,
+        // private router: Router,
+        // private guard: ManagerGuardService,
+        // private config: AppConfig,
     ) { }
 
     ngOnInit(): void {
 
-        if (!this.guard.canActivate()) {
-            this.router.navigate([`${this.config.apiUrl}/login`]);
-        } else {
-            this.usersService.getManagerInfo();
-            this.usersService.user.subscribe(
-                (managerData: UserInfoDTO) => {
-                    this.managerName = managerData.fullname;
-                }
-            );
+        // if (!this.guard.canActivate()) {
+        //     this.router.navigate([`${this.config.apiUrl}/login`]);
+        // } else {
+        //     this.usersService.getManagerInfo();
+        //     this.usersService.user.subscribe(
+        //         (managerData: UserInfoDTO) => {
+        //             this.managerName = managerData.fullname;
+        //         }
+        //     );
 
-            this.stocksInfo = this.stocksService.getStockData();
-        }
+        //     this.stocksInfo = this.stocksService.getStockData();
+        // }
     }
 
-    getClients() {
-        if (this.isDisabled === false) {
-            return this.isDisabled = true;
-        } else {
-            return this.isDisabled = false;
-        }
-    }
+    // getClients() {
+    //     if (this.isDisabled === false) {
+    //         return this.isDisabled = true;
+    //     } else {
+    //         return this.isDisabled = false;
+    //     }
+    // }
 }

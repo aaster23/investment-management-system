@@ -151,6 +151,11 @@ export class UsersService {
     return user.settings;
   }
 
+  async getAllUsersSettings() {
+    const users: User[] = await this.usersRepository.find({ });
+    return users;
+  }
+
   async updateUserSettings(id: string, settings: any) {
     const user: User = await this.usersRepository.findOne({ id });
     user.settings = settings;

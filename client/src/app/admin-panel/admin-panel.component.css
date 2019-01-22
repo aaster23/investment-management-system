@@ -25,3 +25,11 @@ a:-webkit-any-link {
   background: rgb(223, 84, 84);
   color: black;
 }
+
+#buttonsHolder .mat-raised-button:nth-child(2){
+  margin-left: 10px;
+}
+#buttonsHolder .mat-raised-button{
+  background-color: rgb(74, 122, 255);
+  color: white;
+}

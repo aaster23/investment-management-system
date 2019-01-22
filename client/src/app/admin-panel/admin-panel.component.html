@@ -1,9 +1,10 @@
 <app-header></app-header>
 
-<mat-toolbar>
-  <span>Registration</span>
+<mat-toolbar id="buttonsHolder">
+  <button class="mat-raised-button" (click)="this.selectMenu('register')">Registration</button>
+  <button class="mat-raised-button" (click)="this.selectMenu('manage')">Mange</button>
 </mat-toolbar>
-<mat-card class="my-card">
+<mat-card class="my-card" *ngIf="this.selectedMenu === 'register'">
   <mat-card-content>
     <form validate [formGroup]="this.registerForm" (ngSubmit)="this.register(registerForm)" class="my-form" >
 
@@ -11,10 +12,10 @@
         <mat-label>Name</mat-label>
         <input matInput type="text" name="name" formControlName='name' required>
         <mat-error><h4>{{validate(name)}}</h4></mat-error>
-        <br>
       </mat-form-field>
 
       <mat-form-field class="full-width">
+        <br>
         <mat-label >Email</mat-label>
         <input matInput type = "text" name="email" formControlName='email' required>
         <mat-error><h4>{{validate(email)}}</h4></mat-error>
@@ -22,6 +23,7 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
+        <br>
         <mat-label>Password</mat-label>
         <input matInput type = "password" name="password" formControlName='password' required>
         <mat-error><h4>{{validate(password)}}</h4></mat-error>
@@ -29,6 +31,7 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
+        <br>
         <mat-label>Amount</mat-label>
         <input matInput type="number" name="amount" formControlName='amount' required>
         <br>
@@ -50,3 +53,4 @@
     <button mat-raised-button (click)="this.register($event)" color="primary">Register</button>
   </mat-card-actions>
 </mat-card>
+<app-admin-manage *ngIf="this.selectedMenu === 'manage'"></app-admin-manage>

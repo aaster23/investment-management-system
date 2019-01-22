@@ -92,4 +92,11 @@ export class UsersController {
   all() {
     return this.usersService.getAll();
   }
+
+  @Get('/settings')
+  @Roles('admin')
+  @UseGuards(AuthGuard(), AdminGuard)
+  getUsersSettings() {
+    return this.usersService.getAllUsersSettings();
+  }
 }

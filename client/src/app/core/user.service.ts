@@ -25,7 +25,7 @@ export class UsersService {
     public retrieveManagerData(userEmail): Observable<object> {
         return this.httpClient.post(`${this.appConfig.apiUrl}/users/manager`, userEmail);
     }
-    
+
     public retrieveClientsData(id: IdDTO): Observable<object> {
         return this.httpClient.post(`${this.appConfig.apiUrl}/users/clients`, id);
     }

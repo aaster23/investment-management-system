@@ -72,7 +72,7 @@ createConnection().then(async (conn) => {
           const highlow = [min + Math.random() * delta, min + Math.random() * delta];
           newPrice.lowprice = +Math.min(...highlow).toFixed(2);
           newPrice.highprice = +Math.max(...highlow).toFixed(2);
-          newPrice.company = Promise.resolve(company);
+          newPrice.company = company;
           prices.push(newPrice);
         }
         // Try to update the stocks

@@ -1,37 +1,36 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
 import { AppConfig } from '../config/app.config';
-import { MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { StockDTO } from '../models/stock.dto';
 
 @Injectable()
 export class StocksService {
 
-
+    private stock = new BehaviorSubject<object>({});
     constructor(
         private httpClient: HttpClient,
-        private auth: AuthService,
         private appConfig: AppConfig,
-        public snackBar: MatSnackBar,
     ) { }
 
     public retrieveStocksData(): Observable<object> {
         return this.httpClient.get(`${this.appConfig.apiUrl}/companies`);
     }
-    public retrieveCompnayPrices(companyId): Observable<object> {
-        return this.httpClient.post(`${this.appConfig.apiUrl}/prices`, companyId);
+    public retrieveCompanyPrices(): Observable<object> {
+        return this.httpClient.get(`${this.appConfig.apiUrl}/prices`);
     }
-    getStockData() {
-        const stocks = [];
-        this.retrieveStocksData().subscribe(
-            (response: []) => {
-                response.forEach((s: StockDTO) => {
-                    stocks.push(s.abbr);
-                });
-            }
-        );
-        return stocks;
+    getStockData(): any[] {
+        const stocksData = [];
+        let marketData = [];
+        this.retrieveCompanyPrices().subscribe((response: []) => {
+            response.forEach((stock: StockDTO) => {
+                marketData.push(stock.company.abbr, +stock.lowprice, +stock.highprice,
+                    stock.company.industry.name, stock.company.name);
+
+                stocksData.push(marketData);
+                marketData = [];
+            });
+        });
+        return stocksData;
     }
 }

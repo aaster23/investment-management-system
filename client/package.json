@@ -23,6 +23,8 @@
     "@angular/router": "~7.1.0",
     "@auth0/angular-jwt": "^2.1.0",
     "@types/bootstrap": "^4.2.0",
+    "ag-grid-angular": "^20.0.0",
+    "ag-grid-community": "^20.0.0",
     "bootstrap": "^4.2.1",
     "core-js": "^2.5.4",
     "rxjs": "^6.3.3",

@@ -21,14 +21,9 @@
 
     <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
       <div class="cell">
-        <button mat-raised-button color="accent">{{stock}}</button>
-      </div>
-      <div class="cell">
-        3000
-      </div>
-      <div class="cell">
-        3000
-      </div>
+        <button mat-raised-button color="accent">{{stock[0]}}</button></div>
+      <div class="cell">{{stock[1]}}</div>
+      <div class="cell">{{stock[2]}}</div>
     </div>
   </div>
 </nav>

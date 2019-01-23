@@ -1,0 +1,14 @@
+<app-header></app-header>
+<ag-grid-angular 
+#agGrid
+style="width:1400 px; height: 600px; margin-left:310px" 
+class="ag-theme-balham"
+[rowData]="rowData" 
+[columnDefs]="columnDefs"
+rowSelection="multiple"
+>
+</ag-grid-angular>
+
+<app-client-sidebar>
+    <button mat-raised-button color="warn"(click)="getSelectedRows()" buyBtn >Proceed</button>
+</app-client-sidebar>

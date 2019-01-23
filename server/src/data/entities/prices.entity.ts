@@ -23,7 +23,7 @@ export class Price {
   @Column()
   lowprice: number;
 
-  @ManyToOne(type => Company, company => company.prices)
-  company: Promise<Company>;
+  @ManyToOne(type => Company, company => company.prices, { eager: true })
+  company: Company;
 
 }

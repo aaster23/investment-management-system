@@ -15,7 +15,6 @@ export class ClientPanelComponent implements OnInit {
     ngOnInit(): void {
         this.usersService.clientData.subscribe(
             (response: UserInfoDTO) => {
-                console.log(response);
                 this.clientName = response.fullname;
             }
         );

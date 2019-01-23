@@ -1,3 +1,4 @@
+import { ClientModule } from './../client-panel/client.module';
 import { CoreModule } from './../core/core.module';
 import { NgModule } from '@angular/core';
 import { SharedMaterialModule } from '../shared/shared-material.module';
@@ -13,7 +14,7 @@ import { ManagerSidebarComponent } from './sidebar/manager-sidebar.component';
         ClientListComponent,
         ManagerSidebarComponent
     ],
-    imports: [SharedMaterialModule, SharedModule, CoreModule, ManagerRoutingModule],
+    imports: [SharedMaterialModule, SharedModule, CoreModule, ClientModule, ManagerRoutingModule],
     providers: [],
     exports: [],
 })

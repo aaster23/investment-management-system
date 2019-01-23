@@ -11,7 +11,7 @@ import { IdDTO } from '../models/id.dto';
 @Injectable()
 export class UsersService {
     public user = new BehaviorSubject<object>({});
-    public clientsData = new BehaviorSubject<object>({});
+    public clientData = new BehaviorSubject<object>({});
     constructor(
         private httpClient: HttpClient,
         private auth: AuthService,
@@ -25,15 +25,18 @@ export class UsersService {
     public retrieveManagerData(userEmail): Observable<object> {
         return this.httpClient.post(`${this.appConfig.apiUrl}/users/manager`, userEmail);
     }
-
+    
     public retrieveClientsData(id: IdDTO): Observable<object> {
         return this.httpClient.post(`${this.appConfig.apiUrl}/users/clients`, id);
     }
 
-    openSnackBar(message: string, action: string): void {
-        this.snackBar.open(message, action, {
-            duration: 3500,
-        });
+    setClientEmail(email) {
+        this.retrieveUserData({ email }).subscribe(
+            (clientData: UserInfoDTO) => {
+                localStorage.setItem('client_email', clientData.email);
+                this.clientData.next(clientData);
+            }
+        );
     }
 
     getManagerInfo() {
@@ -63,5 +66,10 @@ export class UsersService {
             }
         );
         return clientData;
+    }
+    openSnackBar(message: string, action: string): void {
+        this.snackBar.open(message, action, {
+            duration: 3500,
+        });
     }
 }

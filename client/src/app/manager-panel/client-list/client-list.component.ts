@@ -1,5 +1,6 @@
 import { Component, Injectable, OnInit, } from '@angular/core';
 import { UsersService } from 'src/app/core/user.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 @Component({
@@ -8,13 +9,19 @@ import { UsersService } from 'src/app/core/user.service';
     styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
-    private clientData = []; /* [ [Martin, 500], [Ivan, 50000 ] ]*/
+    private clientsData = []; /* [ [Martin, 500], [Ivan, 50000 ] ]*/
 
     constructor(
         private usersService: UsersService,
+        private router: Router,
     ) { }
     ngOnInit(): void {
-        this.clientData = this.usersService.getClients();
+        this.clientsData = this.usersService.getClients();
+    }
+
+    clientData(data) {
+        this.usersService.setClientEmail(data[1]);
+        this.router.navigate(['/manager/client/']);
     }
 
     // this evil magic here is for searching functionality

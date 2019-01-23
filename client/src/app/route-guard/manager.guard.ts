@@ -15,8 +15,6 @@ export class ManagerGuardService implements CanActivate {
         this.auth.user.subscribe((token: PayloadDTO) => this.token = token);
     }
     public canActivate(): boolean {
-        console.log(this.token.role);
-        console.log(this.appConfig.manager);
         if (this.token !== null && this.token.role === this.appConfig.manager) {
             return true;
         }

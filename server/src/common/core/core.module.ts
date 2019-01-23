@@ -1,3 +1,4 @@
+import { Manager } from './../../data/entities/managers.entity';
 import { UsersService } from '../core/services/users.service';
 import { Funds } from './../../data/entities/funds.entity';
 import { Status } from './../../data/entities/status.entity';
@@ -20,7 +21,7 @@ import { WatchlistService } from './services/watchlist.service';
 import { PricesService } from './services/prices.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Company, Industry, Watchlist, Order, Status, Role, Funds, Settings, Price])],
+  imports: [TypeOrmModule.forFeature([User, Company, Industry, Watchlist, Order, Status, Role, Funds, Settings, Price, Manager])],
   providers: [UsersService, FileService, CompaniesService, OrderService, WatchlistService, FundsService, IndustriesService, PricesService],
   exports: [UsersService, FileService, CompaniesService, OrderService, WatchlistService, FundsService, IndustriesService, PricesService],
 })

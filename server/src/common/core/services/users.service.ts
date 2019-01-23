@@ -1,3 +1,4 @@
+import { Manager } from './../../../data/entities/managers.entity';
 import { GetUserByEmailDTO } from './../../../models/user/getUserByEmail.dto';
 import { ClientRegisterDTO } from './../../../models/user/client-register.dto';
 import { GetUserDTO } from '../../../models/user/get-user.dto';
@@ -19,6 +20,8 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
+    @InjectRepository(Manager)
+    private readonly managersRepository: Repository<Manager>,
     @InjectRepository(Role)
     private readonly roleRepository: Repository<Role>,
     @InjectRepository(Funds)
@@ -26,15 +29,15 @@ export class UsersService {
   ) { }
 
   // ==> Only admin can register new client and managers profiles
-  async createManager(manager: RegisterDTO): Promise<User> {
-    const foundManager = await this.usersRepository.findOne({ email: manager.email });
+  async createManager(manager: RegisterDTO): Promise<Manager> {
+    const foundManager = await this.managersRepository.findOne({ email: manager.email });
     if (foundManager) {
       throw new BadRequestException('Email already exist');
     }
 
     try {
       const managerRole = await this.roleRepository.findOne({ rolename: 'manager' });
-      const newManager = await this.usersRepository.create();
+      const newManager = await this.managersRepository.create();
 
       newManager.fullname = manager.fullname;
       newManager.email = manager.email;
@@ -42,7 +45,7 @@ export class UsersService {
       newManager.dateregistered = new Date();
       newManager.role = managerRole;
 
-      return await this.usersRepository.save(newManager);
+      return await this.managersRepository.save(newManager);
     } catch (error) {
       throw new BadRequestException();
     }
@@ -76,7 +79,7 @@ export class UsersService {
 
     try {
       const role = await this.roleRepository.findOne({ rolename: 'client' });
-      const manager = await this.usersRepository.findOne({ id: managerId });
+      const manager = await this.managersRepository.findOne({ id: managerId });
 
       const funds = await this.fundsRepository.create();
       funds.currentamount = +client.amount;
@@ -98,16 +101,22 @@ export class UsersService {
 
   async validateUser(payload: JwtPayload): Promise<GetUserDTO> {
     const userFound: any = await this.usersRepository.findOne({ where: { email: payload.email } });
-    return userFound;
+    const userFound1: any = await this.managersRepository.findOne({ where: { email: payload.email } });
+    return userFound || userFound1;
   }
 
-  async signIn(user: UserLoginDTO): Promise<User> {
+  async signIn(user: UserLoginDTO): Promise<User | Manager> {
     const userFound: User = await this.usersRepository.findOne({ where: { email: user.email } });
-
+    const userFound1: Manager = await this.managersRepository.findOne({ where: { email: user.email } });
     if (userFound) {
       const result = await bcrypt.compare(user.password, userFound.password);
       if (result) {
         return userFound;
+      }
+    } else {
+      const result1 = await bcrypt.compare(user.password, userFound1.password);
+      if (result1) {
+        return userFound1;
       }
     }
 
@@ -152,7 +161,7 @@ export class UsersService {
   }
 
   async getAllUsersSettings() {
-    const users: User[] = await this.usersRepository.find({ });
+    const users: User[] = await this.usersRepository.find({});
     return users;
   }
 

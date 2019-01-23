@@ -1,3 +1,4 @@
+import { Manager } from './managers.entity';
 import { Funds } from './funds.entity';
 import { Settings } from './settings.entity';
 import { Order } from './order.entity';
@@ -23,11 +24,8 @@ export class User {
   @ManyToOne(type => Role, role => role.users, { eager: true })
   role: Role;
 
-  @ManyToOne(type => User, user => user.clients)
-  manager: User;
-
-  @OneToMany(type => User, user => user.manager)
-  clients: Promise<User[]>;
+  @ManyToOne(type => Manager, manager => manager.client, { eager: true })
+  manager: Manager;
 
   @OneToOne(type => Watchlist, watchlist => watchlist.client)
   @JoinColumn()
@@ -36,7 +34,7 @@ export class User {
   @OneToOne(type => Settings, settings => settings.user)
   settings: Promise<Settings>;
 
-  @OneToOne(type => Funds, funds => funds.client, { eager: true})
+  @OneToOne(type => Funds, funds => funds.client, { eager: true })
   @JoinColumn()
   funds: Funds;
 

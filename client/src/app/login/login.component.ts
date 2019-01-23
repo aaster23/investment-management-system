@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         }
         if (payload.role === this.appConfig.manager) {
           const email = { email: payload.email };
-          this.userService.retrieveUserData(email).subscribe(
+          this.userService.retrieveManagerData(email).subscribe(
             (managerData: UserInfoDTO) => {
               localStorage.setItem('id', managerData.id);
             }

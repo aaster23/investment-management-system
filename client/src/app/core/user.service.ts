@@ -22,6 +22,9 @@ export class UsersService {
     public retrieveUserData(userEmail): Observable<object> {
         return this.httpClient.post(`${this.appConfig.apiUrl}/users/user`, userEmail);
     }
+    public retrieveManagerData(userEmail): Observable<object> {
+        return this.httpClient.post(`${this.appConfig.apiUrl}/users/manager`, userEmail);
+    }
 
     public retrieveClientsData(id: IdDTO): Observable<object> {
         return this.httpClient.post(`${this.appConfig.apiUrl}/users/clients`, id);
@@ -36,7 +39,7 @@ export class UsersService {
     getManagerInfo() {
         const token = this.auth.decodeToken();
         const email = { email: token.email };
-        this.retrieveUserData(email).subscribe(
+        this.retrieveManagerData(email).subscribe(
             (managerData: UserInfoDTO) => {
                 localStorage.setItem('id', managerData.id);
                 this.user.next(managerData);

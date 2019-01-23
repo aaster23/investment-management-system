@@ -25,6 +25,10 @@ export class UsersController {
   async getUser(@Body() user: GetUserByEmailDTO) {
     return await this.usersService.getUser(user);
   }
+  @Post('/manager')
+  async getManager(@Body() user: GetUserByEmailDTO) {
+    return await this.usersService.getManager(user);
+  }
 
   @Post('/clients')
   async getClients(@Body() id: IdDTO) {

@@ -127,6 +127,14 @@ export class UsersService {
     return this.usersRepository.find({});
   }
 
+  async getManager(manager: GetUserByEmailDTO): Promise<Manager>{
+    try {
+      const foundManager = await this.managersRepository.findOneOrFail({ email: manager.email });
+      return foundManager;
+    } catch (error) {
+      throw new BadRequestException('No such manager');
+    }
+  }
   async getUser(user: GetUserByEmailDTO): Promise<User> {
     try {
       const foundUser = await this.usersRepository.findOneOrFail({ email: user.email });
@@ -142,15 +150,6 @@ export class UsersService {
       return clients;
     } catch (error) {
       throw new BadRequestException('No such user');
-    }
-  }
-
-  async getManager(id: string): Promise<User> {
-    try {
-      const manager = await this.usersRepository.findOneOrFail({ id });
-      return manager;
-    } catch (error) {
-      throw new BadRequestException('No such manager');
     }
   }
 

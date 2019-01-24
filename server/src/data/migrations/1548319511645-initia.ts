@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class AddManagersTable1548205106610 implements MigrationInterface {
+export class initia1548319511645 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query("CREATE TABLE `roles` (`id` varchar(255) NOT NULL, `rolename` varchar(255) NOT NULL DEFAULT '', UNIQUE INDEX `IDX_2db66a4809c8d953c3cd1975c5` (`rolename`), PRIMARY KEY (`id`)) ENGINE=InnoDB");

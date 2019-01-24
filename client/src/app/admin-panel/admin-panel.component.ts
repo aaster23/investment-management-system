@@ -32,10 +32,6 @@ export class AdminPanelComponent implements OnInit {
         private config: AppConfig,
     ) { }
     ngOnInit(): void {
-        if (!this.guard.canActivate()) {
-            this.router.navigate([`${this.config.apiUrl}/login`]);
-        }
-
         this.registerForm = this.formBuilder.group({
             email: ['', Validators.pattern('.+\@.+\..+')],
             password: ['', Validators.pattern('[A-z0-9]{6,}')],

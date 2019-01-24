@@ -30,12 +30,39 @@ export class UsersController {
     return await this.usersService.getManager(user);
   }
 
-  @Post('/clients')
+  @Post('/client')
   async getClients(@Body() id: IdDTO) {
     try {
       return await this.usersService.getClients(id);
     } catch (error) {
       throw new BadRequestException('No clients found');
+    }
+  }
+
+  @Get('/clients')
+  async getUsers() {
+    try {
+      return await this.usersService.getUsersByRole('client');
+    } catch (error) {
+      throw new BadRequestException('No clients found');
+    }
+  }
+
+  @Get('/managers')
+  async getManagers() {
+    try {
+      return await this.usersService.getUsersByRole('manager');
+    } catch (error) {
+      throw new BadRequestException('No managers found');
+    }
+  }
+
+  @Get('/admins')
+  async getAdmins() {
+    try {
+      return await this.usersService.getUsersByRole('admin');
+    } catch (error) {
+      throw new BadRequestException('No admins found');
     }
   }
 
@@ -102,5 +129,16 @@ export class UsersController {
   @UseGuards(AuthGuard(), AdminGuard)
   getUsersSettings() {
     return this.usersService.getAllUsersSettings();
+  }
+
+  @Post('/assign-manager')
+  @Roles('admin')
+  @UseGuards(AuthGuard(), AdminGuard)
+  assignManager(@Body() email: string, manager_email: string) {
+    try {
+      return this.usersService.assignManager(email, manager_email);
+    } catch (error) {
+      return error;
+    }
   }
 }

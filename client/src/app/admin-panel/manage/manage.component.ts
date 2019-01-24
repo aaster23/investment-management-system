@@ -25,13 +25,11 @@ export class ManageComponent implements OnInit {
   async ngOnInit() {
     let users = await this.getUsers();
     users = users.map((user) => {
-      if (user.role.rolename === 'client' && user.managerID === 'null') {
-      return { name: user.fullname, email: user.email, role: user.role.rolename, manager: 'Assign', funds: user.funds.currentamount  };
-      }
       if (user.funds) {
-      return { name: user.fullname, email: user.email, role: user.role.rolename, manager: user.managerID, funds: user.funds.currentamount  };
+        // tslint:disable-next-line:max-line-length
+        return { name: user.fullname, email: user.email, role: user.role.rolename, manager: user.manager.email, funds: user.funds.currentamount };
       }
-      return { name: user.fullname, email: user.email, role: user.role.rolename, manager: user.managerID };
+      return { name: user.fullname, email: user.email, role: user.role.rolename, manager: 'Not assignable' };
     });
     console.log(users);
     this.dataSource = new MatTableDataSource(users);
@@ -54,6 +52,9 @@ export class ManageComponent implements OnInit {
     let users;
     await this.http.get(`${this.appConfig.apiUrl}/users`, { headers: bearerToken  }).toPromise().then((response) => {
       users = response;
+    });
+    await this.http.get(`${this.appConfig.apiUrl}/users/managers`, { headers: bearerToken  }).toPromise().then((response: []) => {
+      response.forEach((user) => users.push(user));
     });
   console.log(users);
    return users;

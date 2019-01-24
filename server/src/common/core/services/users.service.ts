@@ -135,6 +135,28 @@ export class UsersService {
       throw new BadRequestException('No such manager');
     }
   }
+
+  async getUsersByRole(role: string): Promise<Manager[] | User[]>{
+    try {
+      if (role === 'manager') {
+      const managers = await this.managersRepository.find({ });
+      return managers;
+        }
+      if (role === 'admin') {
+        let admins = await this.usersRepository.find();
+        admins = admins.filter((user) => user.role.rolename === 'admin')
+        return admins;
+        }
+      if (role === 'client') {
+        let client = await this.usersRepository.find();
+        client = client.filter((user) => user.role.rolename === 'client');
+        return client;
+        }
+    } catch (error) {
+      throw new BadRequestException('No users in the database!');
+    }
+  }
+
   async getUser(user: GetUserByEmailDTO): Promise<User> {
     try {
       const foundUser = await this.usersRepository.findOneOrFail({ email: user.email });
@@ -167,5 +189,23 @@ export class UsersService {
   async updateUserSettings(id: string, settings: any) {
     const user: User = await this.usersRepository.findOne({ id });
     user.settings = settings;
+  }
+
+  async assignManager(email): Promise<{message: string}> {
+    try {
+      const userEmail = email.email;
+      const managerEmail = email.manager_email;
+
+      const user: User = await this.usersRepository.findOne({ where: {email: userEmail} });
+      const manager: Manager = await this.managersRepository.findOne({ where: { email: managerEmail }});
+
+      user.manager = manager;
+      this.usersRepository.update( {email: userEmail}, {manager});
+
+      return { message: `Successfully assigned manager ${manager.email} to ${user.email}`};
+    }
+    catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }

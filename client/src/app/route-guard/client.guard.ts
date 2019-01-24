@@ -1,5 +1,5 @@
 import { AppConfig } from './../config/app.config';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../core/auth.service';
 import { Injectable } from '@angular/core';
 import { PayloadDTO } from '../models/payload.dto';
@@ -10,6 +10,7 @@ export class ClientGuardService implements CanActivate {
     constructor(
         private auth: AuthService,
         private appConfig: AppConfig,
+        private router: Router,
     ) {
         this.auth.getUser();
         this.auth.user.subscribe((token: PayloadDTO) => this.token = token);
@@ -18,6 +19,6 @@ export class ClientGuardService implements CanActivate {
         if (this.token.role === this.appConfig.client) {
             return true;
         }
-        return false;
+        this.router.navigate([`${this.appConfig.apiUrl}/login`]);
     }
 }

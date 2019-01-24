@@ -1,6 +1,6 @@
 import { UsersService } from '../core/user.service';
 import { Component, Injectable, OnInit, Output, } from '@angular/core';
-import { UserInfoDTO } from '../models/userInfo.dto';
+import { NotificationService } from '../core/notification.service';
 
 @Injectable()
 @Component({
@@ -9,13 +9,12 @@ import { UserInfoDTO } from '../models/userInfo.dto';
     styleUrls: ['./client-panel.component.css']
 })
 export class ClientPanelComponent implements OnInit {
-    constructor(private usersService: UsersService) {
+    private clientName: string;
+    constructor(
+        private notificationService: NotificationService,
+    ) {
     }
     ngOnInit(): void {
-        this.usersService.clientData.subscribe(
-            (response: UserInfoDTO) => {
-                this.clientName = response.fullname;
-            }
-        );
+        this.clientName = localStorage.getItem('client_names');
     }
 }

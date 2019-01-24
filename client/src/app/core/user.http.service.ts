@@ -21,6 +21,6 @@ export class UsersHttpService {
     }
 
     public retrieveClientsData(id: IdDTO): Observable<object> {
-        return this.httpClient.post(`${this.appConfig.apiUrl}/users/clients`, id);
+        return this.httpClient.post(`${this.appConfig.apiUrl}/users/client`, id);
     }
 }

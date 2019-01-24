@@ -1,10 +1,7 @@
-import { Component, Injectable, OnInit, } from '@angular/core';
+import { Component, Injectable, OnInit, Input, } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersService } from '../../core/user.service';
 import { StocksService } from '../../core/stocks.service';
 import { ManagerGuardService } from '../../route-guard/manager.guard';
-import { AppConfig } from '../../config/app.config';
-import { UserInfoDTO } from '../../models/userInfo.dto';
 
 @Injectable()
 @Component({
@@ -14,27 +11,18 @@ import { UserInfoDTO } from '../../models/userInfo.dto';
 })
 export class ManagerSidebarComponent implements OnInit {
     private stocksInfo = [];
-    private managerName: string;
+    @Input() private managerName: string;
     constructor(
-        private usersService: UsersService,
         private stocksService: StocksService,
         private router: Router,
         private guard: ManagerGuardService,
-        private config: AppConfig,
     ) { }
 
     ngOnInit(): void {
 
         if (!this.guard.canActivate()) {
-            this.router.navigate([`${this.config.apiUrl}/login`]);
+            this.router.navigate(['/login']);
         } else {
-            this.usersService.getManagerInfo();
-            this.usersService.user.subscribe(
-                (managerData: UserInfoDTO) => {
-                    this.managerName = managerData.fullname;
-                }
-            );
-
             this.stocksInfo = this.stocksService.getStockData();
         }
     }

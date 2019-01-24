@@ -1,4 +1,3 @@
-import { ClientModule } from './../client-panel/client.module';
 import { NgModule } from '@angular/core';
 import { SharedMaterialModule } from '../shared/shared-material.module';
 import { SharedModule } from '../shared/shared.module';
@@ -8,12 +7,12 @@ import { ManagerRoutingModule } from './manager.routing.module';
 import { ManagerSidebarComponent } from './sidebar/manager-sidebar.component';
 
 @NgModule({
+    imports: [SharedMaterialModule, SharedModule, ManagerRoutingModule],
     declarations: [
         ManagerPanelComponent,
         ClientListComponent,
         ManagerSidebarComponent
     ],
-    imports: [SharedMaterialModule, SharedModule, ClientModule, ManagerRoutingModule],
     providers: [],
     exports: [],
 })

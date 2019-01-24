@@ -19,6 +19,6 @@ export class AdminGuardService implements CanActivate {
         if (this.token !== null && this.token.role === this.appConfig.admin) {
             return true;
         }
-        this.router.navigate([`${this.appConfig.apiUrl}/login`]);
+        this.router.navigate(['/login']);
     }
 }

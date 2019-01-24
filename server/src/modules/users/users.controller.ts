@@ -134,9 +134,9 @@ export class UsersController {
   @Post('/assign-manager')
   @Roles('admin')
   @UseGuards(AuthGuard(), AdminGuard)
-  assignManager(@Body() email: string, manager_email: string) {
+  assignManager(@Body() email: string) {
     try {
-      return this.usersService.assignManager(email, manager_email);
+      return this.usersService.assignManager(email);
     } catch (error) {
       return error;
     }

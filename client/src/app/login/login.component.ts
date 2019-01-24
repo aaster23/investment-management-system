@@ -1,3 +1,4 @@
+import { PayloadDTO } from './../models/payload.dto';
 import { UsersHttpService } from './../core/user.http.service';
 import { AppConfig } from './../config/app.config';
 import { Component, OnInit, Injectable } from '@angular/core';
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
       this.auth.login(loginForm.value).subscribe((response: TokenDTO) => {
         localStorage.setItem('access_token', response.token);
         this.credentialsError = null;
-        const payload: any = this.auth.decodeToken();
+        const payload: PayloadDTO = this.auth.decodeToken();
         if (payload.role === this.appConfig.admin) {
           this.router.navigate(['/register']);
         }
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
           const email = { email: payload.email };
           this.usersServiceHttp.retrieveManagerData(email).subscribe(
             (managerData: UserInfoDTO) => {
-              localStorage.setItem('id', managerData.id);
+              localStorage.setItem('manager_id', managerData.id);
             }
           );
           this.router.navigate(['/manager']);

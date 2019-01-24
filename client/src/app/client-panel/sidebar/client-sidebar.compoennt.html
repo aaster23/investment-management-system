@@ -1,5 +1,5 @@
 <nav class="nav">
-  <h1 class="text-white name">{{this.clientName}}</h1>
+  <h1 class="text-white name">{{clientName}}</h1>
   <ul>
     <hr style="margin:0;border-color: #666;">
     <li><a>Portfolio</a></li>
@@ -8,7 +8,7 @@
     <li><a (click)="this.clear()" [routerLink]="['/manager']">Complete</a></li>
     <br>
     <li>
-      <ng-content select="[buyBtn]"></ng-content>
+      <ng-content></ng-content>
     </li>
   </ul>
 </nav>

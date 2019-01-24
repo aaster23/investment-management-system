@@ -1,5 +1,4 @@
-import { Component, Injectable, OnInit, } from '@angular/core';
-import { UserInfoDTO } from '../../models/userInfo.dto';
+import { Component, Injectable, OnInit, Input, } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersHttpService } from 'src/app/core/user.http.service';
 
@@ -10,23 +9,20 @@ import { UsersHttpService } from 'src/app/core/user.http.service';
     styleUrls: ['./client-sidebar.component.css'],
 })
 export class ClientSidebarComponent implements OnInit {
-    private clientName: string;
+    @Input() private clientName: string;
+
     constructor(
         private usersHttpService: UsersHttpService,
         private router: Router
     ) { }
 
     ngOnInit(): void {
-        this.usersHttpService.retrieveUserData({ email: localStorage.getItem('client_email') }).subscribe(
-            (client: UserInfoDTO) => {
-                this.clientName = client.fullname;
-            }
-        );
+        this.clientName = localStorage.getItem('client_name');
     }
     private showGrid() {
-        this.router.navigate(['/manager/client/stocks']);
+        this.router.navigate(['/client/stocks']);
     }
     private clear() {
-        localStorage.removeItem('client_email');
+        localStorage.removeItem('client_name');
     }
 }

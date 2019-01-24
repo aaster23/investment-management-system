@@ -19,6 +19,6 @@ export class ManagerGuardService implements CanActivate {
         if (this.token !== null && this.token.role === this.appConfig.manager) {
             return true;
         }
-        this.router.navigate([`${this.appConfig.apiUrl}/login`]);
+        this.router.navigate(['/login']);
     }
 }

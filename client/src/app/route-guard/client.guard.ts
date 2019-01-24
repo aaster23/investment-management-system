@@ -19,6 +19,6 @@ export class ClientGuardService implements CanActivate {
         if (this.token.role === this.appConfig.client) {
             return true;
         }
-        this.router.navigate([`${this.appConfig.apiUrl}/login`]);
+        this.router.navigate(['/login']);
     }
 }

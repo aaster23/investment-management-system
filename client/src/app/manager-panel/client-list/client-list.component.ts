@@ -10,18 +10,22 @@ import { Router } from '@angular/router';
 })
 export class ClientListComponent implements OnInit {
     private clientsData = []; /* [ [Martin, 500], [Ivan, 50000 ] ]*/
+    private managerName: string;
 
     constructor(
         private usersService: UsersService,
         private router: Router,
     ) { }
     ngOnInit(): void {
+        this.managerName = this.usersService.getDecodedToken().name;
         this.clientsData = this.usersService.getClients();
     }
 
     clientData(data) {
-        this.usersService.setClientEmail(data[1]);
-        this.router.navigate(['/manager/client/']);
+        this.usersService.setClientName(data[1]);
+        setTimeout(() => {
+            this.router.navigate(['/client']);
+        }, 600);
     }
 
     // this evil magic here is for searching functionality

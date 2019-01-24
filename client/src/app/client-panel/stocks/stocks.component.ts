@@ -1,7 +1,7 @@
-import { StockDTO } from 'src/app/models/stock.dto';
 import { Component, Injectable, OnInit, ViewChild, } from '@angular/core';
-import { StocksService } from 'src/app/core/stocks.service';
+import { StocksService } from '../../core/stocks.service';
 import { AgGridNg2 } from 'ag-grid-angular';
+import { UsersService } from '../../core/user.service';
 
 @Injectable()
 @Component({
@@ -11,6 +11,7 @@ import { AgGridNg2 } from 'ag-grid-angular';
 })
 export class StocksComponent implements OnInit {
     private stockdata = [];
+    private name: string;
     @ViewChild('agGrid') agGrid: AgGridNg2;
     private columnDefs = [
         { headerName: 'Symbol', field: 'symbol', sortable: true, filter: true, checkboxSelection: true },
@@ -30,9 +31,12 @@ export class StocksComponent implements OnInit {
         sellprice: 200,
         buyprice: 228,
     }];
-    constructor(private stockService: StocksService) {
+    constructor(
+        private stockService: StocksService,
+    ) {
     }
     ngOnInit() {
+        this.name = localStorage.getItem('client_name');
         // this.rowData = this.stockService.getStockData();
     }
     getSelectedRows() {

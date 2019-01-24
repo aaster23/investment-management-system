@@ -6,6 +6,7 @@ export class GetUserDTO {
   email: string;
   @IsString()
   password: string;
-
+  @IsString()
   role: Role;
+  fullname: string;
 }

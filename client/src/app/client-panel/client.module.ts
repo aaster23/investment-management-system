@@ -13,7 +13,7 @@ import { AgGridModule } from 'ag-grid-angular';
         ClientPanelComponent,
         ClientSidebarComponent,
     ],
-    imports: [SharedMaterialModule, SharedModule, CoreModule,  AgGridModule.withComponents([])],
+    imports: [SharedMaterialModule, SharedModule, AgGridModule.withComponents([])],
     providers: [],
     exports: [],
 })

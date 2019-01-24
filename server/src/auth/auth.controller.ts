@@ -31,14 +31,18 @@ export class AuthController {
     transform: true,
     whitelist: true,
   })) user: UserLoginDTO): Promise<any> {
-    const token = await this.authService.signIn(user);
-    if (!token) {
-      throw new BadRequestException('Wrong credentials!');
-    }
+    try {
+      const token = await this.authService.signIn(user);
+      if (!token) {
+        throw new BadRequestException('Wrong credentials!');
+      }
 
-    return {
-      token,
-    };
+      return {
+        token,
+      };
+    } catch (error) {
+      throw new BadRequestException('Wrong credentials');
+    }
   }
 
   // @Post('register')

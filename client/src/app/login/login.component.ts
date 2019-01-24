@@ -1,13 +1,12 @@
-import { LoginDTO } from './../models/user-login.dto';
+import { UsersHttpService } from './../core/user.http.service';
 import { AppConfig } from './../config/app.config';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '../core/auth.service';
 import { TokenDTO } from '../models/token.dto';
-import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { UsersService } from '../core/user.service';
 import { UserInfoDTO } from '../models/userInfo.dto';
+import { NotificationService } from '../core/notification.service';
 
 @Injectable()
 @Component({
@@ -23,9 +22,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private auth: AuthService,
-    private userService: UsersService,
+    private usersServiceHttp: UsersHttpService,
     private router: Router,
     private appConfig: AppConfig,
+    private notificationService: NotificationService,
   ) { }
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -48,16 +48,16 @@ export class LoginComponent implements OnInit {
         }
         if (payload.role === this.appConfig.manager) {
           const email = { email: payload.email };
-          this.userService.retrieveManagerData(email).subscribe(
+          this.usersServiceHttp.retrieveManagerData(email).subscribe(
             (managerData: UserInfoDTO) => {
               localStorage.setItem('id', managerData.id);
             }
           );
           this.router.navigate(['/manager']);
         }
-        this.userService.openSnackBar('Successful login.', 'OK');
+        this.notificationService.openSnackBar('Successful login.', 'OK');
       }, (e) => {
-        this.userService.openSnackBar('Wrong credentials', 'Failed to login!');
+        this.notificationService.openSnackBar('Wrong credentials', 'Failed to login!');
       });
     }
   }

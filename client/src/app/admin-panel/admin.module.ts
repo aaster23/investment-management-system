@@ -14,7 +14,7 @@ import { RegisterComponent } from './register/register.component';
         UsersComponent,
         RegisterComponent,
     ],
-    imports: [SharedMaterialModule, SharedModule, CoreModule],
+    imports: [SharedMaterialModule, SharedModule],
     providers: [],
     exports: [],
 })

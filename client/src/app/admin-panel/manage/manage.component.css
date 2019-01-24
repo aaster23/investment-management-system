@@ -1,15 +1,12 @@
-#buttonsHolder .mat-raised-button{
-    margin-left: 10px;
-}
-#buttonsHolder .mat-raised-button{
+.menuButton{
     background-color: rgb(255, 101, 74);
     color: white;
 }
 
-#buttonsHolder {
-    justify-content: center;
+.menuDropDownButton:hover {
+    color: rgb(255, 101, 74);
+    font-weight: 600;
 }
-
 .my-form {
     min-width: 150px;
     max-width: 500px;

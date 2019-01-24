@@ -141,4 +141,15 @@ export class UsersController {
       return error;
     }
   }
+
+  @Post('/unassign-manager')
+  @Roles('admin')
+  @UseGuards(AuthGuard(), AdminGuard)
+  unassignManager(@Body() email: string) {
+    try {
+      return this.usersService.unassignManager(email);
+    } catch (error) {
+      return error;
+    }
+  }
 }

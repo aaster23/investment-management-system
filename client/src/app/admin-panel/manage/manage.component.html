@@ -1,17 +1,12 @@
-<mat-toolbar id="buttonsHolder">
-    <button class="mat-raised-button">Unassign Manager</button>
-    <button class="mat-raised-button">Assign Clients</button>.
-    <button class="mat-raised-button">Unassign Clients</button>
-</mat-toolbar>
-
 <mat-card class="my-card">
     <mat-card-content>
-      <form validate [formGroup]="this.manageForm" (ngSubmit)="this.doAction()" class="my-form" >
-  
+      <form validate [formGroup]="this.manageForm" class="my-form" >
+        <h1>Chosen action: </h1>
         <mat-form-field class="full-width">
           <mat-label>Manager Email</mat-label>
           <input matInput type="text" name="managerEmail" formControlName='managerEmail' required>
           <mat-error><h5>{{validate(managerEmail)}}</h5></mat-error>
+          <br>
         </mat-form-field>
 
         <mat-form-field class="full-width">
@@ -23,6 +18,11 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary">Do action</button>
+        <button class="menuButton" mat-button [matMenuTriggerFor]="menu">Menu</button>
+        <mat-menu #menu="matMenu">
+          <button class="menuDropDownButton" mat-menu-item (click)="unassignManager()">Unassign Manager</button>
+          <button class="menuDropDownButton" mat-menu-item (click)="assignClient()">Assign Clients</button>
+          <button class="menuDropDownButton" mat-menu-item (click)="unassignClient()">Unassign Clients</button>
+        </mat-menu>
     </mat-card-actions>
   </mat-card>

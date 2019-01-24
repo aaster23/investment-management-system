@@ -208,4 +208,19 @@ export class UsersService {
       throw new BadRequestException(error.message);
     }
   }
+
+  async unassignManager(email): Promise<{message: string}> {
+    console.log(email.email)
+    try {
+      const user: User = await this.usersRepository.findOneOrFail({ where: {email: email.email} });
+
+      user.manager = null;
+      this.usersRepository.update( {email: email.email}, {manager: null});
+
+      return { message: `Successfully unassigned manager from user ${user.email}`};
+    }
+    catch (error) {
+      throw new BadRequestException(error.message);
+    }
+  }
 }

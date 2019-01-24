@@ -8,7 +8,7 @@ export class NotificationService {
     ) { }
     public openSnackBar(message: string, action: string, color: string): void {
         this.snackBar.open(message, action, {
-            duration: 3500,
+            duration: 2500,
             panelClass: [`${color}-snackbar`],
         });
     }

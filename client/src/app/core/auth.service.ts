@@ -6,7 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfig } from '../config/app.config';
 import { LoginDTO } from '../models/user-login.dto';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UsersService } from './user.service';
 
 @Injectable()
 export class AuthService {

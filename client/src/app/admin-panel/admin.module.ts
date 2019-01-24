@@ -10,7 +10,7 @@ import { ManageComponent } from './manage/manage.component';
         AdminPanelComponent,
         ManageComponent,
     ],
-    imports: [SharedMaterialModule, SharedModule, CoreModule],
+    imports: [SharedMaterialModule, SharedModule],
     providers: [],
     exports: [],
 })

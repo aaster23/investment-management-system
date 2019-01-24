@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit, } from '@angular/core';
-import { UsersService } from '../../core/user.service';
 import { UserInfoDTO } from '../../models/userInfo.dto';
 import { Router } from '@angular/router';
+import { UsersHttpService } from 'src/app/core/user.http.service';
 
 @Injectable()
 @Component({
@@ -12,12 +12,12 @@ import { Router } from '@angular/router';
 export class ClientSidebarComponent implements OnInit {
     private clientName: string;
     constructor(
-        private usersService: UsersService,
+        private usersHttpService: UsersHttpService,
         private router: Router
     ) { }
 
     ngOnInit(): void {
-        this.usersService.retrieveUserData({ email: localStorage.getItem('client_email') }).subscribe(
+        this.usersHttpService.retrieveUserData({ email: localStorage.getItem('client_email') }).subscribe(
             (client: UserInfoDTO) => {
                 this.clientName = client.fullname;
             }

@@ -38,7 +38,6 @@ export class ManagerSidebarComponent implements OnInit {
             this.stocksInfo = this.stocksService.getStockData();
         }
     }
-
     getClients() {
         this.router.navigate(['manager/clients']);
     }

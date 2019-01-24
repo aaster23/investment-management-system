@@ -1,0 +1,49 @@
+<mat-card class="my-card">
+  <mat-card-content>
+    <form validate [formGroup]="this.registerForm" (ngSubmit)="this.register(registerForm)" class="my-form" >
+
+      <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" name="name" formControlName='name' required>
+        <mat-error><h4>{{validate(name)}}</h4></mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <br>
+        <mat-label >Email</mat-label>
+        <input matInput type = "text" name="email" formControlName='email' required>
+        <mat-error><h4>{{validate(email)}}</h4></mat-error>
+        <br>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" *ngIf="isSelectedRole()">
+        <br>
+        <mat-label>Password</mat-label>
+        <input matInput type = "password" name="password" formControlName='password' required *ngIf="this.selectedRole === 'admin' || this.selectedRole === 'manager'">
+        <mat-error><h4>{{validate(password)}}</h4></mat-error>
+        <br>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" *ngIf="!isSelectedRole()">
+        <br>
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" name="amount" formControlName='amount' required>
+        <br>
+      </mat-form-field>
+
+      <section class="example-section">
+        <label class="full-width">Role:</label>
+        <br>
+        <br>
+        <mat-radio-group>
+          <mat-radio-button class="example-margin" value="0" (change)="this.selectedButtonRole('admin')">Admin</mat-radio-button>
+          <mat-radio-button class="example-margin" value="1" (change)="this.selectedButtonRole('manager')">Manager</mat-radio-button>
+          <mat-radio-button class="example-margin" value="2" (change)="this.selectedButtonRole('client')" checked>Client</mat-radio-button>
+        </mat-radio-group>
+      </section>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="this.register($event)" color="primary">Register</button>
+  </mat-card-actions>
+</mat-card>

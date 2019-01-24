@@ -21,12 +21,7 @@ a:-webkit-any-link {
   font-size: -webkit-xxx-large;
 }
 
-::ng-deep snack-bar-container.blue-snackbar{
-  background: rgb(223, 84, 84);
-  color: black;
-}
-
-#buttonsHolder .mat-raised-button:nth-child(2){
+#buttonsHolder .mat-raised-button{
   margin-left: 10px;
 }
 #buttonsHolder .mat-raised-button{

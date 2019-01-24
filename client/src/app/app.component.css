@@ -1,0 +1,29 @@
+::ng-deep snack-bar-container.blue-snackbar{
+    background: rgb(113, 175, 255);
+    color: black;
+}
+
+::ng-deep snack-bar-container.red-snackbar{
+    background: rgb(223, 84, 84);
+    color: black;
+}
+
+::ng-deep snack-bar-container.green-snackbar{
+    background: rgb(84, 223, 84);
+    color: black;
+}
+
+::ng-deep snack-bar-container.yellow-snackbar{
+    background: yellow;
+    color: black;
+}
+
+::ng-deep snack-bar-container.black-snackbar{
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+}
+
+::ng-deep snack-bar-container.grey-snackbar{
+    background: rgb(181, 218, 228);
+    color: black;
+}

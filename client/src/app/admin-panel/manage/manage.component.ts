@@ -1,8 +1,10 @@
 import { AppConfig } from './../../config/app.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { UsersManageModel } from 'src/app/models/users-manage.model';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-admin-manage',
@@ -11,52 +13,36 @@ import { UsersManageModel } from 'src/app/models/users-manage.model';
 })
 @Injectable()
 export class ManageComponent implements OnInit {
-  displayedColumns: string[] = ['role', 'name', 'email', 'manager', 'funds'];
-  dataSource: MatTableDataSource<UsersManageModel>;
+    private manageForm: FormGroup;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+    private userEmail: AbstractControl;
+    private managerEmail: AbstractControl;
 
-  constructor(
-    private http: HttpClient,
-    private appConfig: AppConfig,
-    ) {  }
+    private selectedForm: string;
+    private credentialsError: string = null;
 
-  async ngOnInit() {
-    let users = await this.getUsers();
-    users = users.map((user) => {
-      if (user.funds) {
-        // tslint:disable-next-line:max-line-length
-        return { name: user.fullname, email: user.email, role: user.role.rolename, manager: user.manager.email, funds: user.funds.currentamount };
-      }
-      return { name: user.fullname, email: user.email, role: user.role.rolename, manager: 'Not assignable' };
-    });
-    console.log(users);
-    this.dataSource = new MatTableDataSource(users);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+    constructor(
+      private formBuilder: FormBuilder,
+      private auth: AuthService,
+      public snackBar: MatSnackBar,
+      ) {}
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    ngOnInit() {
+      this.manageForm = this.formBuilder.group({
+        userEmail: ['', Validators.pattern('.+\@.+\..+')],
+        managerEmail: ['', Validators.pattern('.+\@.+\..+')],
+      });
+      this.userEmail = this.manageForm.get('userEmail');
+      this.managerEmail = this.manageForm.get('managerEmail');
     }
-  }
-  async getUsers() {
-    const bearerToken = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('access_token')
-  });
-    let users;
-    await this.http.get(`${this.appConfig.apiUrl}/users`, { headers: bearerToken  }).toPromise().then((response) => {
-      users = response;
-    });
-    await this.http.get(`${this.appConfig.apiUrl}/users/managers`, { headers: bearerToken  }).toPromise().then((response: []) => {
-      response.forEach((user) => users.push(user));
-    });
-  console.log(users);
-   return users;
-  }
+
+    private validate(inputField: AbstractControl): string {
+      if (inputField.hasError('required')) {
+          return 'The field is required';
+      }
+    }
+
+    private doAction(){
+      return 1;
+    }
 }

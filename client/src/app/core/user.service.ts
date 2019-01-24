@@ -48,7 +48,7 @@ export class UsersService {
             });
         },
             (e) => {
-                return this.notificationService.openSnackBar('No clients to show', 'Ok');
+                return this.notificationService.openSnackBar('No clients to show', 'Ok', 'red');
             }
         );
         return clientData;

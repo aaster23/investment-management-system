@@ -1,15 +1,3 @@
-#buttonsHolder .mat-raised-button{
-    margin-left: 10px;
-}
-#buttonsHolder .mat-raised-button{
-    background-color: rgb(255, 101, 74);
-    color: white;
-}
-
-#buttonsHolder {
-    justify-content: center;
-}
-
 .my-form {
     min-width: 150px;
     max-width: 500px;
@@ -32,3 +20,12 @@
     font-family: fantasy;
     font-size: -webkit-xxx-large;
   }
+  
+  #buttonsHolder .mat-raised-button{
+    margin-left: 10px;
+  }
+  #buttonsHolder .mat-raised-button{
+    background-color: rgb(74, 122, 255);
+    color: white;
+  }
+  

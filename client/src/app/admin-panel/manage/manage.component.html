@@ -1,1 +1,28 @@
-<p>works</p>
+<mat-toolbar id="buttonsHolder">
+    <button class="mat-raised-button">Unassign Manager</button>
+    <button class="mat-raised-button">Assign Clients</button>.
+    <button class="mat-raised-button">Unassign Clients</button>
+</mat-toolbar>
+
+<mat-card class="my-card">
+    <mat-card-content>
+      <form validate [formGroup]="this.manageForm" (ngSubmit)="this.doAction()" class="my-form" >
+  
+        <mat-form-field class="full-width">
+          <mat-label>Manager Email</mat-label>
+          <input matInput type="text" name="managerEmail" formControlName='managerEmail' required>
+          <mat-error><h5>{{validate(managerEmail)}}</h5></mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>User Email</mat-label>
+            <input matInput type="text" managerEmail="userEmail" formControlName='userEmail' required>
+            <mat-error><h5>{{validate(userEmail)}}</h5></mat-error>
+        </mat-form-field>
+  
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Do action</button>
+    </mat-card-actions>
+  </mat-card>

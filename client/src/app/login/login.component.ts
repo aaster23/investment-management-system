@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit {
           );
           this.router.navigate(['/manager']);
         }
-        this.notificationService.openSnackBar('Successful login.', 'OK');
+        this.notificationService.openSnackBar('Successful login.', 'OK', 'green');
       }, (e) => {
-        this.notificationService.openSnackBar('Wrong credentials', 'Failed to login!');
+        this.notificationService.openSnackBar('Wrong credentials', 'Failed to login!', 'red');
       });
     }
   }

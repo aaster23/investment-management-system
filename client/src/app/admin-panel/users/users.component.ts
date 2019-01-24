@@ -58,7 +58,6 @@ export class UsersComponent implements OnInit {
     await this.http.get(`${this.appConfig.apiUrl}/users/managers`, { headers: bearerToken  }).toPromise().then((response: []) => {
       response.forEach((user) => users.push(user));
     });
-  console.log(users);
    return users;
   }
 }

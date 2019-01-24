@@ -9,6 +9,7 @@ import { UserInfoDTO } from '../models/userInfo.dto';
     styleUrls: ['./client-panel.component.css']
 })
 export class ClientPanelComponent implements OnInit {
+    private clientName: string;
     constructor(private usersService: UsersService) {
     }
     ngOnInit(): void {

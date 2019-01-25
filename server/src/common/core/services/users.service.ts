@@ -144,7 +144,7 @@ export class UsersService {
         }
       if (role === 'admin') {
         let admins = await this.usersRepository.find();
-        admins = admins.filter((user) => user.role.rolename === 'admin')
+        admins = admins.filter((user) => user.role.rolename === 'admin');
         return admins;
         }
       if (role === 'client') {
@@ -210,7 +210,6 @@ export class UsersService {
   }
 
   async unassignManager(email): Promise<{message: string}> {
-    console.log(email.email)
     try {
       const user: User = await this.usersRepository.findOneOrFail({ where: {email: email.email} });
 
@@ -218,6 +217,23 @@ export class UsersService {
       this.usersRepository.update( {email: email.email}, {manager: null});
 
       return { message: `Successfully unassigned manager from user ${user.email}`};
+    }
+    catch (error) {
+      throw new BadRequestException(error.message);
+    }
+  }
+
+  async dropManager(email): Promise<{message: string}> {
+    try {
+      const manager = await this.managersRepository.findOneOrFail({ where: { email: email.manager_email }});
+      const users: User[] = await this.usersRepository.find({ where: { manager } });
+      users.forEach(async (user) => {
+        const id = user.id;
+        user.manager = null;
+        await this.usersRepository.update( { id }, {manager: null});
+      });
+
+      return { message: `Successfully unassigned all users from manager ${manager.email}`};
     }
     catch (error) {
       throw new BadRequestException(error.message);

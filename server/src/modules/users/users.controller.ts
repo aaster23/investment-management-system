@@ -152,4 +152,15 @@ export class UsersController {
       return error;
     }
   }
+
+  @Post('/drop-manager')
+  @Roles('admin')
+  @UseGuards(AuthGuard(), AdminGuard)
+  dropManager(@Body() email: string) {
+    try {
+      return this.usersService.dropManager(email);
+    } catch (error) {
+      return error;
+    }
+  }
 }

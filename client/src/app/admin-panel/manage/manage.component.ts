@@ -82,4 +82,23 @@ export class ManageComponent implements OnInit {
       this.notificationservice.openSnackBar(`Fill the forms properly!`, `Okay`, 'red');
       }
     }
+
+    private unassignManagerFromUsers() {
+      const manager_email = this.manageForm.controls.managerEmail.value;
+
+      if (manager_email) {
+        const bearerToken = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('access_token')
+      });
+      this.http.post(`${this.appConfig.apiUrl}/users/drop-manager`, {manager_email}, { headers: bearerToken })
+      .subscribe((res) => {
+        this.notificationservice.openSnackBar(`Successfully unassigned manager ${manager_email} from all users`, `Okay`, 'green')},
+        (err) => {
+          this.notificationservice.openSnackBar(`No manager with email: ${manager_email}`, `Okay`, 'red');
+        });
+      } else {
+      this.notificationservice.openSnackBar(`Fill the forms properly!`, `Okay`, 'red');
+      }
+    }
 }

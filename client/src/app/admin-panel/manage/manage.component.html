@@ -20,9 +20,9 @@
     <mat-card-actions>
         <button class="menuButton" mat-button [matMenuTriggerFor]="menu">Menu</button>
         <mat-menu #menu="matMenu">
-          <button class="menuDropDownButton" mat-menu-item (click)="unassignManager()">Unassign Manager</button>
-          <button class="menuDropDownButton" mat-menu-item (click)="assignClient()">Assign Clients</button>
-          <button class="menuDropDownButton" mat-menu-item (click)="unassignClient()">Unassign Clients</button>
+          <button class="menuDropDownButton" mat-menu-item (click)="unassignManagerFromUsers()">Unassign Manager</button>
+          <button class="menuDropDownButton" mat-menu-item (click)="assignClient()">Assign Client</button>
+          <button class="menuDropDownButton" mat-menu-item (click)="unassignClient()">Unassign Client</button>
         </mat-menu>
     </mat-card-actions>
   </mat-card>

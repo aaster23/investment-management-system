@@ -1,6 +1,5 @@
-<app-header></app-header>
-<app-manager-sidebar [managerName] = "this.managerName"></app-manager-sidebar>
-<div class="main">
+
+<div class="main" *ngIf="this.showClients">
   <br>
   <input type="text" id="myInput" (keyup)="myFunction()" placeholder="Search for name...">
 

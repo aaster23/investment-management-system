@@ -2,7 +2,7 @@
   <h1 class="text-white name">{{managerName}}</h1>
   <ul>
     <hr style="margin:0;border-color: #666;">
-    <li><a [routerLink]="['/manager/clients']">Clients</a></li>
+    <li><a (click)="this.show()">Clients</a></li>
     <li><a>Clients Positions</a></li>
   </ul>
   <div class="table">
@@ -25,5 +25,58 @@
       <div class="cell">{{stock[1]}}</div>
       <div class="cell">{{stock[2]}}</div>
     </div>
+
+    <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
+      <div class="cell">
+        <button mat-raised-button color="accent">{{stock[0]}}</button></div>
+      <div class="cell">{{stock[1]}}</div>
+      <div class="cell">{{stock[2]}}</div>
+    </div>
+    <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
+      <div class="cell">
+        <button mat-raised-button color="accent">{{stock[0]}}</button></div>
+      <div class="cell">{{stock[1]}}</div>
+      <div class="cell">{{stock[2]}}</div>
+    </div>
+    <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
+      <div class="cell">
+        <button mat-raised-button color="accent">{{stock[0]}}</button></div>
+      <div class="cell">{{stock[1]}}</div>
+      <div class="cell">{{stock[2]}}</div>
+    </div>
+    <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
+      <div class="cell">
+        <button mat-raised-button color="accent">{{stock[0]}}</button></div>
+      <div class="cell">{{stock[1]}}</div>
+      <div class="cell">{{stock[2]}}</div>
+    </div>
+    <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
+      <div class="cell">
+        <button mat-raised-button color="accent">{{stock[0]}}</button></div>
+      <div class="cell">{{stock[1]}}</div>
+      <div class="cell">{{stock[2]}}</div>
+    </div>
+    <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
+      <div class="cell">
+        <button mat-raised-button color="accent">{{stock[0]}}</button></div>
+      <div class="cell">{{stock[1]}}</div>
+      <div class="cell">{{stock[2]}}</div>
+    </div>
+    <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
+      <div class="cell">
+        <button mat-raised-button color="accent">{{stock[0]}}</button></div>
+      <div class="cell">{{stock[1]}}</div>
+      <div class="cell">{{stock[2]}}</div>
+    </div>
+    <div class="table-row" href="#" *ngFor='let stock of stocksInfo'>
+      <div class="cell">
+        <button mat-raised-button color="accent">{{stock[0]}}</button></div>
+      <div class="cell">{{stock[1]}}</div>
+      <div class="cell">{{stock[2]}}</div>
+    </div>
+
+
   </div>
 </nav>
+
+<app-client-list [showClients]="this.showClients"></app-client-list>

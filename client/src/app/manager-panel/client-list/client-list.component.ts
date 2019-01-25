@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, } from '@angular/core';
+import { Component, Injectable, OnInit, Input, } from '@angular/core';
 import { UsersService } from 'src/app/core/user.service';
 import { Router } from '@angular/router';
 
@@ -10,14 +10,12 @@ import { Router } from '@angular/router';
 })
 export class ClientListComponent implements OnInit {
     private clientsData = []; /* [ [Martin, 500], [Ivan, 50000 ] ]*/
-    private managerName: string;
-
+    @Input() private showClients: boolean;
     constructor(
         private usersService: UsersService,
         private router: Router,
     ) { }
     ngOnInit(): void {
-        this.managerName = this.usersService.getDecodedToken().name;
         this.clientsData = this.usersService.getClients();
     }
 

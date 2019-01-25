@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './not-found-page/404.component';
 import { AdminModule } from './admin-panel/admin.module';
 import { GuardsModule } from './route-guard/gurad.module';
 import { AppConfig } from './config/app.config';
@@ -19,6 +20,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LoginComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

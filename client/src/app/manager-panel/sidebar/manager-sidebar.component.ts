@@ -11,6 +11,7 @@ import { ManagerGuardService } from '../../route-guard/manager.guard';
 })
 export class ManagerSidebarComponent implements OnInit {
     private stocksInfo = [];
+    private showClients = false;
     @Input() private managerName: string;
     constructor(
         private stocksService: StocksService,
@@ -19,14 +20,14 @@ export class ManagerSidebarComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-
-        if (!this.guard.canActivate()) {
-            this.router.navigate(['/login']);
-        } else {
-            this.stocksInfo = this.stocksService.getStockData();
-        }
+        this.stocksInfo = this.stocksService.getStockData();
     }
-    getClients() {
-        this.router.navigate(['manager/clients']);
+
+    show() {
+        if (this.showClients === false) {
+            return this.showClients = true;
+        } else {
+            return this.showClients = false;
+        }
     }
 }

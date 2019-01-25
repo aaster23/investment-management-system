@@ -88,7 +88,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgb(217, 178, 226);
-  transition: width 250ms ease;
+  transition: width 350ms ease;
 }
 
 .text-white {
@@ -133,4 +133,21 @@ body {
 
 .mat-raised-button {
   font-size: 20px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(204, 203, 203); 
+  border-radius: 50%;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #7f5bbd; 
+  border-radius: 50%;
 }

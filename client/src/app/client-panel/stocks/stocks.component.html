@@ -4,9 +4,9 @@
 #agGrid
 style="width:1400 px; height: 600px; margin-left:310px" 
 class="ag-theme-balham"
-[rowData]="rowData" 
-[columnDefs]="columnDefs"
-rowSelection="multiple"
+[rowSelection]="rowSelection"
+(rowClicked)="onRowSelected($event)"
+[gridOptions]="gridOptions"
 >
 </ag-grid-angular>
 

@@ -1,4 +1,3 @@
-import { ClientModule } from './client-panel/client.module';
 import { NotFoundComponent } from './not-found-page/404.component';
 import { AdminModule } from './admin-panel/admin.module';
 import { GuardsModule } from './route-guard/gurad.module';
@@ -14,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SharedMaterialModule } from './shared/shared-material.module';
 import { ModalComponent } from './client-panel/stocks/modal/modal.component';
+import { OnlyNumberDirective } from './numbersDirective/only-numbers';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -23,7 +23,8 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     NotFoundComponent,
-    ModalComponent
+    ModalComponent,
+    OnlyNumberDirective
   ],
   imports: [
     BrowserModule,

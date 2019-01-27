@@ -1,5 +1,4 @@
-import { ManagerGuardService } from './../../../../client/src/app/route-guard/manager.guard';
-import { UserLoginDTO } from './../../models/user/user-login.dto';
+import { AddSubstractFundDTO } from './../../models/funds/add-substract-fund.dto';
 import { AdminGuard } from '../../common/guards/roles/admin.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { Controller, Get, UseGuards, Body, ValidationPipe, HttpException, Post, BadRequestException } from '@nestjs/common';
@@ -67,12 +66,32 @@ export class UsersController {
   }
 
   @Post('/funds')
-  async getFund(@Body() id: IdDTO) {
+  async getFund(@Body() email: AddSubstractFundDTO) {
     try {
-      const fund = +(await this.fundService.currentFund(id));
+      const fund = +(await this.fundService.currentFund(email));
       return { fund };
     } catch (error) {
       throw new BadRequestException('No clients found');
+    }
+  }
+
+  @Post('/funds/add')
+  async addFund(@Body() body: AddSubstractFundDTO) {
+    try {
+      const fund = +(await this.fundService.addToFund(body));
+      return { fund };
+    } catch (error) {
+      throw new BadRequestException('Fund not found');
+    }
+  }
+
+  @Post('funds/substract')
+  async substractFund(@Body() body: AddSubstractFundDTO) {
+    try {
+      const fund = +(await this.fundService.substractFund(body));
+      return { fund };
+    } catch (error) {
+      throw new BadRequestException('Fund not found or not enough money');
     }
   }
 
@@ -95,7 +114,6 @@ export class UsersController {
   @Roles('admin')
   @UseGuards(AuthGuard(), AdminGuard)
   async registerClient(@Body() client: ClientRegisterDTO) {
-    console.log(client);
     try {
       await this.usersService.createClient(client.managerId, client);
       return { message: 'Sucessfully created client!' };
@@ -108,7 +126,6 @@ export class UsersController {
   @Roles('admin')
   @UseGuards(AuthGuard(), AdminGuard)
   async registerAdmin(@Body() admin: RegisterDTO) {
-    console.log(admin);
     try {
       await this.usersService.createAdmin(admin);
       return { message: 'Sucessfully created admin!' };

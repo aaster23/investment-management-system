@@ -16,7 +16,8 @@
 
       <br>
       <mat-form-field>
-        <input matInput [(ngModel)]="this.units" name="price" type="number" min="0" placeholder="Units" required>
+        <input matInput [(ngModel)]="this.units" name="units" type="text" min="0" maxlength="10" placeholder="Units"
+          required OnlyNumber="true">
       </mat-form-field>
     </form>
 

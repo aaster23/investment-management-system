@@ -29,28 +29,32 @@ export class FundsService {
     }
 
     async addToFund(fundDTO: AddSubstractFundDTO) {
-        const foundFund: Funds = await this.fundRepository.findOne({ id: fundDTO.id });
-        if (!foundFund) {
+        const foundUser: User = await this.userRepository.findOne({ email: fundDTO.email });
+        const fundID = foundUser.funds.id;
+        const foundFund = +(foundUser.funds.currentamount);
+        console.log(foundFund)
+        if (!foundFund && foundFund !== 0) {
             throw new HttpException('Fund not found!', HttpStatus.NOT_FOUND);
         }
-
-        return await this.fundRepository.update({ id: fundDTO.id }, { currentamount: foundFund.currentamount + fundDTO.amount });
-
+        return await this.fundRepository.update({ id: fundID }, { currentamount: foundFund + fundDTO.amount });
     }
     async substractFund(fundDTO: AddSubstractFundDTO) {
-        const foundFund: Funds = await this.fundRepository.findOne({ id: fundDTO.id });
+        console.log(fundDTO)
+        const foundUser: User = await this.userRepository.findOne({ email: fundDTO.email });
+        const fundID = foundUser.funds.id;
+        const foundFund = +(foundUser.funds.currentamount);
         if (!foundFund) {
             throw new HttpException('Fund not found!', HttpStatus.NOT_FOUND);
         }
-        if (foundFund.currentamount < fundDTO.amount) {
+        if (foundFund < fundDTO.amount) {
             throw new Error('Current amount is less than the amount you want to extract');
         }
 
-        return await this.fundRepository.update({ id: fundDTO.id }, { currentamount: foundFund.currentamount - fundDTO.amount });
+        return await this.fundRepository.update({ id: fundID }, { currentamount: foundFund - fundDTO.amount });
     }
 
-    async currentFund(client_id: IdDTO) {
-        const clientFound = await this.userRepository.findOne({ where: { id: client_id.id } });
+    async currentFund(client_id: AddSubstractFundDTO) {
+        const clientFound = await this.userRepository.findOne({ where: { email: client_id.email } });
 
         if (!clientFound) {
             throw new HttpException('Client not found!', HttpStatus.NOT_FOUND);

@@ -19,10 +19,13 @@ export class ModalComponent implements OnInit {
     }
     getDialogInfo() {
         const total = (this.units * this.price).toFixed(2);
+        const direction = this.price > this.sellPrice ? 'Sell' : 'Buy';
         return {
             price: this.price,
             units: this.units,
-            total
+            total,
+            direction,
+            openDate: new Date(),
         };
     }
 }

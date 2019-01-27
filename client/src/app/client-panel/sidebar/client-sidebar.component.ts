@@ -10,7 +10,7 @@ import { UsersHttpService } from 'src/app/core/user.http.service';
 })
 export class ClientSidebarComponent implements OnInit {
     @Input() private clientName: string;
-
+    @Input() private balance: string;
     constructor(
         private usersHttpService: UsersHttpService,
         private router: Router
@@ -18,11 +18,14 @@ export class ClientSidebarComponent implements OnInit {
 
     ngOnInit(): void {
         this.clientName = localStorage.getItem('client_name');
+        this.balance = localStorage.getItem('client_balance');
     }
     private showGrid() {
         this.router.navigate(['/client/stocks']);
     }
     private clear() {
         localStorage.removeItem('client_name');
+        localStorage.removeItem('client_email');
+        localStorage.removeItem('client_balance');
     }
 }

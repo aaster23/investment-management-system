@@ -1,3 +1,4 @@
+import { FundsService } from './../../core/fund.service';
 import { StockDTO } from './../../models/stock.dto';
 import { Component, Injectable, OnInit, } from '@angular/core';
 import { StocksService } from '../../core/stocks.service';
@@ -5,6 +6,7 @@ import { GridOptions, } from 'ag-grid-community';
 import { MatDialog } from '@angular/material';
 import { ModalComponent } from './modal/modal.component';
 import { NotificationService } from 'src/app/core/notification.service';
+import { ModalDTO } from 'src/app/models/modal.dto';
 
 @Injectable()
 @Component({
@@ -30,6 +32,7 @@ export class StocksComponent implements OnInit {
         private stockService: StocksService,
         public dialog: MatDialog,
         private notification: NotificationService,
+        private fundsService: FundsService,
     ) { }
     ngOnInit() {
         this.name = localStorage.getItem('client_name');
@@ -65,10 +68,11 @@ export class StocksComponent implements OnInit {
                 }
             });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe((result: ModalDTO) => {
             if (isNaN(result.total)) {
-                this.notification.openSnackBar('Invalid unit or price', 'OK', 'red');
+                return this.notification.openSnackBar('Invalid unit or price', 'OK', 'red');
             }
+            this.fundsService.substractFund(result);
         });
     }
 }

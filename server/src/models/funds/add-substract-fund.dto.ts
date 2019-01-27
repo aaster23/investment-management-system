@@ -3,7 +3,7 @@ import { IsString, IsNumber } from 'class-validator';
 export class AddSubstractFundDTO {
 
     @IsString()
-    id: string;
+    email: string;
 
     @IsNumber()
     amount: number;

@@ -24,10 +24,6 @@ export class ManagerSidebarComponent implements OnInit {
     }
 
     show() {
-        if (this.showClients === false) {
-            return this.showClients = true;
-        } else {
-            return this.showClients = false;
-        }
+        this.router.navigate(['/manager/clients/']);
     }
 }

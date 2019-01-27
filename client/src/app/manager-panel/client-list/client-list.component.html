@@ -1,5 +1,7 @@
+<app-header></app-header>
+<app-manager-sidebar [managerName] = "this.managerName"></app-manager-sidebar>
 
-<div class="main" *ngIf="this.showClients">
+<div class="main">
   <br>
   <input type="text" id="myInput" (keyup)="myFunction()" placeholder="Search for name...">
 
@@ -15,7 +17,7 @@
       <td>{{i+1}}. {{clientInfo[0]}}</td>
       <td>{{clientInfo[1]}}</td>
       <td>{{clientInfo[2]}}</td>
-      <td><button mat-fab color="accent" (click)="this.clientData(clientInfo)">Manage</button></td>
+      <td><button mat-fab color="accent" (click)="this.clientOverview(clientInfo)">Manage</button></td>
     </tr>
 
   </table>

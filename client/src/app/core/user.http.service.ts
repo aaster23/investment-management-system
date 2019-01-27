@@ -1,9 +1,7 @@
-import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../config/app.config';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
+import { Observable, } from 'rxjs';
 import { IdDTO } from '../models/id.dto';
 
 @Injectable()

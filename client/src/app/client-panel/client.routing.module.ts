@@ -1,7 +1,7 @@
-import { ClientPanelComponent } from './../client-panel/client-panel.component';
 import { NgModule, } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StocksComponent } from '../client-panel/stocks/stocks.component';
+import { ClientPanelComponent } from './client-panel.component';
 
 
 const routes = [

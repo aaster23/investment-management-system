@@ -1,11 +1,11 @@
-// import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfig } from '../config/app.config';
 import { LoginDTO } from '../models/user-login.dto';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { PayloadDTO } from '../models/payload.dto';
 
 @Injectable()
 export class AuthService {
@@ -45,13 +45,12 @@ export class AuthService {
 
     public decodeToken() {
         const token = localStorage.getItem('access_token');
-        return this.jwtService.decodeToken(token);
+        const decodedToken: PayloadDTO = this.jwtService.decodeToken(token);
+        return decodedToken;
     }
 
     public logout(): void {
         localStorage.clear();
-        // this.user.next({});
-        // this.isAuth.next(false);
         this.router.navigate(['/login']);
     }
 

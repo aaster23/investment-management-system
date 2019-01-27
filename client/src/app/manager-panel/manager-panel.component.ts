@@ -1,6 +1,5 @@
-import { UsersService } from './../core/user.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { Component, Injectable, OnInit, } from '@angular/core';
+import { AuthService } from '../core/auth.service';
 
 @Injectable()
 @Component({
@@ -11,10 +10,10 @@ import { Component, Injectable, OnInit, } from '@angular/core';
 export class ManagerPanelComponent implements OnInit {
     private managerName: string;
     constructor(
-        private usersService: UsersService,
+        private auth: AuthService,
     ) { }
 
     ngOnInit(): void {
-        this.managerName = this.usersService.getDecodedToken().name;
+        this.managerName = this.auth.decodeToken().name;
     }
 }

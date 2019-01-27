@@ -35,3 +35,15 @@ polygon {
 polygon.processed {
   transform: rotateY(0deg) scale(1);
 }
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+.mat-raised-button:not([class*=mat-elevation-z]){
+  height: 60px;
+  width: 145px;
+  font-size: 40px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

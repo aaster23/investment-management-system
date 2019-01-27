@@ -1,0 +1,34 @@
+<div class="header" mat-dialog-title>
+  <span>{{this.data.name}}</span>
+</div>
+
+<br>
+<mat-dialog-content class="mat-typography">
+  <div class="example-container">
+
+    <form class="my-form">
+      <mat-form-field>
+        <mat-select [(value)]="price" name="price" placeholder="Price" required>
+          <mat-option value="{{this.buyPrice}}">Buy: {{this.buyPrice | currency}}</mat-option>
+          <mat-option value="{{this.sellPrice}}">Sell: {{this.sellPrice | currency}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br>
+      <mat-form-field>
+        <input matInput [(ngModel)]="this.units" name="price" type="number" min="0" placeholder="Units" required>
+      </mat-form-field>
+    </form>
+
+    <br>
+    <label>
+      <h2>Total</h2>
+    </label>
+    <h3>{{units*price | currency}}</h3>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button [mat-dialog-close]>Cancel</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="getDialogInfo()">Proceed</button>
+</mat-dialog-actions>

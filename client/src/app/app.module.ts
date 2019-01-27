@@ -1,3 +1,4 @@
+import { ClientModule } from './client-panel/client.module';
 import { NotFoundComponent } from './not-found-page/404.component';
 import { AdminModule } from './admin-panel/admin.module';
 import { GuardsModule } from './route-guard/gurad.module';
@@ -12,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SharedMaterialModule } from './shared/shared-material.module';
+import { ModalComponent } from './client-panel/stocks/modal/modal.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -20,7 +22,8 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ export function tokenGetter() {
       },
     }),
   ],
+  entryComponents: [ModalComponent],
   providers: [AppConfig],
   bootstrap: [AppComponent]
 })

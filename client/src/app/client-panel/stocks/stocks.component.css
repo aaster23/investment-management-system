@@ -1,5 +1,6 @@
 table {
   width: 100%;
+  font-size: 20px
 }
 
 .mat-form-field {
@@ -20,4 +21,13 @@ th {
   height: 55px;
   font-size: 34px;
   background-color: rgb(24, 139, 95)
+}
+
+.ag-row-hover {
+  /* putting in !important so it overrides the theme's styling as it hovers the row also */
+  background-color: #dfdfff !important;
+}
+
+.ag-column-hover {
+  background-color: #dfffdf;
 }

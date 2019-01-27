@@ -1,8 +1,10 @@
 import { StockDTO } from './../../models/stock.dto';
-import { Component, Injectable, OnInit, ViewChild, } from '@angular/core';
+import { Component, Injectable, OnInit, } from '@angular/core';
 import { StocksService } from '../../core/stocks.service';
-import { AgGridNg2 } from 'ag-grid-angular';
 import { GridOptions, } from 'ag-grid-community';
+import { MatDialog } from '@angular/material';
+import { ModalComponent } from './modal/modal.component';
+import { NotificationService } from 'src/app/core/notification.service';
 
 @Injectable()
 @Component({
@@ -12,19 +14,22 @@ import { GridOptions, } from 'ag-grid-community';
 })
 export class StocksComponent implements OnInit {
     private name: string;
-    @ViewChild('agGrid') agGrid: AgGridNg2;
+
     public gridOptions: GridOptions;
     private columnDefs = [
-        { headerName: 'Symbol', field: 'symbol', sortable: true, filter: true, checkboxSelection: false },
-        { headerName: 'Market', field: 'market', sortable: true, filter: true, checkboxSelection: false },
-        { headerName: 'Sell Price', field: 'sellprice', sortable: true, filter: true, checkboxSelection: false },
-        { headerName: 'Buy Price', field: 'buyprice', sortable: true, filter: true, checkboxSelection: false }
+        { headerName: 'Symbol', field: 'symbol', sortable: true, },
+        { headerName: 'Market', field: 'market', sortable: true, },
+        { headerName: 'Sell Price ($)', field: 'sellprice', sortable: true, },
+        { headerName: 'Buy Price ($)', field: 'buyprice', sortable: true, }
     ];
+    private defaultColDef = { width: 280, filter: 'agTextColumnFilter' };
     private rowData = [];
     private rowSelection = 'single';
 
     constructor(
         private stockService: StocksService,
+        public dialog: MatDialog,
+        private notification: NotificationService,
     ) { }
     ngOnInit() {
         this.name = localStorage.getItem('client_name');
@@ -50,15 +55,20 @@ export class StocksComponent implements OnInit {
         };
     }
     onRowSelected(event) {
-        console.log(event);
-    }
-    // For select a stock
-    getSelectedRows() {
-        const selectedNodes = this.agGrid.api.getSelectedNodes();
-        const selectedData = selectedNodes.map(node => node.data);
-        const selectedDataStringPresentation = selectedData.map(node => `${node.symbol} ${node.buyprice}`);
-        selectedDataStringPresentation.length === 0 ?
-            alert('Have to select stock !') :
-            alert(`Wanna buy ?: ${selectedDataStringPresentation}`);
+        const instrument = `${event.data.symbol} (${event.data.market})`;
+        const dialogRef = this.dialog.open(ModalComponent,
+            {
+                data: {
+                    name: instrument,
+                    buyprice: +event.data.buyprice,
+                    sellprice: +event.data.sellprice
+                }
+            });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (isNaN(result.total)) {
+                this.notification.openSnackBar('Invalid unit or price', 'OK', 'red');
+            }
+        });
     }
 }

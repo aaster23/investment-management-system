@@ -1,15 +1,12 @@
 <app-header></app-header>
 <app-client-sidebar [clientName] = "this.name"></app-client-sidebar>
-<ag-grid-angular 
-#agGrid
-style="width:1400 px; height: 600px; margin-left:310px" 
-class="ag-theme-balham"
-[rowSelection]="rowSelection"
-(rowClicked)="onRowSelected($event)"
+<ag-grid-angular style="height:688px; margin-left:300px; font-size: 22px" class="ag-theme-balham-dark"
 [gridOptions]="gridOptions"
+[rowSelection]="rowSelection"
+[defaultColDef]="defaultColDef"
+[floatingFilter]="true"
+(rowClicked)="onRowSelected($event)"
 >
 </ag-grid-angular>
 
-<app-client-sidebar>
-    <button mat-raised-button color="warn"(click)="getSelectedRows()" buyBtn >Proceed</button>
-</app-client-sidebar>
+<app-client-sidebar></app-client-sidebar>

@@ -1,10 +1,7 @@
-import { AppConfig } from './../../config/app.config';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Component, OnInit, Injectable } from '@angular/core';
-import { } from 'src/app/models/users-manage.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/auth.service';
-import { NotificationService } from 'src/app/core/notification.service';
+import { ManageService } from 'src/app/core/manage.service';
 
 @Component({
   selector: 'app-admin-manage',
@@ -23,10 +20,7 @@ export class ManageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private auth: AuthService,
-    private notificationservice: NotificationService,
-    private http: HttpClient,
-    private appConfig: AppConfig,
+    private manageService: ManageService,
   ) { }
 
   ngOnInit() {
@@ -38,69 +32,19 @@ export class ManageComponent implements OnInit {
     this.managerEmail = this.manageForm.get('managerEmail');
   }
 
-  private validate(inputField: AbstractControl): string {
-    if (inputField.hasError('required')) {
-      return 'The field is required';
-    }
-  }
-
-  private unassignManager() {
+  private unassignClient() {
     const email = this.manageForm.controls.userEmail.value;
-    if (email) {
-      const bearerToken = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('access_token')
-      });
-      this.http.post(`${this.appConfig.apiUrl}/users/unassign-manager`, { email }, { headers: bearerToken })
-        .subscribe((res) => {
-          this.notificationservice.openSnackBar(`Successfully unassigned manager from user ${email}`, `Okay`, 'green')
-        },
-          (err) => {
-            this.notificationservice.openSnackBar(`No user with email ${email}`, `Okay`, 'red');
-          });
-    } else {
-      this.notificationservice.openSnackBar(`Fill the forms properly!`, `Okay`, 'red');
-    }
+    this.manageService.unassignClient(email);
   }
 
   private assignClient() {
     const email = this.manageForm.controls.userEmail.value;
     const manager_email = this.manageForm.controls.managerEmail.value;
-
-    if (email && manager_email) {
-      const bearerToken = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('access_token')
-      });
-      this.http.post(`${this.appConfig.apiUrl}/users/assign-manager`, { email, manager_email }, { headers: bearerToken })
-        .subscribe((res) => {
-          this.notificationservice.openSnackBar(`Successfully assigned client ${email} to manager ${manager_email}`, `Okay`, 'green')
-        },
-          (err) => {
-            this.notificationservice.openSnackBar(`No user with email ${email} or ${manager_email} is not a manager`, `Okay`, 'red');
-          });
-    } else {
-      this.notificationservice.openSnackBar(`Fill the forms properly!`, `Okay`, 'red');
-    }
+    this.manageService.assignClient(email, manager_email);
   }
 
   private unassignManagerFromUsers() {
     const manager_email = this.manageForm.controls.managerEmail.value;
-
-    if (manager_email) {
-      const bearerToken = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('access_token')
-      });
-      this.http.post(`${this.appConfig.apiUrl}/users/drop-manager`, { manager_email }, { headers: bearerToken })
-        .subscribe((res) => {
-          this.notificationservice.openSnackBar(`Successfully unassigned manager ${manager_email} from all users`, `Okay`, 'green')
-        },
-          (err) => {
-            this.notificationservice.openSnackBar(`No manager with email: ${manager_email}`, `Okay`, 'red');
-          });
-    } else {
-      this.notificationservice.openSnackBar(`Fill the forms properly!`, `Okay`, 'red');
-    }
+    this.manageService.unassignManagerFromUsers(manager_email);
   }
 }

@@ -4,15 +4,13 @@
         <h1>Chosen action: </h1>
         <mat-form-field class="full-width">
           <mat-label>Manager Email</mat-label>
-          <input matInput type="text" name="managerEmail" formControlName='managerEmail' required>
-          <mat-error><h5>{{validate(managerEmail)}}</h5></mat-error>
+          <input matInput type="text" name="managerEmail" formControlName='managerEmail'>
           <br>
         </mat-form-field>
 
         <mat-form-field class="full-width">
             <mat-label>User Email</mat-label>
-            <input matInput type="text" managerEmail="userEmail" formControlName='userEmail' required>
-            <mat-error><h5>{{validate(userEmail)}}</h5></mat-error>
+            <input matInput type="text" managerEmail="userEmail" formControlName='userEmail'>
         </mat-form-field>
   
       </form>
@@ -20,9 +18,9 @@
     <mat-card-actions>
         <button class="menuButton" mat-button [matMenuTriggerFor]="menu">Menu</button>
         <mat-menu #menu="matMenu">
-          <button class="menuDropDownButton" mat-menu-item (click)="unassignManagerFromUsers()">Unassign Manager</button>
-          <button class="menuDropDownButton" mat-menu-item (click)="assignClient()">Assign Client</button>
-          <button class="menuDropDownButton" mat-menu-item (click)="unassignClient()">Unassign Client</button>
+          <button class="menuDropDownButton" matTooltip="Unassigns the manager from all of the users he is assigned to" matTooltipPosition="after" mat-menu-item (click)="unassignManagerFromUsers()" >Unassign Manager</button>
+          <button class="menuDropDownButton" matTooltip="Assigns a manager to a client" matTooltipPosition="after" mat-menu-item (click)="assignClient()">Assign Client</button>
+          <button class="menuDropDownButton" matTooltip="Unassigns a manager from a client" matTooltipPosition="after" mat-menu-item (click)="unassignClient()">Unassign Client</button>
         </mat-menu>
     </mat-card-actions>
   </mat-card>

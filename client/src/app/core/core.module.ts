@@ -10,6 +10,7 @@ import { NotificationService } from './notification.service';
 import { FundsService } from './fund.service';
 import { OrdersHttpService } from './order.http.service';
 import { OrdersService } from './order.service';
+import { ManageService } from './manage.service';
 
 @NgModule({
   imports: [],
@@ -24,7 +25,8 @@ import { OrdersService } from './order.service';
     FundsService,
     FundsHttpService,
     OrdersHttpService,
-    OrdersService
+    OrdersService,
+    ManageService
   ]
 })
 export class CoreModule { }

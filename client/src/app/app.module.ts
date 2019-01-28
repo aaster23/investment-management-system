@@ -24,7 +24,7 @@ export function tokenGetter() {
     LoginComponent,
     NotFoundComponent,
     ModalComponent,
-    OnlyNumberDirective
+    OnlyNumberDirective,
   ],
   imports: [
     BrowserModule,

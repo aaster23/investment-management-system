@@ -19,6 +19,9 @@ export class StocksService {
     public retrieveCompanyPrices(): Observable<object> {
         return this.httpClient.get(`${this.appConfig.apiUrl}/prices`);
     }
+    public retrieveCompanyInfo(companyAbbr): Observable<object> {
+        return this.httpClient.post(`${this.appConfig.apiUrl}/companies/company`, companyAbbr);
+    }
     getStockData(): any[] {
         const stocksData = [];
         let marketData = [];

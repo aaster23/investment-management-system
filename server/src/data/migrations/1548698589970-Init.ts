@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class initia1548319511645 implements MigrationInterface {
+export class Init1548698589970 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query("CREATE TABLE `roles` (`id` varchar(255) NOT NULL, `rolename` varchar(255) NOT NULL DEFAULT '', UNIQUE INDEX `IDX_2db66a4809c8d953c3cd1975c5` (`rolename`), PRIMARY KEY (`id`)) ENGINE=InnoDB");
@@ -8,7 +8,7 @@ export class initia1548319511645 implements MigrationInterface {
         await queryRunner.query("CREATE TABLE `funds` (`id` varchar(255) NOT NULL, `currentamount` int NOT NULL DEFAULT 0, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `settings` (`id` varchar(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `userstatus` (`id` varchar(255) NOT NULL, `statusname` varchar(255) NOT NULL DEFAULT '', UNIQUE INDEX `IDX_89bc91077d49f0396e882eac69` (`statusname`), PRIMARY KEY (`id`)) ENGINE=InnoDB");
-        await queryRunner.query("CREATE TABLE `orders` (`id` varchar(255) NOT NULL, `opendate` datetime NOT NULL, `closedate` datetime NULL, `buyprice` int NOT NULL, `sellprice` int NOT NULL, `units` int NOT NULL, `clientId` varchar(255) NULL, `companyId` varchar(255) NULL, `statusId` varchar(255) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
+        await queryRunner.query("CREATE TABLE `orders` (`id` varchar(255) NOT NULL, `opendate` datetime NOT NULL, `closedate` datetime NULL, `openPrice` int NOT NULL, `closePrice` int NULL, `units` int NOT NULL, `result` int NULL, `direction` varchar(255) NOT NULL, `clientId` varchar(255) NULL, `companyId` varchar(255) NULL, `statusId` varchar(255) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `users` (`id` varchar(255) NOT NULL, `fullname` varchar(255) NOT NULL DEFAULT '', `dateregistered` datetime NOT NULL, `email` varchar(255) NOT NULL, `password` varchar(255) NOT NULL DEFAULT '', `roleId` varchar(255) NULL, `managerId` varchar(255) NULL, `watchlistId` varchar(255) NULL, `fundsId` varchar(255) NULL, UNIQUE INDEX `IDX_97672ac88f789774dd47f7c8be` (`email`), UNIQUE INDEX `REL_4d95042947e09160d0b7414010` (`watchlistId`), UNIQUE INDEX `REL_616ac2fcdc9031a115bff56637` (`fundsId`), PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `watchlists` (`id` varchar(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `industries` (`id` varchar(255) NOT NULL, `name` varchar(255) NOT NULL DEFAULT '', UNIQUE INDEX `IDX_447df075c342af02a92901dc81` (`name`), PRIMARY KEY (`id`)) ENGINE=InnoDB");

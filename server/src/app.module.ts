@@ -1,3 +1,4 @@
+import { OrderModule } from './modules/order/orders.module';
 import { CompanyModule } from './modules/company/company.module';
 import { UsersModule } from './modules/users/users.module';
 import { Module, HttpModule } from '@nestjs/common';
@@ -22,6 +23,7 @@ import { UsersService } from './common/core/services/users.service';
     PricesModule,
     UsersModule,
     CompanyModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [UsersService],

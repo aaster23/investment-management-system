@@ -4,13 +4,12 @@ export class OrderDTO {
     @IsDate()
     openDate: Date;
     @IsDate()
-    closeDate: Date;
-    @IsNumber()
-    buyPrice: number;
-    @IsNumber()
-    sellPrice: number;
+    openPrice: number;
     @IsNumber()
     units: number;
     @IsString()
     companyId: string;
+    @IsString()
+    clientEmail: string;
+    direction: string;
 }

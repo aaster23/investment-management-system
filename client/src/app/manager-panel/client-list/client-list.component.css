@@ -3,7 +3,7 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 #myInput {
-  width: 100%;
+  width: 250px;
   /* Full-width */
   font-size: 16px;
   /* Increase font-size */
@@ -14,6 +14,7 @@
   margin-bottom: 12px;
   /* Add some space below the input */
   opacity: 0.9;
+
 }
 
 #myTable {

@@ -29,14 +29,19 @@ export class Order {
   company: Promise<Company>;
 
   @Column()
-  buyprice: number;
+  openPrice: number;
 
-  @Column()
-  sellprice: number;
+  @Column({ nullable: true, default: null })
+  closePrice: number;
 
   @Column()
   units: number;
 
   @ManyToOne(type => Status, status => status.orders, { eager: true })
   status: Status;
+
+  @Column({ nullable: true, default: null })
+  result: number;
+  @Column()
+  direction: string;
 }

@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { ModalComponent } from './modal/modal.component';
 import { NotificationService } from 'src/app/core/notification.service';
 import { ModalDTO } from 'src/app/models/modal.dto';
+import { OrdersService } from 'src/app/core/order.service';
 
 @Injectable()
 @Component({
@@ -33,6 +34,7 @@ export class StocksComponent implements OnInit {
         public dialog: MatDialog,
         private notification: NotificationService,
         private fundsService: FundsService,
+        private orderService: OrdersService,
     ) { }
     ngOnInit() {
         this.name = localStorage.getItem('client_name');
@@ -69,10 +71,13 @@ export class StocksComponent implements OnInit {
             });
 
         dialogRef.afterClosed().subscribe((result: ModalDTO) => {
-            if (isNaN(result.total)) {
-                return this.notification.openSnackBar('Invalid unit or price', 'OK', 'red');
+            if (result) {
+                if (isNaN(result.total)) {
+                    return this.notification.openSnackBar('Invalid unit or price', 'OK', 'red');
+                }
+                this.fundsService.substractFund(result);
+                this.orderService.saveOrder(result, event.data.symbol);
             }
-            this.fundsService.substractFund(result);
         });
     }
 }

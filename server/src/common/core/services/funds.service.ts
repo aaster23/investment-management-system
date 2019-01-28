@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { FundDTO } from '../../../models/funds/fund.dto';
 import { AddSubstractFundDTO } from '../../../models/funds/add-substract-fund.dto';
-import { IdDTO } from '../../../../../client/src/app/models/id.dto';
 
 @Injectable()
 export class FundsService {
@@ -32,14 +31,12 @@ export class FundsService {
         const foundUser: User = await this.userRepository.findOne({ email: fundDTO.email });
         const fundID = foundUser.funds.id;
         const foundFund = +(foundUser.funds.currentamount);
-        console.log(foundFund)
         if (!foundFund && foundFund !== 0) {
             throw new HttpException('Fund not found!', HttpStatus.NOT_FOUND);
         }
         return await this.fundRepository.update({ id: fundID }, { currentamount: foundFund + fundDTO.amount });
     }
     async substractFund(fundDTO: AddSubstractFundDTO) {
-        console.log(fundDTO)
         const foundUser: User = await this.userRepository.findOne({ email: fundDTO.email });
         const fundID = foundUser.funds.id;
         const foundFund = +(foundUser.funds.currentamount);

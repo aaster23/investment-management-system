@@ -197,6 +197,9 @@ export class UsersService {
       const managerEmail = email.manager_email;
 
       const user: User = await this.usersRepository.findOne({ where: {email: userEmail} });
+      if(user.role.rolename !== 'client'){
+        throw new BadRequestException('The user is not a client!');
+      }
       const manager: Manager = await this.managersRepository.findOne({ where: { email: managerEmail }});
 
       user.manager = manager;
@@ -212,6 +215,9 @@ export class UsersService {
   async unassignManager(email): Promise<{message: string}> {
     try {
       const user: User = await this.usersRepository.findOneOrFail({ where: {email: email.email} });
+      if (!user.manager) {
+        throw new BadRequestException('The user does not have a manager assigned to him!');
+      }
 
       user.manager = null;
       this.usersRepository.update( {email: email.email}, {manager: null});

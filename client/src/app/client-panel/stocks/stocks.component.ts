@@ -16,8 +16,6 @@ import { OrdersService } from 'src/app/core/order.service';
     styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
-    private name: string;
-
     public gridOptions: GridOptions;
     private columnDefs = [
         { headerName: 'Symbol', field: 'symbol', sortable: true, },
@@ -25,7 +23,7 @@ export class StocksComponent implements OnInit {
         { headerName: 'Sell Price ($)', field: 'sellprice', sortable: true, },
         { headerName: 'Buy Price ($)', field: 'buyprice', sortable: true, }
     ];
-    private defaultColDef = { width: 280, filter: 'agTextColumnFilter' };
+    private defaultColDef = { width: 300, filter: 'agTextColumnFilter' };
     private rowData = [];
     private rowSelection = 'single';
 
@@ -37,7 +35,6 @@ export class StocksComponent implements OnInit {
         private orderService: OrdersService,
     ) { }
     ngOnInit() {
-        this.name = localStorage.getItem('client_name');
         this.gridOptions = <GridOptions>{
             enableRangeSelection: true,
             columnDefs: this.columnDefs,
@@ -55,7 +52,7 @@ export class StocksComponent implements OnInit {
                         this.gridOptions.api.setRowData(this.rowData);
                     }
                 });
-                this.gridOptions.rowHeight = 50;
+                this.gridOptions.rowHeight = 45;
             }
         };
     }

@@ -5,8 +5,13 @@ import { ClientPanelComponent } from './client-panel.component';
 
 
 const routes = [
-    { path: '', component: ClientPanelComponent, },
-    { path: 'stocks', component: StocksComponent },
+    {
+        path: '', component: ClientPanelComponent,
+        children:
+        [
+            { path: 'stocks', component: StocksComponent, pathMatch: 'full'}
+        ]
+    },
 ];
 
 @NgModule({

@@ -5,8 +5,15 @@ import { ManagerPanelComponent } from './manager-panel.component';
 
 
 const routes = [
-    { path: '', component: ManagerPanelComponent, },
-    {path: 'clients', component: ClientListComponent}
+    {
+        path: '', component: ManagerPanelComponent,
+        children:
+            [
+                { path: 'clients', component: ClientListComponent, patMatch: 'full' },
+              /*  { path: 'clients/positions', component: ClientListComponent, patMatch: 'full' },*/
+            ]
+    },
+
 ];
 
 @NgModule({

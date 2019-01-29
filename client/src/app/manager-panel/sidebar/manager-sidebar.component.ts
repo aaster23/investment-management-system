@@ -22,8 +22,4 @@ export class ManagerSidebarComponent implements OnInit {
     ngOnInit(): void {
         this.stocksInfo = this.stocksService.getStockData();
     }
-
-    show() {
-        this.router.navigate(['/manager/clients/']);
-    }
 }

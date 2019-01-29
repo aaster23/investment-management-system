@@ -8,7 +8,7 @@ export const ROUTES: Routes = [
     { path: 'register', component: AdminPanelComponent/*, canActivate: [AdminGuardService]*/ },
     { path: 'login', component: LoginComponent },
     { path: '404', component: NotFoundComponent },
-    { path: 'manager', loadChildren: './manager-panel/manager.module#ManagerModule'/*,  canActivate: [ManagerGuardService] */},
+    { path: 'manager', loadChildren: './manager-panel/manager.module#ManagerModule'/*,  canActivate: [ManagerGuardService] */ },
     { path: 'client', loadChildren: './client-panel/client.module#ClientModule' },
-    { path: '**',  redirectTo: '/404', pathMatch: 'full'},
+    { path: '**', redirectTo: '/404', pathMatch: 'full' },
 ];

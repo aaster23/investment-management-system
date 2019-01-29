@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class ClientListComponent implements OnInit {
     private clientsData = []; /* [ [Martin, 500], [Ivan, 50000 ] ]*/
-    private managerName: string;
     @Input() private showClients: boolean;
     constructor(
         private usersService: UsersService,
@@ -20,7 +19,6 @@ export class ClientListComponent implements OnInit {
     ) { }
     ngOnInit(): void {
         this.clientsData = this.usersService.getClients();
-        this.managerName = this.auth.decodeToken().name;
     }
 
     clientOverview(data) {

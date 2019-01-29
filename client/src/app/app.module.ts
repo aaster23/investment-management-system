@@ -1,3 +1,4 @@
+import { ManageDialogComponent } from './admin-panel/manage/manage-dialog/manage-dialog.component';
 import { NotFoundComponent } from './not-found-page/404.component';
 import { AdminModule } from './admin-panel/admin.module';
 import { GuardsModule } from './route-guard/gurad.module';
@@ -25,6 +26,7 @@ export function tokenGetter() {
     NotFoundComponent,
     ModalComponent,
     OnlyNumberDirective,
+    ManageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,7 @@ export function tokenGetter() {
       },
     }),
   ],
-  entryComponents: [ModalComponent],
+  entryComponents: [ModalComponent, ManageDialogComponent],
   providers: [AppConfig],
   bootstrap: [AppComponent]
 })

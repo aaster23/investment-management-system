@@ -1,7 +1,9 @@
-
+import { ManageDialogComponent } from './manage-dialog/manage-dialog.component';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ManageService } from 'src/app/core/manage.service';
+import { MatDialog } from '@angular/material';
+import { NotificationService } from 'src/app/core/notification.service';
 
 @Component({
   selector: 'app-admin-manage',
@@ -18,9 +20,12 @@ export class ManageComponent implements OnInit {
   private selectedForm: string;
   private credentialsError: string = null;
 
+  private notificationservice: NotificationService;
+
   constructor(
     private formBuilder: FormBuilder,
     private manageService: ManageService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -40,11 +45,26 @@ export class ManageComponent implements OnInit {
   private assignClient() {
     const email = this.manageForm.controls.userEmail.value;
     const manager_email = this.manageForm.controls.managerEmail.value;
-    this.manageService.assignClient(email, manager_email);
+    this.onActionSelect('Assign Client');
+    // this.manageService.assignClient(email, manager_email);
+    // this.manageService.selectedEvent('assignClient');
   }
 
   private unassignManagerFromUsers() {
     const manager_email = this.manageForm.controls.managerEmail.value;
     this.manageService.unassignManagerFromUsers(manager_email);
+  }
+
+  onActionSelect(action) {
+    const dialogRef = this.dialog.open(ManageDialogComponent,
+        {
+            data: {
+                action
+            }
+        });
+
+    dialogRef.afterClosed().subscribe((result) => {
+          return this.notificationservice.openSnackBar('Invalid unit or price', 'OK', 'red');
+        })
   }
 }

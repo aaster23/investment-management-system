@@ -16,6 +16,6 @@ import { RegisterComponent } from './register/register.component';
     ],
     imports: [SharedMaterialModule, SharedModule, CoreModule],
     providers: [],
-    exports: [],
+    exports: [ ],
 })
 export class AdminModule { }

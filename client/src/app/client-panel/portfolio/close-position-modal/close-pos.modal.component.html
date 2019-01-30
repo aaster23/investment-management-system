@@ -1,0 +1,8 @@
+<div class="header" mat-dialog-title>
+  <span>Close this position {{this.data.name}}</span>
+</div>
+<br>
+<mat-dialog-actions align="end">
+  <button mat-raised-button [mat-dialog-close] = "getDialogAnswer(false)">Cancel</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="getDialogAnswer(true)">Confirm</button>
+</mat-dialog-actions>

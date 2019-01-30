@@ -1,6 +1,6 @@
 export class CloseOrderDTO {
     companyId: string;
-    units: string;
+    units;
     direction: string;
     price: string;
     closePrice: string;

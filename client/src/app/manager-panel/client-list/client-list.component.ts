@@ -1,4 +1,3 @@
-import { AuthService } from 'src/app/core/auth.service';
 import { Component, Injectable, OnInit, Input, } from '@angular/core';
 import { UsersService } from 'src/app/core/user.service';
 import { Router } from '@angular/router';
@@ -14,7 +13,6 @@ export class ClientListComponent implements OnInit {
     @Input() private showClients: boolean;
     constructor(
         private usersService: UsersService,
-        private auth: AuthService,
         private router: Router,
     ) { }
     ngOnInit(): void {
@@ -22,10 +20,10 @@ export class ClientListComponent implements OnInit {
     }
 
     clientOverview(data) {
-        this.usersService.setClientCred(data[1]);
-        setTimeout(() => {
+        this.usersService.setClientCred(data[1]).subscribe(() => {
+
             this.router.navigate(['/client']);
-        }, 600);
+        });
     }
 
     myFunction() {

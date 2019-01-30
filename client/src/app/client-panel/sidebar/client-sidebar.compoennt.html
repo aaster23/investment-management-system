@@ -3,8 +3,9 @@
   <p class="text-white name">Balance: {{balance | currency}}</p>
   <ul>
     <hr style="margin:0;border-color: #666;">
-    <li><a>Portfolio</a></li>
-    <li><a (click)="this.showGrid()">Stocks</a></li>
+    <li><a [routerLink]="['/client/portfolio']">Portfolio</a></li>
+    <li><a [routerLink]="['/client/stocks']">Stocks</a></li>
+    <li><a>History</a></li>
     <li><a>Edit Profile</a></li>
     <li><a (click)="this.clear()" [routerLink]="['/manager/clients']">Complete</a></li>
   </ul>

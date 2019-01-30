@@ -3,6 +3,7 @@ import { AppConfig } from '../config/app.config';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { StockDTO } from '../models/stock.dto';
+import { IdDTO } from '../models/id.dto';
 
 @Injectable()
 export class StocksService {
@@ -18,6 +19,9 @@ export class StocksService {
     }
     public retrieveCompanyPrices(): Observable<object> {
         return this.httpClient.get(`${this.appConfig.apiUrl}/prices`);
+    }
+    public getLastPrices(id: IdDTO): Observable<object> {
+        return this.httpClient.post(`${this.appConfig.apiUrl}/prices/last`, id);
     }
     public retrieveCompanyInfo(companyAbbr): Observable<object> {
         return this.httpClient.post(`${this.appConfig.apiUrl}/companies/company`, companyAbbr);

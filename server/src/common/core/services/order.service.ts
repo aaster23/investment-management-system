@@ -40,13 +40,13 @@ export class OrderService {
         if (amountNeeded <= foundUser.funds.currentamount) {
             try {
                 const createOrder: Order = await this.orderRepository.create();
-                createOrder.opendate = order.openDate;
+                createOrder.opendate = new Date();
                 createOrder.openPrice = order.openPrice;
                 createOrder.units = order.units;
                 createOrder.client = Promise.resolve(foundUser);
                 createOrder.status = foundStatus;
                 createOrder.direction = order.direction;
-                createOrder.company = Promise.resolve(foundCompany);
+                createOrder.company = foundCompany;
                 await this.orderRepository.save(createOrder);
             } catch (error) {
                 throw new HttpException('Cannot create order', HttpStatus.BAD_REQUEST);
@@ -78,16 +78,25 @@ export class OrderService {
 
     async closeOrder(closeOrder: CloseOrderDTO): Promise<Order> {
         try {
-            const order: Order = await this.orderRepository.findOne({ id: closeOrder.id });
-            order.closePrice = closeOrder.closePrice;
+            const order: Order = await this.orderRepository.findOne({
+                where: { company: closeOrder.companyId, units: closeOrder.units, openPrice: closeOrder.price, direction: closeOrder.direction },
+            });
+
+            order.closedate = new Date();
+            order.closePrice = +closeOrder.closePrice;
             order.status = await this.statusRepository.findOne({ where: { statusname: 'closed' } });
-            let result = 0;
-            if (order.direction === 'Buy') {
-                result = +order.units * +order.openPrice - (+order.closePrice);
-            } else {
-                result = +order.closePrice - (+order.units * +order.openPrice);
+
+            let result = +order.closePrice - (+order.openPrice);
+            if (order.direction === 'Sell') {
+                if (order.closePrice > order.openPrice) {
+                    result = -(result);
+                } else {
+                    result = +result;
+                }
             }
-            order.result = result;
+
+            order.result = result * order.units;
+
             return await this.orderRepository.save(order);
         } catch (error) {
             throw new HttpException('Orders not found!', HttpStatus.NOT_FOUND);
@@ -116,7 +125,6 @@ export class OrderService {
     }
 
     async getOpenOrders(id: string) {
-
         const foundStatus = await this.statusRepository.findOne({ where: { statusname: 'opened' } });
         const foundOpenOrders = await this.orderRepository.find({
             where: {
@@ -129,7 +137,7 @@ export class OrderService {
             throw new HttpException('Open orders not found!', HttpStatus.NOT_FOUND);
         }
         if (foundOpenOrders.length === 0) {
-            throw new BadRequestException('Client has no opened orders');
+            return [];
         }
 
         return foundOpenOrders;

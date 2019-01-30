@@ -25,7 +25,6 @@ export class ModalComponent implements OnInit {
             units: this.units,
             total,
             direction,
-            openDate: new Date(),
         };
     }
 }

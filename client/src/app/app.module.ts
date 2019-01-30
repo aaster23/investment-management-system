@@ -12,7 +12,6 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SharedMaterialModule } from './shared/shared-material.module';
-import { ModalComponent } from './client-panel/stocks/modal/modal.component';
 import { OnlyNumberDirective } from './numbersDirective/only-numbers';
 
 export function tokenGetter() {
@@ -23,7 +22,6 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     NotFoundComponent,
-    ModalComponent,
     OnlyNumberDirective,
   ],
   imports: [
@@ -43,7 +41,6 @@ export function tokenGetter() {
       },
     }),
   ],
-  entryComponents: [ModalComponent],
   providers: [AppConfig],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,6 @@
-<ag-grid-angular style="height:660px; margin-left:300px; font-size: 22px" class="ag-theme-balham-dark"
-[gridOptions]="gridOptions"
-[rowSelection]="rowSelection"
-[defaultColDef]="defaultColDef"
-[floatingFilter]="true"
-(rowClicked)="onRowSelected($event)"
+<app-grid 
+[gridType] = "this.stockGrid" 
+[columnDefs]='this.columnDefs' 
+(selectRow)='displayModal($event)'
 >
-</ag-grid-angular>
+</app-grid>

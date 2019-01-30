@@ -1,18 +1,16 @@
-import { User } from '../../data/entities/user.entity';
-import { Company } from '../../data/entities/company.entity';
-import { Controller, Get, UseGuards, Param, Body, ValidationPipe, BadRequestException } from '@nestjs/common';
+import { Controller, Get, UseGuards, Param, Body, ValidationPipe, BadRequestException, Post } from '@nestjs/common';
 import { Roles, RolesGuard } from 'src/common';
 import { AuthGuard } from '@nestjs/passport';
 import { PricesService } from 'src/common/core/services/prices.service';
 import { Price } from 'src/data/entities/prices.entity';
 import { PriceRequestDTO } from 'src/models/prices/price-request.dto';
 
-@Controller()
+@Controller('prices')
 export class PricesController {
 
     constructor(private readonly pricesService: PricesService) { }
 
-    @Get('prices')
+    @Get()
     // @Roles('manager')
     async getLatestForAllCompanies(): Promise<Price[]> {
         try {
@@ -22,7 +20,17 @@ export class PricesController {
         }
     }
 
-    @Get('prices/company')
+    @Post('/last')
+    // @Roles('manager')
+    async getLastPrice(@Body() id: string): Promise<Price> {
+        try {
+            return await this.pricesService.getLastPrice(id);
+        } catch (error) {
+            throw new BadRequestException('No price found');
+        }
+    }
+
+    @Get('/company')
     @Roles('manager')
     @UseGuards(AuthGuard(), RolesGuard)
     async getPrices(@Body(new ValidationPipe({

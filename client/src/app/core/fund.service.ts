@@ -1,3 +1,4 @@
+import { AddSubstractDTO } from './../models/add-substract.dto';
 import { ModalDTO } from './../models/modal.dto';
 import { FundsHttpService } from './funds.http.service';
 import { NotificationService } from './notification.service';
@@ -31,5 +32,9 @@ export class FundsService {
 
             }
         );
+    }
+
+    changeBalance(client: AddSubstractDTO) {
+        this.fundsHttpService.addFund(client);
     }
 }

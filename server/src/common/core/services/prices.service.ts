@@ -46,8 +46,13 @@ export class PricesService {
         throw new BadRequestException('Price not found');
       }
     }
-
     return result;
   }
-
+  async getLastPrice(id: string): Promise<Price> {
+    try {
+      return await this.priceRepository.findOne({ where: { company: id }, order: { opendate: 'DESC' } });
+    } catch (e) {
+      throw new BadRequestException('Price not found');
+    }
+  }
 }

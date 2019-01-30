@@ -25,8 +25,8 @@ export class Order {
   @Column({ nullable: true, default: null })
   closedate: Date;
 
-  @ManyToOne(type => Company, company => company.orders)
-  company: Promise<Company>;
+  @ManyToOne(type => Company, company => company.orders, { eager: true })
+  company: Company;
 
   @Column()
   openPrice: number;

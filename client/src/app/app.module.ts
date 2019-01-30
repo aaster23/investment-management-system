@@ -1,3 +1,4 @@
+import { ManageDialogComponent } from './admin-panel/manage/manage-dialog/manage-dialog.component';
 import { NotFoundComponent } from './not-found-page/404.component';
 import { AdminModule } from './admin-panel/admin.module';
 import { GuardsModule } from './route-guard/gurad.module';
@@ -13,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SharedMaterialModule } from './shared/shared-material.module';
 import { OnlyNumberDirective } from './numbersDirective/only-numbers';
+import { MatInputModule } from '@angular/material';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -23,6 +25,7 @@ export function tokenGetter() {
     LoginComponent,
     NotFoundComponent,
     OnlyNumberDirective,
+    ManageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ export function tokenGetter() {
     CoreModule,
     SharedModule,
     AppRoutingModule,
+    MatInputModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
@@ -41,6 +45,7 @@ export function tokenGetter() {
       },
     }),
   ],
+  entryComponents: [ManageDialogComponent],
   providers: [AppConfig],
   bootstrap: [AppComponent]
 })

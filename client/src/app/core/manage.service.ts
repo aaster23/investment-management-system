@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { NotificationService } from 'src/app/core/notification.service';
 import { AppConfig } from 'src/app/config/app.config';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 
 @Injectable()
 export class ManageService {
@@ -66,36 +66,6 @@ export class ManageService {
       this.notificationservice.openSnackBar(`Fill the forms properly!`, `Okay`, 'red');
     }
   }
+
 }
 
-
-// class ManagerDialog {
-
-//   constructor() {}
-
-//   openDialog(): void {
-//     const dialogRef = this.dialog.open(ManagerOverviewDialog, {
-//       width: '250px',
-//       data: {name: this.name, animal: this.animal}
-//     });
-
-//     dialogRef.afterClosed().subscribe(result => {
-//     });
-//   }
-
-//   openFromFront(form: string) {
-
-//   }
-// }
-
-
-//  class ManagerOverviewDialog {
-
-//     constructor(
-//       public dialogRef: MatDialogRef<ManagerOverviewDialog>,
-//       @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-//     onNoClick(): void {
-//       this.dialogRef.close();
-//     }
-//   }

@@ -1,37 +1,23 @@
 .menuButton{
-    background-color: rgb(255, 101, 74);
     color: white;
 }
 
 .menuDropDownButton:hover {
-    color: rgb(255, 101, 74);
+    color: rgb(74, 107, 255);
     font-weight: 600;
-}
-.my-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
 }
 
 .full-width {
   width: 100%;
 }
-
-.mat-radio-button ~ .mat-radio-button {
-    margin-left: 16px;
-  }
   
-a:-webkit-any-link {
-  color: -webkit-link;
-  cursor: pointer;
-  text-decoration: underline;
-  color: white;
-  font-family: fantasy;
-  font-size: -webkit-xxx-large;
-}
 
 ::ng-deep .mat-tooltip {
   font-size: 14px;
   font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.95);
+}
+
+.mat-raised-button {
+  background-color: rgb(74, 122, 255);
+  color: white;
 }

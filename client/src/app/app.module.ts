@@ -15,6 +15,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { SharedMaterialModule } from './shared/shared-material.module';
 import { ModalComponent } from './client-panel/stocks/modal/modal.component';
 import { OnlyNumberDirective } from './numbersDirective/only-numbers';
+import { MatInputModule } from '@angular/material';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -37,6 +38,7 @@ export function tokenGetter() {
     CoreModule,
     SharedModule,
     AppRoutingModule,
+    MatInputModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,

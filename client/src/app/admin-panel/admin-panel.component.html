@@ -3,8 +3,8 @@
 <mat-toolbar id="buttonsHolder">
   <button class="mat-raised-button" (click)="this.selectMenu('register')">Registration</button>
   <button class="mat-raised-button" (click)="this.selectMenu('users')">Users</button>
-  <button class="mat-raised-button" (click)="this.selectMenu('manage')">Mange</button>
+  <app-admin-manage></app-admin-manage>
 </mat-toolbar>
-<app-admin-manage *ngIf="this.selectedMenu === 'manage'"></app-admin-manage>
+
 <app-admin-panel-users *ngIf="this.selectedMenu === 'users'"></app-admin-panel-users>
 <app-admin-panel-register *ngIf="this.selectedMenu === 'register'"></app-admin-panel-register>

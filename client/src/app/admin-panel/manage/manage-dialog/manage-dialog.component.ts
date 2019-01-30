@@ -1,3 +1,4 @@
+import { ManageDialogResultModel } from './../../../models/manage-dialog-result.model';
 import { Component, OnInit, Inject, Injectable } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
@@ -20,7 +21,7 @@ export class ManageDialogComponent implements OnInit {
       this.action = this.data.action;
   }
 
-  getDialogInfo() {
+  getDialogInfo(): ManageDialogResultModel {
     if (this.action === 'Assign Client') {
       return {
           client: this.clientEmail,

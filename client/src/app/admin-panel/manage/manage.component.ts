@@ -4,6 +4,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
 import { ManageService } from 'src/app/core/manage.service';
 import { MatDialog } from '@angular/material';
 import { NotificationService } from 'src/app/core/notification.service';
+import { ManageDialogResultModel } from 'src/app/models/manage-dialog-result.model';
 
 @Component({
   selector: 'app-admin-manage',
@@ -12,50 +13,40 @@ import { NotificationService } from 'src/app/core/notification.service';
 })
 @Injectable()
 export class ManageComponent implements OnInit {
-  private manageForm: FormGroup;
-
-  private userEmail: AbstractControl;
-  private managerEmail: AbstractControl;
-
-  private selectedForm: string;
-  private credentialsError: string = null;
-
-  private notificationservice: NotificationService;
 
   constructor(
-    private formBuilder: FormBuilder,
     private manageService: ManageService,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this.manageForm = this.formBuilder.group({
-      userEmail: ['', Validators.pattern('.+\@.+\..+')],
-      managerEmail: ['', Validators.pattern('.+\@.+\..+')],
-    });
-    this.userEmail = this.manageForm.get('userEmail');
-    this.managerEmail = this.manageForm.get('managerEmail');
   }
 
   private unassignClient() {
-    const email = this.manageForm.controls.userEmail.value;
-    this.manageService.unassignClient(email);
+    this.onActionSelect('Unassign Client').subscribe((result: ManageDialogResultModel) => {
+      if (result) {
+      this.manageService.unassignClient(result.client);
+      }
+    });
   }
 
   private assignClient() {
-    const email = this.manageForm.controls.userEmail.value;
-    const manager_email = this.manageForm.controls.managerEmail.value;
-    this.onActionSelect('Assign Client');
-    // this.manageService.assignClient(email, manager_email);
-    // this.manageService.selectedEvent('assignClient');
+    this.onActionSelect('Assign Client').subscribe((result: ManageDialogResultModel) => {
+      if (result) {
+      this.manageService.assignClient(result.client, result.manager);
+      }
+    });
   }
 
   private unassignManagerFromUsers() {
-    const manager_email = this.manageForm.controls.managerEmail.value;
-    this.manageService.unassignManagerFromUsers(manager_email);
+    this.onActionSelect('Unassign Manager').subscribe((result: ManageDialogResultModel) => {
+      if (result) {
+      this.manageService.unassignManagerFromUsers(result.manager);
+      }
+    });
   }
 
-  onActionSelect(action) {
+   onActionSelect(action) {
     const dialogRef = this.dialog.open(ManageDialogComponent,
         {
             data: {
@@ -63,8 +54,6 @@ export class ManageComponent implements OnInit {
             }
         });
 
-    dialogRef.afterClosed().subscribe((result) => {
-          return this.notificationservice.openSnackBar('Invalid unit or price', 'OK', 'red');
-        })
+    return dialogRef.afterClosed();
   }
 }

@@ -2,23 +2,20 @@
   <span>{{this.action}}</span>
 </div>
 
-<br>
 <mat-dialog-content class="mat-typography">
-  <div class="example-container">
 
     <form class="my-form">
-      <br>
-      <mat-form-field>
-        <input matInput [(ngModel)]="this.managerEmail" name="managerEmail" type="text" placeholder="Manager Email:" *ngIf(this.action === 'Assign Client' || this.action === 'Unassign Manager')>
-        <input matInput [(ngModel)]="this.clientEmail" name="clientEmail" type="text" placeholder="Client Email:" *ngIf(this.action === 'Assign Client' || this.action === 'Unassign Client')>
-      </mat-form-field>
-    </form>
-
-    <br>
-  </div>
+        <mat-form-field *ngIf="this.action === 'Assign Client' || this.action === 'Unassign Manager'">
+          <input matInput [(ngModel)]="this.managerEmail" name="managerEmail" type="text" placeholder="Manager Email:">
+          <br>
+        </mat-form-field>
+        <mat-form-field  *ngIf="this.action === 'Assign Client' || this.action === 'Unassign Client'">
+          <input matInput [(ngModel)]="this.clientEmail" name="clientEmail" type="text" placeholder="Client Email:">
+        </mat-form-field>
+      </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-raised-button [mat-dialog-close]>Cancel</button>
   <button mat-raised-button color="warn" [mat-dialog-close]="getDialogInfo()">Submit</button>
-</mat-dialog-actions>
+</mat-dialog-actions> 

@@ -21,10 +21,11 @@ a:-webkit-any-link {
   font-size: -webkit-xxx-large;
 }
 
-#buttonsHolder .mat-raised-button{
+#buttonsHolder .mat-raised-button, #buttonsHolder app-admin-manage {
   margin-left: 10px;
 }
-#buttonsHolder .mat-raised-button{
+#buttonsHolder .mat-raised-button, #buttonsHolder app-admin-manage .mat-raised-button {
   background-color: rgb(74, 122, 255);
   color: white;
 }
+

@@ -1,9 +1,9 @@
 <app-header></app-header>
-
+<h1>{{isUserChanged}}</h1>
 <mat-toolbar id="buttonsHolder">
   <button class="mat-raised-button" (click)="this.selectMenu('register')">Registration</button>
   <button class="mat-raised-button" (click)="this.selectMenu('users')">Users</button>
-  <app-admin-manage></app-admin-manage>
+  <app-admin-manage (isChanged)="onChanged($event)"></app-admin-manage>
 </mat-toolbar>
 
 <app-admin-panel-users *ngIf="this.selectedMenu === 'users'"></app-admin-panel-users>

@@ -15,10 +15,18 @@ export class AdminPanelComponent implements OnInit {
     constructor(
         public snackBar: MatSnackBar,
     ) { }
+
     ngOnInit(): void {
+
     }
+
 
     private selectMenu(menu: string) {
         this.selectedMenu = menu;
+    }
+
+    public onChanged(event) {
+        setTimeout(() => { this.selectMenu('register'); } , 500);
+        setTimeout(() => { this.selectMenu('users'); } , 500);
     }
 }

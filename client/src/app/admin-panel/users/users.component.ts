@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AdminPanelUsersService } from './../../core/users.service';
+import { Component, OnInit, ViewChild, HostListener, HostBinding, Input, DoCheck } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AppConfig } from 'src/app/config/app.config';
 import { UsersManageModel } from 'src/app/models/users-manage.model';
+import { UpdateUsers } from 'src/app/core/users-update.service';
 
 @Component({
   selector: 'app-admin-panel-users',
@@ -18,22 +20,15 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private http: HttpClient,
-    private appConfig: AppConfig,
+    private usersService: AdminPanelUsersService,
     ) {  }
 
   async ngOnInit() {
-    let users = await this.getUsers();
-    users = users.map((user) => {
-      if (user.funds) {
-        if (user.manager) {
-          // tslint:disable-next-line:max-line-length
-          return { name: user.fullname, email: user.email, role: user.role.rolename, manager: user.manager.email, funds: user.funds.currentamount };
-        }// tslint:disable-next-line:max-line-length
-        return { name: user.fullname, email: user.email, role: user.role.rolename, manager: '', funds: user.funds.currentamount };
-      }
-      return { name: user.fullname, email: user.email, role: user.role.rolename, manager: 'Not assignable' };
-    });
+    await this.fillTable();
+  }
+
+  public async fillTable() {
+    const users = await this.usersService.getClients();
     this.dataSource = new MatTableDataSource(users);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -46,18 +41,5 @@ export class UsersComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  async getUsers() {
-    const bearerToken = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('access_token')
-  });
-    let users;
-    await this.http.get(`${this.appConfig.apiUrl}/users`, { headers: bearerToken  }).toPromise().then((response) => {
-      users = response;
-    });
-    await this.http.get(`${this.appConfig.apiUrl}/users/managers`, { headers: bearerToken  }).toPromise().then((response: []) => {
-      response.forEach((user) => users.push(user));
-    });
-   return users;
-  }
+
 }

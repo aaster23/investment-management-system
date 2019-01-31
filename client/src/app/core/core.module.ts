@@ -12,6 +12,7 @@ import { FundsService } from './fund.service';
 import { OrdersHttpService } from './order.http.service';
 import { OrdersService } from './order.service';
 import { ManageService } from './manage.service';
+import { AdminPanelUsersService } from './users.service';
 
 @NgModule({
   imports: [],
@@ -28,7 +29,8 @@ import { ManageService } from './manage.service';
     OrdersHttpService,
     OrdersService,
     ManageService,
-    GridService
+    GridService,
+    AdminPanelUsersService
   ]
 })
 export class CoreModule { }

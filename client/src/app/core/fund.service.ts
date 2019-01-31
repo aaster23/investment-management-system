@@ -29,7 +29,6 @@ export class FundsService {
                 this.fundsHttpService.substractFund(clientCred).subscribe();
                 this.notificationService.openSnackBar('Successful payment', 'OK', 'green');
                 this.user.next(response);
-
             }
         );
     }

@@ -6,7 +6,7 @@ import { ModalComponent } from './modal/modal.component';
 import { NotificationService } from 'src/app/core/notification.service';
 import { ModalDTO } from 'src/app/models/modal.dto';
 import { OrdersService } from 'src/app/core/order.service';
-
+import { take } from 'rxjs/operators';
 @Injectable()
 @Component({
     selector: 'app-stocks',
@@ -23,18 +23,19 @@ export class StocksComponent implements OnInit {
     ];
 
     constructor(
-        public dialog: MatDialog,
+        private dialog: MatDialog,
         private notification: NotificationService,
         private fundsService: FundsService,
         private orderService: OrdersService,
         private appConfig: AppConfig,
+
     ) { }
     ngOnInit() {
         this.stockGrid = this.appConfig.stockDrig;
     }
     displayModal(event) {
         const instrument = `${event.data.symbol} (${event.data.market})`;
-        const dialogRef = this.dialog.open(ModalComponent,
+        const refDial = this.dialog.open(ModalComponent,
             {
                 data: {
                     name: instrument,
@@ -42,14 +43,14 @@ export class StocksComponent implements OnInit {
                     sellprice: +event.data.sellprice
                 }
             });
-
-        dialogRef.afterClosed().subscribe((result: ModalDTO) => {
+        refDial.afterClosed().subscribe((result: ModalDTO) => {
             if (result) {
                 if (isNaN(result.total) || +result.units === 0) {
-                    return this.notification.openSnackBar('Invalid unit or price', 'OK', 'red');
-                }
+                    this.notification.openSnackBar('Invalid unit or price', 'OK', 'red');
+                } else {
                 this.fundsService.substractFund(result);
                 this.orderService.saveOrder(result, event.data.symbol);
+                }
             }
         });
     }

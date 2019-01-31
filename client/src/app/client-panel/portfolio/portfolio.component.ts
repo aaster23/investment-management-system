@@ -18,11 +18,11 @@ export class PortfolioComponent implements OnInit {
     private portfolioGrid: string;
     public gridOptions: GridOptions;
     private columnDefs = [
-        { headerName: 'Symbol', field: 'symbol', sortable: true, },
-        { headerName: 'Direction', field: 'direction', sortable: true, },
-        { headerName: 'Units', field: 'units', sortable: true, },
-        { headerName: 'Price ($)', field: 'price', sortable: true, },
-        { headerName: 'Date', field: 'date', sortable: true, },
+        { headerName: 'Symbol', field: 'symbol' },
+        { headerName: 'Direction', field: 'direction' },
+        { headerName: 'Units', field: 'units' },
+        { headerName: 'Price ($)', field: 'price' },
+        { headerName: 'Date', field: 'date' },
     ];
 
     constructor(

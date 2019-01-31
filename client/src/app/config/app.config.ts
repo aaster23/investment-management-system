@@ -7,7 +7,7 @@ export class AppConfig {
     public readonly manager: string;
     public readonly closed: string;
     public readonly admin: string;
-    public readonly stockDrig: string;
+    public readonly stockGrid: string;
     public readonly portfolioGrid: string;
     public readonly historyGrid: string;
 
@@ -19,6 +19,6 @@ export class AppConfig {
         this.client = 'client';
         this.portfolioGrid = 'portfolioGrid';
         this.historyGrid = 'historyGrid';
-        this.stockDrig = 'stockGrid';
+        this.stockGrid = 'stockGrid';
     }
 }

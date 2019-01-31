@@ -3,5 +3,5 @@ while true
 do
     echo "Called"
     sh ts-node ./src/setup/generate-gap-data.ts
-    sleep 5
+    sleep 10
 done

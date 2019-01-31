@@ -6,7 +6,6 @@ import { ModalComponent } from './modal/modal.component';
 import { NotificationService } from 'src/app/core/notification.service';
 import { ModalDTO } from 'src/app/models/modal.dto';
 import { OrdersService } from 'src/app/core/order.service';
-import { take } from 'rxjs/operators';
 @Injectable()
 @Component({
     selector: 'app-stocks',
@@ -16,10 +15,10 @@ import { take } from 'rxjs/operators';
 export class StocksComponent implements OnInit {
     public stockGrid;
     private columnDefs = [
-        { headerName: 'Symbol', field: 'symbol', sortable: true, },
-        { headerName: 'Market', field: 'market', sortable: true, },
-        { headerName: 'Sell Price ($)', field: 'sellprice', sortable: true, },
-        { headerName: 'Buy Price ($)', field: 'buyprice', sortable: true, }
+        { headerName: 'Symbol', field: 'symbol' },
+        { headerName: 'Market', field: 'market' },
+        { headerName: 'Sell Price ($)', field: 'sellprice' },
+        { headerName: 'Buy Price ($)', field: 'buyprice' }
     ];
 
     constructor(
@@ -31,7 +30,7 @@ export class StocksComponent implements OnInit {
 
     ) { }
     ngOnInit() {
-        this.stockGrid = this.appConfig.stockDrig;
+        this.stockGrid = this.appConfig.stockGrid;
     }
     displayModal(event) {
         const instrument = `${event.data.symbol} (${event.data.market})`;
@@ -48,8 +47,8 @@ export class StocksComponent implements OnInit {
                 if (isNaN(result.total) || +result.units === 0) {
                     this.notification.openSnackBar('Invalid unit or price', 'OK', 'red');
                 } else {
-                this.fundsService.substractFund(result);
-                this.orderService.saveOrder(result, event.data.symbol);
+                    this.fundsService.substractFund(result);
+                    this.orderService.saveOrder(result, event.data.symbol);
                 }
             }
         });

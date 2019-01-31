@@ -3,10 +3,11 @@ import { Company } from './../../../data/entities/company.entity';
 import { Injectable, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../../../data/entities/user.entity';
-import { Repository } from 'typeorm';
+import { Repository, AdvancedConsoleLogger } from 'typeorm';
 import { Order } from '../../../data/entities/order.entity';
 import { OrderDTO } from '../../../models/order/order.dto';
 import { CloseOrderDTO } from 'src/models/order/close.order.dto';
+import { IdDTO } from 'src/models/user/id.dto';
 
 @Injectable()
 export class OrderService {
@@ -58,16 +59,18 @@ export class OrderService {
     }
 
     async getOrdersAll() {
+
         try {
-            const foundOrders = await this.orderRepository.find();
-            return foundOrders;
+            const status = await this.statusRepository.findOne({ where: { statusname: 'opened' } });
+            return await this.orderRepository.find({ where: { status: status.id } });
         } catch (error) {
             throw new HttpException('Open orders not found!', HttpStatus.NOT_FOUND);
         }
     }
 
-    async getOrdersByClient(id: string) {
-        const foundOrder = await this.orderRepository.findOneOrFail({ where: { clientId: id } });
+    async getOrdersByClient(id: IdDTO) {
+        const status = await this.statusRepository.findOne({ where: { statusname: 'opened' } });
+        const foundOrder = await this.orderRepository.find({ where: { clientId: id.id, status: status.id } });
 
         if (!foundOrder) {
             throw new HttpException('Orders not found!', HttpStatus.NOT_FOUND);
@@ -128,7 +131,7 @@ export class OrderService {
         const foundStatus = await this.statusRepository.findOne({ where: { statusname: 'opened' } });
         const foundOpenOrders = await this.orderRepository.find({
             where: {
-                clientId: id,
+                client: id,
                 status: foundStatus.id,
             },
         });

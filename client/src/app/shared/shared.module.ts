@@ -13,6 +13,7 @@ const modules = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    AgGridModule
 ];
 
 @NgModule({

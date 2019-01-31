@@ -24,4 +24,7 @@ export class OrdersHttpService {
     public closeOrder(orderBody: CloseOrderDTO): Observable<object> {
         return this.http.post(`${this.appConfig.apiUrl}/order/delete`, orderBody);
     }
+    public getAll(): Observable<object> {
+        return this.http.get(`${this.appConfig.apiUrl}/order/all`);
+    }
 }

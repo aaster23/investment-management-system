@@ -27,5 +27,6 @@ export class ClientSidebarComponent implements OnInit {
         localStorage.removeItem('client_name');
         localStorage.removeItem('client_email');
         localStorage.removeItem('client_balance');
+        localStorage.removeItem('client_id');
     }
 }

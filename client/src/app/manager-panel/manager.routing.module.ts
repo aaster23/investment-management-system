@@ -1,3 +1,4 @@
+import { ClientPositionsComponent } from './client-positions/client-positions.component';
 import { ClientListComponent } from './client-list/client-list.component';
 import { NgModule, } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -10,7 +11,7 @@ const routes = [
         children:
             [
                 { path: 'clients', component: ClientListComponent, patMatch: 'full' },
-              /*  { path: 'clients/positions', component: ClientListComponent, patMatch: 'full' },*/
+                { path: 'clients/positions', component: ClientPositionsComponent, patMatch: 'full' },
             ]
     },
 

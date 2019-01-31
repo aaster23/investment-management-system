@@ -20,7 +20,7 @@ export class GridComponent implements OnInit {
     @Input() private gridType: string;
     @Input() private columnDefs;
     @Output() selectRow = new EventEmitter();
-    private defaultColDef = { resizable: true, filter: 'agTextColumnFilter' };
+    private defaultColDef = { resizable: true, filter: 'agTextColumnFilter', sortable: true };
     private rowSelection = 'single';
     private rowData = [];
 
@@ -31,7 +31,7 @@ export class GridComponent implements OnInit {
         private notification: NotificationService
     ) { }
     ngOnInit() {
-        if (this.gridType === this.appConfig.stockDrig) {
+        if (this.gridType === this.appConfig.stockGrid) {
             this.gridOptions = <GridOptions>{
                 columnDefs: this.columnDefs,
                 defaultColDef: this.defaultColDef,
@@ -73,6 +73,7 @@ export class GridComponent implements OnInit {
                         });
                         if (this.gridOptions.api) {
                             this.gridOptions.api.setRowData(this.rowData);
+                            this.gridOptions.api.sizeColumnsToFit();
                         }
                     });
                     this.gridOptions.rowHeight = 45;

@@ -20,7 +20,6 @@ export class UsersService {
                 (clientData: UserInfoDTO) => {
                     localStorage.setItem('client_name', clientData.fullname);
                     localStorage.setItem('client_email', clientData.email);
-                    localStorage.setItem('client_balance', clientData.funds.currentamount);
                     localStorage.setItem('client_id', clientData.id);
                     observer.next(null);
                 }

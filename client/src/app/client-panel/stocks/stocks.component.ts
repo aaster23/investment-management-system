@@ -10,7 +10,6 @@ import { OrdersService } from 'src/app/core/order.service';
 @Component({
     selector: 'app-stocks',
     templateUrl: './stocks.component.html',
-    styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
     public stockGrid;

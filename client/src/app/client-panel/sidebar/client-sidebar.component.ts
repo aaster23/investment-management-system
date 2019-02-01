@@ -1,3 +1,4 @@
+import { UserInfoDTO } from './../../models/userInfo.dto';
 import { Component, Injectable, OnInit, Input, } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersHttpService } from 'src/app/core/user.http.service';
@@ -18,7 +19,12 @@ export class ClientSidebarComponent implements OnInit {
 
     ngOnInit(): void {
         this.clientName = localStorage.getItem('client_name');
-        this.balance = localStorage.getItem('client_balance');
+        const email = { email: localStorage.getItem('client_email') };
+        this.usersHttpService.retrieveUserData(email).subscribe(
+            (response: UserInfoDTO) => {
+                this.balance = response.funds.currentamount;
+            }
+        );
     }
     private showGrid() {
         this.router.navigate(['/client/stocks']);
@@ -26,7 +32,6 @@ export class ClientSidebarComponent implements OnInit {
     private clear() {
         localStorage.removeItem('client_name');
         localStorage.removeItem('client_email');
-        localStorage.removeItem('client_balance');
         localStorage.removeItem('client_id');
     }
 }

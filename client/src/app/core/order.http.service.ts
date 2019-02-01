@@ -27,4 +27,8 @@ export class OrdersHttpService {
     public getAll(): Observable<object> {
         return this.http.get(`${this.appConfig.apiUrl}/order/all`);
     }
+
+    public getClosed(clientId: IdDTO): Observable<object> {
+        return this.http.post(`${this.appConfig.apiUrl}/order/close`, clientId);
+    }
 }

@@ -15,6 +15,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { SharedMaterialModule } from './shared/shared-material.module';
 import { OnlyNumberDirective } from './numbersDirective/only-numbers';
 import { MatInputModule } from '@angular/material';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -25,10 +28,11 @@ export function tokenGetter() {
     LoginComponent,
     NotFoundComponent,
     OnlyNumberDirective,
-    ManageDialogComponent
+    ManageDialogComponent,
   ],
   imports: [
     BrowserModule,
+    NgxSpinnerModule,
     AdminModule,
     GuardsModule,
     BrowserAnimationsModule,
@@ -46,7 +50,14 @@ export function tokenGetter() {
     }),
   ],
   entryComponents: [ManageDialogComponent],
-  providers: [AppConfig],
+  providers: [
+    AppConfig,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -62,4 +62,15 @@ export class OrderController {
             throw new BadRequestException('Can\'t close orders!');
         }
     }
+
+    @Post('/close')
+    // @Roles('admin', 'manager')
+    // @UseGuards(AuthGuard(), RolesGuard)
+    getClosed(@Body() id: IdDTO) {
+        try {
+            return this.ordersService.getClosedOrders(id);
+        } catch (error) {
+            throw new BadRequestException('Can\'t close orders!');
+        }
+    }
 }

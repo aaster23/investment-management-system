@@ -3,5 +3,7 @@ export class UserInfoDTO {
     email: string;
     fullname: string;
     dateReg: Date;
-    funds: any;
+    funds: {
+        currentamount
+    };
 }

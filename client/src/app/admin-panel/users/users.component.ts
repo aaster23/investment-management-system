@@ -1,10 +1,7 @@
 import { AdminPanelUsersService } from './../../core/users.service';
-import { Component, OnInit, ViewChild, HostListener, HostBinding, Input, DoCheck } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { AppConfig } from 'src/app/config/app.config';
 import { UsersManageModel } from 'src/app/models/users-manage.model';
-import { UpdateUsers } from 'src/app/core/users-update.service';
 
 @Component({
   selector: 'app-admin-panel-users',
@@ -21,7 +18,7 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private usersService: AdminPanelUsersService,
-    ) {  }
+  ) { }
 
   async ngOnInit() {
     await this.fillTable();

@@ -1,4 +1,3 @@
-import { GridService } from './../client-panel/grid/grid.service';
 import { FundsHttpService } from './funds.http.service';
 import { UsersHttpService } from './user.http.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -29,7 +28,6 @@ import { AdminPanelUsersService } from './users.service';
     OrdersHttpService,
     OrdersService,
     ManageService,
-    GridService,
     AdminPanelUsersService
   ]
 })

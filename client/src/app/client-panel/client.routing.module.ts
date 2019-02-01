@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { StocksComponent } from '../client-panel/stocks/stocks.component';
 import { ClientPanelComponent } from './client-panel.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
+import { HistoryComponent } from './history/history.component';
 
 
 const routes = [
@@ -11,7 +12,8 @@ const routes = [
         children:
         [
             { path: 'stocks', component: StocksComponent, pathMatch: 'full'},
-            { path: 'portfolio', component: PortfolioComponent, pathMatch: 'full'}
+            { path: 'portfolio', component: PortfolioComponent, pathMatch: 'full'},
+            { path: 'history', component: HistoryComponent, pathMatch: 'full'}
         ]
     },
 ];

@@ -9,7 +9,7 @@ import { CreateOrderDTO } from '../models/create-order.dto';
 import { OrdersHttpService } from './order.http.service';
 import { UserInfoDTO } from '../models/userInfo.dto';
 import { CloseOrderDTO } from '../models/close-order.dto';
-import { take, first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class OrdersService {
@@ -28,7 +28,7 @@ export class OrdersService {
                 companyId: companyInfo.id,
                 direction: result.direction
             };
-            this.fundsService.user.pipe(first()).subscribe((response: UserInfoDTO) => {
+            this.fundsService.user.pipe(take(1)).subscribe((response: UserInfoDTO) => {
                 if (Object.keys(response).length !== 0 && response.funds.currentamount > result.total) {
                     this.orderHttpService.createOrder(order).subscribe();
                 }

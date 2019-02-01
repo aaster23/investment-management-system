@@ -107,7 +107,7 @@ export class OrderService {
 
     }
 
-    async getClosedOrders(clientId: string) {
+    async getClosedOrders(clientId: IdDTO) {
 
         const foundStatus = await this.statusRepository.findOne({ where: { statusname: 'closed' } });
         const foundClosedOrders = await this.orderRepository.find({

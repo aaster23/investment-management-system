@@ -5,7 +5,6 @@ import { ManageService } from 'src/app/core/manage.service';
 import { MatDialog } from '@angular/material';
 import { NotificationService } from 'src/app/core/notification.service';
 import { ManageDialogResultModel } from 'src/app/models/manage-dialog-result.model';
-import { UpdateUsers } from 'src/app/core/users-update.service';
 
 @Component({
   selector: 'app-admin-manage',
@@ -15,7 +14,7 @@ import { UpdateUsers } from 'src/app/core/users-update.service';
 @Injectable()
 export class ManageComponent implements OnInit {
 
-  @Output() isChanged = new EventEmitter<boolean>(); 
+  @Output() isChanged = new EventEmitter<boolean>();
 
 
   constructor(

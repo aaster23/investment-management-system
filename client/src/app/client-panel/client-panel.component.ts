@@ -14,6 +14,6 @@ export class ClientPanelComponent implements OnInit {
         private notificationService: NotificationService,
     ) { }
     ngOnInit(): void {
-        this.clientName = localStorage.getItem('client_names');
+        this.clientName = localStorage.getItem('client_name');
     }
 }

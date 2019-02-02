@@ -6,8 +6,10 @@ import { ModalComponent } from './modal/modal.component';
 import { NotificationService } from 'src/app/core/notification.service';
 import { ModalDTO } from 'src/app/models/modal.dto';
 import { OrdersService } from 'src/app/core/order.service';
+import { ClientSidebarComponent } from '../sidebar/client-sidebar.component';
 @Injectable()
 @Component({
+    providers: [ ClientSidebarComponent ],
     selector: 'app-stocks',
     templateUrl: './stocks.component.html',
 })
@@ -26,7 +28,7 @@ export class StocksComponent implements OnInit {
         private fundsService: FundsService,
         private orderService: OrdersService,
         private appConfig: AppConfig,
-
+        private clientSidebar: ClientSidebarComponent,
     ) { }
     ngOnInit() {
         this.stockGrid = this.appConfig.stockGrid;
@@ -48,6 +50,10 @@ export class StocksComponent implements OnInit {
                 } else {
                     this.fundsService.substractFund(result);
                     this.orderService.saveOrder(result, event.data.symbol);
+                    setTimeout(() => {
+                        this.clientSidebar.updateBalance();
+                    }, 1500);
+
                 }
             }
         });

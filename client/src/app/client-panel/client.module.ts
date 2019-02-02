@@ -22,7 +22,7 @@ import { GridServiceComponent } from './grid/grid.service.component';
         GridServiceComponent,
         ModalComponent,
         ClosePosModalComponent,
-        HistoryComponent
+        HistoryComponent,
     ],
     entryComponents: [ModalComponent, ClosePosModalComponent],
     providers: [],

@@ -1,7 +1,9 @@
-import { Component, Injectable, OnInit, Input, } from '@angular/core';
+import { Component, Injectable, OnInit, Input, Renderer2, } from '@angular/core';
 import { Router } from '@angular/router';
 import { StocksService } from '../../core/stocks.service';
 import { ManagerGuardService } from '../../route-guard/manager.guard';
+import { MatDialog } from '@angular/material';
+import { ChartsServiceComponent } from '../charts/charts.service.component';
 
 @Injectable()
 @Component({
@@ -17,9 +19,21 @@ export class ManagerSidebarComponent implements OnInit {
         private stocksService: StocksService,
         private router: Router,
         private guard: ManagerGuardService,
+        private dialog: MatDialog,
+
     ) { }
 
     ngOnInit(): void {
         this.stocksInfo = this.stocksService.getStockData();
     }
+
+    openUpDialog(action) {
+        const dialogRef = this.dialog.open(ChartsServiceComponent,
+            {
+                data: {
+                    action
+                }
+            });
+        return dialogRef.afterClosed();
+      }
 }

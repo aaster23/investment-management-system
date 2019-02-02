@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
+import { ChartsServiceComponent } from './manager-panel/charts/charts.service.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -29,6 +30,7 @@ export function tokenGetter() {
     NotFoundComponent,
     OnlyNumberDirective,
     ManageDialogComponent,
+    ChartsServiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ export function tokenGetter() {
       },
     }),
   ],
-  entryComponents: [ManageDialogComponent],
+  entryComponents: [ManageDialogComponent, ChartsServiceComponent],
   providers: [
     AppConfig,
     {

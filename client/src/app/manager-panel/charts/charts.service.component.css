@@ -1,0 +1,13 @@
+.mat-raised-button.mat-primary {
+  margin-left: 200px;
+  margin-right: 7px
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+.mat-dialog-title{
+  font: 500 30px/32px Roboto,"Helvetica Neue",sans-serif;
+  margin-right: 200px;
+}

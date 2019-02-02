@@ -11,3 +11,24 @@
     background-color: #477c47;
     opacity: 0.9;
 }
+.rag-red {
+    background-color: lightcoral;
+}
+.rag-green {
+    background-color: rgb(125, 216, 125);
+}
+.rag-amber {
+    background-color: lightsalmon;
+}
+
+.rag-red-outer .rag-element {
+    background-color: lightcoral;
+}
+
+.rag-green-outer .rag-element {
+    background-color: lightgreen;
+}
+
+.rag-blue {
+    background-color: rgb(124, 192, 223);
+}

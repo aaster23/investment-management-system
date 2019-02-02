@@ -146,18 +146,18 @@ export class OrderService {
         return foundOpenOrders;
     }
 
-    async getOrdersInInterval(start: Date, end: Date) {
-        const foundOrdersInInrerval = await this.orderRepository.find({
-            where: {
-                opendate: start,
-                closedate: end,
-            },
-        });
+    // async getOrdersInInterval(start: Date, end: Date) {
+    //     const foundOrdersInInrerval = await this.orderRepository.find({
+    //         where: {
+    //             opendate: start,
+    //             closedate: end,
+    //         },
+    //     });
 
-        if (!foundOrdersInInrerval) {
-            throw new HttpException('Orders in set interval not found!', HttpStatus.NOT_FOUND);
-        }
+    //     if (!foundOrdersInInrerval) {
+    //         throw new HttpException('Orders in set interval not found!', HttpStatus.NOT_FOUND);
+    //     }
 
-        return foundOrdersInInrerval;
-    }
+    //     return foundOrdersInInrerval;
+    // }
 }

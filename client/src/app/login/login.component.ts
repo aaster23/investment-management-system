@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 
     this.email = this.loginForm.get('email');
     this.password = this.loginForm.get('password');
+    localStorage.clear();
   }
 
   login(loginForm: NgForm): void {

@@ -1,4 +1,4 @@
-import { UsersService } from '../core/user.service';
+// import { UsersService } from '../core/user.service';
 import { Component, Injectable, OnInit, Output, } from '@angular/core';
 import { NotificationService } from '../core/notification.service';
 
@@ -6,7 +6,6 @@ import { NotificationService } from '../core/notification.service';
 @Component({
     selector: 'app-client-panel',
     templateUrl: './client-panel.component.html',
-    styleUrls: ['./client-panel.component.css']
 })
 export class ClientPanelComponent implements OnInit {
     private clientName: string;

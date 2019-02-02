@@ -28,10 +28,10 @@ export class UsersService {
     private readonly fundsRepository: Repository<Funds>,
   ) { }
 
-  // ==> Only admin can register new client and managers profiles
   async createManager(manager: RegisterDTO): Promise<Manager> {
     const foundManager = await this.managersRepository.findOne({ email: manager.email });
-    if (foundManager) {
+    const foundClient = await this.usersRepository.findOne({ email: manager.email });
+    if (foundManager || foundClient) {
       throw new BadRequestException('Email already exist');
     }
 
@@ -53,7 +53,8 @@ export class UsersService {
 
   async createAdmin(admin: RegisterDTO): Promise<User> {
     const foundAdmin = await this.usersRepository.findOne({ email: admin.email });
-    if (foundAdmin) {
+    const foundManager = await this.managersRepository.findOne({ email: admin.email });
+    if (foundAdmin || foundManager) {
       throw new BadRequestException('Email already exist');
     }
     try {
@@ -73,7 +74,8 @@ export class UsersService {
 
   async createClient(managerId: string, client: ClientRegisterDTO): Promise<User> {
     const foundClient = await this.usersRepository.findOne({ email: client.email });
-    if (foundClient) {
+    const foundManager = await this.managersRepository.findOne({ email: client.email });
+    if (foundClient || foundManager) {
       throw new BadRequestException('Email already exist');
     }
 
@@ -127,7 +129,7 @@ export class UsersService {
     return this.usersRepository.find({});
   }
 
-  async getManager(manager: GetUserByEmailDTO): Promise<Manager>{
+  async getManager(manager: GetUserByEmailDTO): Promise<Manager> {
     try {
       const foundManager = await this.managersRepository.findOneOrFail({ email: manager.email });
       return foundManager;
@@ -136,22 +138,22 @@ export class UsersService {
     }
   }
 
-  async getUsersByRole(role: string): Promise<Manager[] | User[]>{
+  async getUsersByRole(role: string): Promise<Manager[] | User[]> {
     try {
       if (role === 'manager') {
-      const managers = await this.managersRepository.find({ });
-      return managers;
-        }
+        const managers = await this.managersRepository.find({});
+        return managers;
+      }
       if (role === 'admin') {
         let admins = await this.usersRepository.find();
         admins = admins.filter((user) => user.role.rolename === 'admin');
         return admins;
-        }
+      }
       if (role === 'client') {
         let client = await this.usersRepository.find();
         client = client.filter((user) => user.role.rolename === 'client');
         return client;
-        }
+      }
     } catch (error) {
       throw new BadRequestException('No users in the database!');
     }
@@ -175,71 +177,71 @@ export class UsersService {
     }
   }
 
-  // Need info on settings and how will it work
-  async getUserSettings(id: string) {
-    const user: User = await this.usersRepository.findOne({ id });
-    return user.settings;
-  }
+  // // Need info on settings and how will it work
+  // async getUserSettings(id: string) {
+  //   const user: User = await this.usersRepository.findOne({ id });
+  //   return user.settings;
+  // }
 
-  async getAllUsersSettings() {
-    const users: User[] = await this.usersRepository.find({});
-    return users;
-  }
+  // async getAllUsersSettings() {
+  //   const users: User[] = await this.usersRepository.find({});
+  //   return users;
+  // }
 
-  async updateUserSettings(id: string, settings: any) {
-    const user: User = await this.usersRepository.findOne({ id });
-    user.settings = settings;
-  }
+  // async updateUserSettings(id: string, settings: any) {
+  //   const user: User = await this.usersRepository.findOne({ id });
+  //   user.settings = settings;
+  // }
 
-  async assignManager(email): Promise<{message: string}> {
+  async assignManager(email): Promise<{ message: string }> {
     try {
       const userEmail = email.email;
       const managerEmail = email.manager_email;
 
-      const user: User = await this.usersRepository.findOne({ where: {email: userEmail} });
-      if(user.role.rolename !== 'client'){
+      const user: User = await this.usersRepository.findOne({ where: { email: userEmail } });
+      if (user.role.rolename !== 'client') {
         throw new BadRequestException('The user is not a client!');
       }
-      const manager: Manager = await this.managersRepository.findOne({ where: { email: managerEmail }});
+      const manager: Manager = await this.managersRepository.findOne({ where: { email: managerEmail } });
 
       user.manager = manager;
-      this.usersRepository.update( {email: userEmail}, {manager});
+      this.usersRepository.update({ email: userEmail }, { manager });
 
-      return { message: `Successfully assigned manager ${manager.email} to ${user.email}`};
+      return { message: `Successfully assigned manager ${manager.email} to ${user.email}` };
     }
     catch (error) {
       throw new BadRequestException(error.message);
     }
   }
 
-  async unassignManager(email): Promise<{message: string}> {
+  async unassignManager(email): Promise<{ message: string }> {
     try {
-      const user: User = await this.usersRepository.findOneOrFail({ where: {email: email.email} });
+      const user: User = await this.usersRepository.findOneOrFail({ where: { email: email.email } });
       if (!user.manager) {
         throw new BadRequestException('The user does not have a manager assigned to him!');
       }
 
       user.manager = null;
-      this.usersRepository.update( {email: email.email}, {manager: null});
+      this.usersRepository.update({ email: email.email }, { manager: null });
 
-      return { message: `Successfully unassigned manager from user ${user.email}`};
+      return { message: `Successfully unassigned manager from user ${user.email}` };
     }
     catch (error) {
       throw new BadRequestException(error.message);
     }
   }
 
-  async dropManager(email): Promise<{message: string}> {
+  async dropManager(email): Promise<{ message: string }> {
     try {
-      const manager = await this.managersRepository.findOneOrFail({ where: { email: email.manager_email }});
+      const manager = await this.managersRepository.findOneOrFail({ where: { email: email.manager_email } });
       const users: User[] = await this.usersRepository.find({ where: { manager } });
       users.forEach(async (user) => {
         const id = user.id;
         user.manager = null;
-        await this.usersRepository.update( { id }, {manager: null});
+        await this.usersRepository.update({ id }, { manager: null });
       });
 
-      return { message: `Successfully unassigned all users from manager ${manager.email}`};
+      return { message: `Successfully unassigned all users from manager ${manager.email}` };
     }
     catch (error) {
       throw new BadRequestException(error.message);

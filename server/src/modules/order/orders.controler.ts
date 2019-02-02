@@ -1,17 +1,18 @@
 import { CloseOrderDTO } from 'src/models/order/close.order.dto';
-import { Controller, Post, Body, BadRequestException, Get } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException, Get, UseGuards } from '@nestjs/common';
 import { OrderService } from 'src/common/core/services/order.service';
 import { OrderDTO } from 'src/models/order/order.dto';
 import { IdDTO } from 'src/models/user/id.dto';
-import { Result } from 'range-parser';
+import { Roles, RolesGuard } from 'src/common';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('order')
 export class OrderController {
     constructor(private readonly ordersService: OrderService) { }
 
     @Post('/create')
-    // @Roles('admin', 'manager')
-    // @UseGuards(AuthGuard(), RolesGuard)
+    @Roles('manager')
+    @UseGuards(AuthGuard(), RolesGuard)
     createOrder(@Body() orderBody: OrderDTO) {
         try {
             this.ordersService.createOrder(orderBody);
@@ -20,19 +21,19 @@ export class OrderController {
         }
     }
     @Post('/client')
-    // @Roles('admin', 'manager')
-    // @UseGuards(AuthGuard(), RolesGuard)
+    @Roles('manager')
+    @UseGuards(AuthGuard(), RolesGuard)
     gerOrdersByClient(@Body() id: IdDTO) {
         try {
             return this.ordersService.getOrdersByClient(id);
         } catch (error) {
-            throw new BadRequestException('Can\'t close orders!');
+            throw new BadRequestException('Orders not found!');
         }
     }
 
     @Get('/all')
-    // @Roles('admin', 'manager')
-    // @UseGuards(AuthGuard(), RolesGuard)
+    @Roles('manager')
+    @UseGuards(AuthGuard(), RolesGuard)
     getAlll() {
         try {
             return this.ordersService.getOrdersAll();
@@ -42,8 +43,8 @@ export class OrderController {
     }
 
     @Post('/open')
-    // @Roles('admin', 'manager')
-    // @UseGuards(AuthGuard(), RolesGuard)
+    @Roles('manager')
+    @UseGuards(AuthGuard(), RolesGuard)
     getOpenPositions(@Body() id: string) {
         try {
             return this.ordersService.getOpenOrders(id);
@@ -53,8 +54,8 @@ export class OrderController {
     }
 
     @Post('/delete')
-    // @Roles('admin', 'manager')
-    // @UseGuards(AuthGuard(), RolesGuard)
+    @Roles('manager')
+    @UseGuards(AuthGuard(), RolesGuard)
     closePositions(@Body() orderBody: CloseOrderDTO) {
         try {
             return this.ordersService.closeOrder(orderBody);
@@ -64,8 +65,8 @@ export class OrderController {
     }
 
     @Post('/close')
-    // @Roles('admin', 'manager')
-    // @UseGuards(AuthGuard(), RolesGuard)
+    @Roles('manager')
+    @UseGuards(AuthGuard(), RolesGuard)
     getClosed(@Body() id: IdDTO) {
         try {
             return this.ordersService.getClosedOrders(id);

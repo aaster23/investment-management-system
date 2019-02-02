@@ -31,32 +31,32 @@ export class IndustriesService {
     const result = await this.industryRepository.save(industry);
     return result;
   }
-  async updateIndustry(industryData: IndustryUpdateDTO): Promise<Industry> {
-    const industryFound = await this.industryRepository.findOne({
-      where: { id: industryData.id },
-    });
+  // async updateIndustry(industryData: IndustryUpdateDTO): Promise<Industry> {
+  //   const industryFound = await this.industryRepository.findOne({
+  //     where: { id: industryData.id },
+  //   });
 
-    if (!industryFound) {
-      throw new HttpException(
-        'There is no industry with this ID in the database',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
+  //   if (!industryFound) {
+  //     throw new HttpException(
+  //       'There is no industry with this ID in the database',
+  //       HttpStatus.BAD_REQUEST,
+  //     );
+  //   }
 
-    industryFound.name = industryData.name;
+  //   industryFound.name = industryData.name;
 
-    const result = await this.industryRepository.save(industryFound);
+  //   const result = await this.industryRepository.save(industryFound);
 
-    return result;
-  }
+  //   return result;
+  // }
 
-  async getAllIndustries(): Promise<Industry[]> {
-    const industries: Industry[] = await this.industryRepository.find({});
+  // async getAllIndustries(): Promise<Industry[]> {
+  //   const industries: Industry[] = await this.industryRepository.find({});
 
-    if (!industries) {
-      return [];
-    }
+  //   if (!industries) {
+  //     return [];
+  //   }
 
-    return industries;
-  }
+  //   return industries;
+  // }
 }

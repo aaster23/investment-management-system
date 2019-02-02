@@ -11,7 +11,8 @@ export class PricesController {
     constructor(private readonly pricesService: PricesService) { }
 
     @Get()
-    // @Roles('manager')
+    @Roles('manager')
+    @UseGuards(AuthGuard(), RolesGuard)
     async getLatestForAllCompanies(): Promise<Price[]> {
         try {
             return await this.pricesService.getLastPricePerCompany();
@@ -21,7 +22,8 @@ export class PricesController {
     }
 
     @Post('/last')
-    // @Roles('manager')
+    @Roles('manager')
+    @UseGuards(AuthGuard(), RolesGuard)
     async getLastPrice(@Body() id: string): Promise<Price> {
         try {
             return await this.pricesService.getLastPrice(id);
@@ -30,15 +32,15 @@ export class PricesController {
         }
     }
 
-    @Get('/company')
-    @Roles('manager')
-    @UseGuards(AuthGuard(), RolesGuard)
-    async getPrices(@Body(new ValidationPipe({
-        transform: true,
-        whitelist: true,
-    })) priceRequest: PriceRequestDTO): Promise<object> {
+    // @Get('/company')
+    // @Roles('manager')
+    // @UseGuards(AuthGuard(), RolesGuard)
+    // async getPrices(@Body(new ValidationPipe({
+    //     transform: true,
+    //     whitelist: true,
+    // })) priceRequest: PriceRequestDTO): Promise<object> {
 
-        return await this.pricesService.getCompanyPrices(priceRequest.id, priceRequest.lastN, priceRequest.startdate, priceRequest.enddate);
-    }
+    //     return await this.pricesService.getCompanyPrices(priceRequest.id, priceRequest.lastN, priceRequest.startdate, priceRequest.enddate);
+    // }
 
 }

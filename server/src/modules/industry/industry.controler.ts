@@ -10,23 +10,23 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller('industry')
 export class IndustryController {
   constructor(private readonly industryService: IndustriesService) {}
-  @Get('')
-  @Roles('admin', 'manager')
-  @UseGuards(AuthGuard(), RolesGuard)
-  getAllIndustries(): Promise<Industry[]> {
-    return this.industryService.getAllIndustries();
-  }
-  @Post('add')
-  @Roles('admin', 'manager')
-  @UseGuards(AuthGuard(), RolesGuard)
-  createIndustry(@Body() data: IndustryDTO): Promise<Industry> {
-    return this.industryService.createIndustry(data);
-  }
+  // @Get('')
+  // @Roles('admin', 'manager')
+  // @UseGuards(AuthGuard(), RolesGuard)
+  // getAllIndustries(): Promise<Industry[]> {
+  //   return this.industryService.getAllIndustries();
+  // }
+  // @Post('add')
+  // @Roles('admin', 'manager')
+  // @UseGuards(AuthGuard(), RolesGuard)
+  // createIndustry(@Body() data: IndustryDTO): Promise<Industry> {
+  //   return this.industryService.createIndustry(data);
+  // }
 
-  @Post('update')
-  @Roles('admin', 'manager')
-  @UseGuards(AuthGuard(), RolesGuard)
-  updateIndustry(@Body() industryData: IndustryUpdateDTO): Promise<Industry> {
-    return this.industryService.updateIndustry(industryData);
-  }
+  // @Post('update')
+  // @Roles('admin', 'manager')
+  // @UseGuards(AuthGuard(), RolesGuard)
+  // updateIndustry(@Body() industryData: IndustryUpdateDTO): Promise<Industry> {
+  //   return this.industryService.updateIndustry(industryData);
+  // }
 }

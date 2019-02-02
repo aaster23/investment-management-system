@@ -25,6 +25,16 @@ export class ClientSidebarComponent implements OnInit {
                 this.balance = response.funds.currentamount;
             }
         );
+
+        const header = document.getElementById('sidebarBtns');
+        const btns = header.getElementsByClassName('btn');
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].addEventListener('click', function () {
+                const current = document.getElementsByClassName('active');
+                current[0].className = current[0].className.replace(' active', '');
+                this.className += ' active';
+            });
+        }
     }
     private showGrid() {
         this.router.navigate(['/client/stocks']);

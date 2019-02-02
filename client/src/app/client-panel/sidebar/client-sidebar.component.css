@@ -135,3 +135,7 @@ html {
     font-size: 20px;
   }
   
+  .active, .btn:hover {
+    background-color: rgb(217, 178, 226);
+    color: white;
+  }

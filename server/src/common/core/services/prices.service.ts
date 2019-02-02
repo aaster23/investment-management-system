@@ -14,24 +14,24 @@ export class PricesService {
     private readonly companyRepository: Repository<Company>,
   ) { }
 
-  async getCompanyPrices(id: string, lastN: number, startdate?: Date, enddate?: Date): Promise<Price[]> {
-    const company = await this.companyRepository.findOne({ id });
-    if (!company) {
-      throw new HttpException('Company doesn\'t exist!', HttpStatus.NOT_FOUND);
-    }
+  // async getCompanyPrices(id: string, lastN: number, startdate?: Date, enddate?: Date): Promise<Price[]> {
+  //   const company = await this.companyRepository.findOne({ id });
+  //   if (!company) {
+  //     throw new HttpException('Company doesn\'t exist!', HttpStatus.NOT_FOUND);
+  //   }
 
-    if (lastN) {
-      return await this.priceRepository.find({ where: { company }, order: { opendate: 'DESC' }, take: lastN });
-    }
-    if (startdate && enddate) {
-      return await this.priceRepository.find({ opendate: Between(startdate, enddate), company });
-    }
-    if (startdate && !enddate) {
-      return await this.priceRepository.find({ opendate: MoreThan(startdate.valueOf() - 1), company });
-    }
+  //   if (lastN) {
+  //     return await this.priceRepository.find({ where: { company }, order: { opendate: 'DESC' }, take: lastN });
+  //   }
+  //   if (startdate && enddate) {
+  //     return await this.priceRepository.find({ opendate: Between(startdate, enddate), company });
+  //   }
+  //   if (startdate && !enddate) {
+  //     return await this.priceRepository.find({ opendate: MoreThan(startdate.valueOf() - 1), company });
+  //   }
 
-    return [await this.priceRepository.findOne({ where: { company }, order: { opendate: 'DESC' } })];
-  }
+  //   return [await this.priceRepository.findOne({ where: { company }, order: { opendate: 'DESC' } })];
+  // }
 
   async getLastPricePerCompany(): Promise<Price[]> {
     const companies = await this.companyRepository.find({});

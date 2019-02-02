@@ -14,9 +14,9 @@ export class StocksService {
         private appConfig: AppConfig,
     ) { }
 
-    public retrieveStocksData(): Observable<object> {
-        return this.httpClient.get(`${this.appConfig.apiUrl}/companies`);
-    }
+    // public retrieveStocksData(): Observable<object> {
+    //     return this.httpClient.get(`${this.appConfig.apiUrl}/companies`);
+    // }
     public retrieveCompanyPrices(): Observable<object> {
         return this.httpClient.get(`${this.appConfig.apiUrl}/prices`);
     }

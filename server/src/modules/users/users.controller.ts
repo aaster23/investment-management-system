@@ -19,8 +19,8 @@ export class UsersController {
   ) { }
 
   @Post('/user')
-  // @Roles('admin', 'manager')
-  // @UseGuards(AuthGuard(), AdminGuard)
+  @Roles('manager')
+  @UseGuards(AuthGuard(), AdminGuard)
   async getUser(@Body() user: GetUserByEmailDTO) {
     return await this.usersService.getUser(user);
   }
@@ -30,6 +30,8 @@ export class UsersController {
   }
 
   @Post('/client')
+  @Roles('manager')
+  @UseGuards(AuthGuard(), AdminGuard)
   async getClients(@Body() id: IdDTO) {
     try {
       return await this.usersService.getClients(id);
@@ -141,12 +143,12 @@ export class UsersController {
     return this.usersService.getAll();
   }
 
-  @Get('/settings')
-  @Roles('admin')
-  @UseGuards(AuthGuard(), AdminGuard)
-  getUsersSettings() {
-    return this.usersService.getAllUsersSettings();
-  }
+  // @Get('/settings')
+  // @Roles('admin')
+  // @UseGuards(AuthGuard(), AdminGuard)
+  // getUsersSettings() {
+  //   return this.usersService.getAllUsersSettings();
+  // }
 
   @Post('/assign-manager')
   @Roles('admin')

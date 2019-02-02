@@ -12,12 +12,20 @@ export class HistoryComponent implements OnInit {
     private portfolioGrid: string;
     public gridOptions: GridOptions;
     private columnDefs = [
-        { headerName: 'Symbol', field: 'symbol' },
-        { headerName: 'Units', field: 'units' },
-        { headerName: 'Direction', field: 'direction' },
-        { headerName: 'Price ($)', field: 'openPrice' },
-        { headerName: 'Close Price ($)', field: 'closePrice' },
-        { headerName: 'Result ($)', field: 'result' },
+        { headerName: 'Symbol', field: 'symbol', width: 150 },
+        { headerName: 'Units', field: 'units', width: 100 },
+        { headerName: 'Direction', field: 'direction', width: 90 },
+        { headerName: 'Price ($)', field: 'openPrice', width: 100 },
+        { headerName: 'Close Price ($)', field: 'closePrice', width: 100 },
+        {
+            headerName: 'Result ($)', field: 'result', width: 100,
+            valueParser: this.numberParser,
+            cellClassRules: {
+                'rag-green': 'x > 0',
+                'rag-blue': 'x === 0',
+                'rag-red': 'x < 0'
+            }
+        },
         { headerName: 'Open date', field: 'openDate' },
         { headerName: 'Close date', field: 'closeDate' },
     ];
@@ -28,6 +36,16 @@ export class HistoryComponent implements OnInit {
     ) { }
     ngOnInit() {
         this.portfolioGrid = this.appConfig.historyGrid;
+    }
+    numberParser(params) {
+        const newValue = params.newValue;
+        let valueAsNumber = 0;
+        if (newValue === null || newValue === undefined || newValue === '') {
+            valueAsNumber = null;
+        } else {
+            valueAsNumber = parseFloat(params.newValue);
+        }
+        return valueAsNumber;
     }
 }
 

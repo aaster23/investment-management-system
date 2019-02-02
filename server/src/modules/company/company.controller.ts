@@ -1,5 +1,7 @@
 import { CompaniesService } from './../../common/core/services/companies.service';
-import { Controller, Get, BadRequestException, Post, Body } from '@nestjs/common';
+import { Controller, Get, BadRequestException, Post, Body, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { Roles, RolesGuard } from 'src/common';
 
 @Controller('companies')
 export class CompaniesControler {
@@ -7,6 +9,8 @@ export class CompaniesControler {
     }
 
     @Post('/company')
+    @Roles('manager')
+    @UseGuards(AuthGuard(), RolesGuard)
     getCompany(@Body() abbr: string) {
         try {
             return this.companiesService.getCompany(abbr);
@@ -15,12 +19,12 @@ export class CompaniesControler {
         }
     }
 
-    @Get()
-    getAll() {
-        try {
-            return this.companiesService.getAll();
-        } catch (error) {
-            throw new BadRequestException('No copmanies to show');
-        }
-    }
+    // @Get()
+    // getAll() {
+    //     try {
+    //         return this.companiesService.getAll();
+    //     } catch (error) {
+    //         throw new BadRequestException('No copmanies to show');
+    //     }
+    // }
 }

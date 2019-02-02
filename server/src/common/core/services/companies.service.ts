@@ -71,35 +71,35 @@ export class CompaniesService {
         });
     }
 
-    async getCompaniesByIndustry(id: string) {
-        const industry = await this.industryRepository.findOne({ where: { id } });
+    // async getCompaniesByIndustry(id: string) {
+    //     const industry = await this.industryRepository.findOne({ where: { id } });
 
-        if (!industry) {
-            throw new HttpException('Industry not found!', HttpStatus.NOT_FOUND);
-        }
+    //     if (!industry) {
+    //         throw new HttpException('Industry not found!', HttpStatus.NOT_FOUND);
+    //     }
 
-        return await this.companyRepository.find({ where: { industry } });
-    }
+    //     return await this.companyRepository.find({ where: { industry } });
+    // }
 
-    async getCompanyTimesListed(id: string) {
-        const companyFound = await this.companyRepository.findOne({ where: { id } });
+    // async getCompanyTimesListed(id: string) {
+    //     const companyFound = await this.companyRepository.findOne({ where: { id } });
 
-        if (!companyFound) {
-            throw new HttpException('Company not found!', HttpStatus.NOT_FOUND);
-        }
+    //     if (!companyFound) {
+    //         throw new HttpException('Company not found!', HttpStatus.NOT_FOUND);
+    //     }
 
-        const companies = await this.watchlistRepository.find({ where: { companyFound } });
+    //     const companies = await this.watchlistRepository.find({ where: { companyFound } });
 
-        return companies.length;
-    }
+    //     return companies.length;
+    // }
 
-    async getAll() {
-        try {
-            return this.companyRepository.find();
-        } catch (error) {
-            throw new BadRequestException('No companies to show');
-        }
-    }
+    // async getAll() {
+    //     try {
+    //         return this.companyRepository.find();
+    //     } catch (error) {
+    //         throw new BadRequestException('No companies to show');
+    //     }
+    // }
     async getCompany(companySymbol) {
         try {
             const company = await this.companyRepository.findOne({ where: { abbr: companySymbol.abbr } });

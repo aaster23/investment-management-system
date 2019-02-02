@@ -22,7 +22,7 @@ export class ClientListComponent implements OnInit {
     clientOverview(data) {
         this.usersService.setClientCred(data[1]).subscribe(() => {
 
-            this.router.navigate(['/client']);
+            this.router.navigate(['/client/stocks']);
         });
     }
 

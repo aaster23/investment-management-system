@@ -14,24 +14,33 @@ export class PricesService {
     private readonly companyRepository: Repository<Company>,
   ) { }
 
-  // async getCompanyPrices(id: string, lastN: number, startdate?: Date, enddate?: Date): Promise<Price[]> {
-  //   const company = await this.companyRepository.findOne({ id });
-  //   if (!company) {
-  //     throw new HttpException('Company doesn\'t exist!', HttpStatus.NOT_FOUND);
-  //   }
+  async getCompanyPrices(abbr: string, lastN: number, startdate?: Date, enddate?: Date): Promise<any> {
+    const company = await this.companyRepository.findOne({ where: { abbr } });
+    if (!company) {
+      throw new HttpException('Company doesn\'t exist!', HttpStatus.NOT_FOUND);
+    }
 
-  //   if (lastN) {
-  //     return await this.priceRepository.find({ where: { company }, order: { opendate: 'DESC' }, take: lastN });
-  //   }
-  //   if (startdate && enddate) {
-  //     return await this.priceRepository.find({ opendate: Between(startdate, enddate), company });
-  //   }
-  //   if (startdate && !enddate) {
-  //     return await this.priceRepository.find({ opendate: MoreThan(startdate.valueOf() - 1), company });
-  //   }
-
-  //   return [await this.priceRepository.findOne({ where: { company }, order: { opendate: 'DESC' } })];
-  // }
+    if (lastN) {
+      return await this.priceRepository.find({ where: { company }, order: { opendate: 'DESC' }, take: lastN });
+    }
+    if (startdate && enddate) {
+      return await this.priceRepository.find({ opendate: Between(startdate, enddate), company });
+    }
+    if (startdate && !enddate) {
+      return await this.priceRepository.find({ opendate: MoreThan(startdate.valueOf() - 1), company });
+    }
+    if (!startdate && !enddate) {
+      return await this.priceRepository.find({ company }).then((res) => {
+          return res.map( stock =>  { return { date: stock.opendate,
+            open: stock.startprice,
+            close: stock.endprice,
+            high: stock.highprice,
+            low: stock.lowprice };
+          });
+      });
+    }
+    return [await this.priceRepository.findOne({ where: { company }, order: { opendate: 'DESC' } })];
+  }
 
   async getLastPricePerCompany(): Promise<Price[]> {
     const companies = await this.companyRepository.find({});

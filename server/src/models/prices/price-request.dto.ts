@@ -3,7 +3,7 @@ import { IsString, IsNumber, IsDate, IsOptional } from 'class-validator';
 export class PriceRequestDTO {
 
     @IsString()
-    id: string;
+    abbr: string;
 
     @IsDate()
     @IsOptional()

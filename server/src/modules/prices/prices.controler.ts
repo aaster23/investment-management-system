@@ -32,15 +32,11 @@ export class PricesController {
         }
     }
 
-    // @Get('/company')
-    // @Roles('manager')
-    // @UseGuards(AuthGuard(), RolesGuard)
-    // async getPrices(@Body(new ValidationPipe({
-    //     transform: true,
-    //     whitelist: true,
-    // })) priceRequest: PriceRequestDTO): Promise<object> {
-
-    //     return await this.pricesService.getCompanyPrices(priceRequest.id, priceRequest.lastN, priceRequest.startdate, priceRequest.enddate);
-    // }
+    @Post('/company')
+    @Roles('manager')
+    async getPrices(@Body() priceRequest: PriceRequestDTO): Promise<object> {
+        console.log(priceRequest);
+        return await this.pricesService.getCompanyPrices(priceRequest.abbr, priceRequest.lastN, priceRequest.startdate, priceRequest.enddate);
+    }
 
 }

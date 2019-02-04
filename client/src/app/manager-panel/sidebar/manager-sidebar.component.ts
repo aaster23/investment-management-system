@@ -27,11 +27,12 @@ export class ManagerSidebarComponent implements OnInit {
         this.stocksInfo = this.stocksService.getStockData();
     }
 
-    openUpDialog(action) {
+    openUpDialog(stock) {
+        console.log(stock)
         const dialogRef = this.dialog.open(ChartsServiceComponent,
             {
                 data: {
-                    action
+                    stock,
                 }
             });
         return dialogRef.afterClosed();

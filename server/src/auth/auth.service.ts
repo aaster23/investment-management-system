@@ -20,7 +20,6 @@ export class AuthService {
   }
 
   async validateUser(payload: JwtPayload): Promise<GetUserDTO> {
-    console.log(payload);
     return await this.usersService.validateUser(payload);
   }
 }

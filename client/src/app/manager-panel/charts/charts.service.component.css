@@ -3,7 +3,7 @@
   margin-right: 7px
 }
 
-#dialog-chart {
+#dialog-chart{
   display: flex;
   flex-direction: column;
   width: 60vw;
@@ -12,4 +12,8 @@
 .mat-dialog-title{
   font: 500 30px/32px Roboto,"Helvetica Neue",sans-serif;
   margin-right: 200px;
+}
+
+.mat-display-1 {
+  text-align: center;
 }

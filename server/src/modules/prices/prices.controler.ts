@@ -35,8 +35,13 @@ export class PricesController {
     @Post('/company')
     @Roles('manager')
     async getPrices(@Body() priceRequest: PriceRequestDTO): Promise<object> {
-        console.log(priceRequest);
         return await this.pricesService.getCompanyPrices(priceRequest.abbr, priceRequest.lastN, priceRequest.startdate, priceRequest.enddate);
+    }
+
+    @Post('/monthly')
+    @Roles('manager')
+    async getMonthlyPrices(@Body() body): Promise<object> {
+        return await this.pricesService.getCompanyMonthlyPrice(body.abbr);
     }
 
 }
